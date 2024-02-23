@@ -844,8 +844,8 @@ def batch_process_documents_sample(
         processor_id (str): GCP DocumentAI ProcessorID
         gcs_input_uri (str): GCS path which contains all input files
         gcs_output_uri (str): GCS path to store processed JSON results
-        processor_version_id (str, optional): VersionID of GCP DocumentAI Processor. Defaults to None.
-        timeout (int, optional): Maximum waiting time for operation to complete. Defaults to 500.
+        processor_version_id (str, optional): VersionID of GCP DocumentAI Processor.
+        timeout (int, optional): Maximum waiting time for operation to complete.
 
     Returns:
         operation.Operation: LRO operation ID for current batch-job
