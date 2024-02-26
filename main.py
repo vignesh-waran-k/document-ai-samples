@@ -14,7 +14,7 @@ GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
 # read the config data
 storage_client = storage.Client()
 bucket = storage_client.bucket(INPUT_BUCKET_NAME)
-blob = bucket.blob("config/config.txt")  # gs://daira-db-test/config/config.txt
+blob = bucket.blob("config/config.txt") 
 config_data = blob.download_as_string().decode("utf-8")
 
 print(str(config_data).split("\n"))
@@ -45,8 +45,8 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
         blob_name (str): The name of the blob inside the bucket.
 
     Returns:
-        None. If the blob exists, it will be deleted. If it doesn't exist or an error occurs, 
-        the function will log the error. This example catches ValueError and TypeError as 
+        None. If the blob exists, it will be deleted. If it doesn't exist or an error occurs,
+        the function will log the error. This example catches ValueError and TypeError as
         placeholders for more specific exceptions you might want to handle.
     """
     print("delete_blob")
@@ -57,8 +57,6 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
         # Example operation that could, in theory, raise a ValueError or TypeError
         if not isinstance(bucket_name, str) or not isinstance(blob_name, str):
             raise ValueError("Bucket name and blob name must be strings.")
-        
-        # Simulating another check that might raise a TypeError
         if bucket_name is None or blob_name is None:
             raise TypeError("Bucket name and blob name cannot be None.")
 
@@ -200,7 +198,7 @@ def metadata_reader(metadata: documentai.BatchProcessMetadata) -> List:
                 "operation_id": i.output_gcs_destination.split("/")[-2],
                 "file_output_gcs_destination": i.output_gcs_destination,
                 "file_human_review_status": i.human_review_status.state.name,
-                "file_human_review_operation_id": 
+                "file_human_review_operation_id":
                 i.human_review_status.human_review_operation.split("/")[-1],
             }
         )
@@ -250,9 +248,9 @@ def concurrent_processing(
 
     Args:
         batch_caller (Function) : Function which will call the batch processing
-        daira_output_test (str): A temporary bucket name where all 
+        daira_output_test (str): A temporary bucket name where all
         the batch processed file get stored.
-        batch_array (List): List of all the copied files from 
+        batch_array (List): List of all the copied files from
         temporary bucket which needs to processed.
     """
     print("--concurrent_processing--")
@@ -265,6 +263,7 @@ def hello_world() -> str:
     HTTP Cloud Function which will get deployed and run by the cloud scheduler every hour.
     For more information on how to deploy cloud function
     https://cloud.google.com/functions/docs/create-deploy-gcloud-1st-gen.
+    
     Return:
         str:
         Returns the success message.
@@ -317,7 +316,7 @@ def hello_world() -> str:
         print("creating : daira-output-test")
         create_bucket_class_location(daira_output_test)  # 'daira-output-test03'
     except KeyError as ke:
-        print("An error occurred during bucket creation.")
+        print(f"An error occurred during bucket creation.{ke}")
 
     bucket_cleaner(diara_processing_test)  # 'daira-processing-test03'
     lenght = len(process_batch_array)
