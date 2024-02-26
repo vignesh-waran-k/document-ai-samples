@@ -51,12 +51,14 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
     """
     print("delete_blob")
     storage_client_db = storage.Client()
-    bucket = storage_client_db.bucket(bucket_name)
-    blob = bucket.blob(blob_name)
+    bucket_db = storage_client_db.bucket(bucket_db)
+    blob_db = bucket_db.blob(blob_db)
     try:
-        blob.delete()
-    except BaseException:
-        pass
+        blob_db.delete()
+    except exceptions.NotFound:
+        print(f"Blob {blob_name} in bucket {bucket_name} not found.")
+    except exceptions.GoogleCloudError as e:
+        print(f"Failed to delete blob: {e}")
 
 
 def bucket_cleaner(bucket_name: str) -> None:
@@ -250,15 +252,11 @@ def concurrent_processing(
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         print("processing completed", executor)
 
-
-def hello_world(request) -> str:
+def hello_world() -> str:
     """
     HTTP Cloud Function which will get deployed and run by the cloud scheduler every hour.
     For more information on how to deploy cloud function
     https://cloud.google.com/functions/docs/create-deploy-gcloud-1st-gen.
-    Args:
-        request : urllib.request: The request object.
-
     Return:
         str:
         Returns the success message.
@@ -271,7 +269,8 @@ def hello_world(request) -> str:
     try:
         previously_done_files = list(db_print()["filename"])
         print("previously_done_files : ", previously_done_files)
-    except BaseException:
+    except Exception as e:  # Catch a more specific exception if possible
+        print(f"An error occurred: {e}")
         previously_done_files = []
 
     input_bucket_files_list = bucket_lister(INPUT_BUCKET_NAME)
@@ -305,19 +304,16 @@ def hello_world(request) -> str:
         print("creating : daira-output-test")
         create_bucket_class_location(daira_output_test)  # 'daira-output-test03'
     except Exception as exc:
-        print("Bucket exists!")
-        print(exc)
+        print("An error occurred during bucket creation.")
+        print(f"Error details: {exc}")
 
     bucket_cleaner(diara_processing_test)  # 'daira-processing-test03'
     lenght = len(process_batch_array)
     print(process_batch_array)
 
-    for i in range(0, len(process_batch_array)):
-        array_having_file_names = process_batch_array[i]
-        bucket_name_with_folder = (
-            "gs://" + diara_processing_test + "/batches/" + str(i) + "/"
-        )
-        print(i, " | ", process_batch_array[i], " | ", bucket_name_with_folder)
+    for i, array_having_file_names in enumerate(process_batch_array):
+        bucket_name_with_folder = "gs://" + diara_processing_test + "/batches/" + str(i) + "/"
+        print(i, " | ", array_having_file_names, " | ", bucket_name_with_folder)
         file_copy(array_having_file_names, bucket_name_with_folder)
 
     batch_array = [
