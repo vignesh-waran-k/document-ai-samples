@@ -38,27 +38,24 @@ connection = firestore.Client(project=project_name)
 
 def delete_blob(bucket_name: str, blob_name: str) -> None:
     """
-    Deletes specified blob name from Google Cloud Storage bucket .
+    Deletes specified blob name from Google Cloud Storage bucket.
 
     Args:
         bucket_name (str): The name of the bucket.
-        blob_name (str):  The name of the blob inside the bucket.
+        blob_name (str): The name of the blob inside the bucket.
 
     Returns:
-        None. If the blob exists, it will be deleted the blob.
-        If it doesn't exist or an error occurs,
-        the function will silently pass.
+        None. If the blob exists, it will be deleted.
+        If it doesn't exist or an error occurs, the function will log the error.
     """
     print("delete_blob")
     storage_client_db = storage.Client()
-    bucket_db = storage_client_db.bucket(bucket_db)
-    blob_db = bucket_db.blob(blob_db)
+    bucket_db = storage_client_db.bucket(bucket_name)
+    blob_db = bucket_db.blob(blob_name)
     try:
         blob_db.delete()
-    except exceptions.NotFound:
-        print(f"Blob {blob_name} in bucket {bucket_name} not found.")
-    except exceptions.GoogleCloudError as e:
-        print(f"Failed to delete blob: {e}")
+    except Exception as e:  # Catching a generic exception with a responsible action
+        print(f"An error occurred while trying to delete blob {blob_name} in bucket {bucket_name}: {e}")
 
 
 def bucket_cleaner(bucket_name: str) -> None:
