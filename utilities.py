@@ -5,6 +5,7 @@ Google Cloud's DocumentAI."""
 # Import the libraries
 import difflib
 import io
+from io import BytesIO
 import json
 import operator
 from pathlib import Path
@@ -288,33 +289,30 @@ def json_to_dataframe(data: documentai.Document) -> pd.DataFrame:
 
     try:
         for entity in data.entities:
-            # First, we'll assume it doesn't have properties
             has_properties = False
 
-            # Check for subentities (properties)
             try:
                 for subentity in entity.properties:
-                    has_properties = True  # Mark that we found properties
+                    has_properties = True
                     try:
                         df = get_entity_metadata(df, subentity)
-                    except (AttributeError, Exception) as e:
+                    except AttributeError as e:
                         print(e)
                         continue
 
-            except (AttributeError, Exception) as e:
+            except AttributeError as e:
                 print(f"Exception encountered: {e}")
                 continue
 
-            # If no properties were found for the entity, add it to the dataframe
             if not has_properties:
                 try:
                     df = get_entity_metadata(df, entity)
-                except (AttributeError, Exception) as e:
+                except AttributeError as e:
                     print(f"Exception encountered: {e}")
                     continue
 
         return df
-    except (AttributeError, Exception) as e:
+    except AttributeError as e:
         print(f"Exception encountered: {e}")
         return df
 
@@ -790,7 +788,6 @@ def convert_and_upload_tiff_to_jpeg(
         input_tiff_path (str): The path of the TIFF file in the bucket to be converted.
         output_jpeg_path (str): The path where the converted JPEG file will be stored in the bucket.
     """
-    from io import BytesIO
 
     try:
         # Initialize Google Cloud Storage client
@@ -844,8 +841,8 @@ def batch_process_documents_sample(
         processor_id (str): GCP DocumentAI ProcessorID
         gcs_input_uri (str): GCS path which contains all input files
         gcs_output_uri (str): GCS path to store processed JSON results
-        processor_version_id (str, optional): VersionID of GCP DocumentAI Processor. Defaults to None.
-        timeout (int, optional): Maximum waiting time for operation to complete. Defaults to 500.
+        processor_version_id (str, optional): VersionID of GCP DocumentAI Processor.
+        timeout (int, optional): Maximum waiting time for operation to complete.
 
     Returns:
         operation.Operation: LRO operation ID for current batch-job
