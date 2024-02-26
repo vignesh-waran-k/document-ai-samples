@@ -1,21 +1,15 @@
+"""
+Reference architecture asynchronous main.py
+"""
+
 import concurrent.futures
 from typing import List
-
 import pandas as pd
 from google.cloud import documentai, firestore, storage
 from utilities import batch_process_documents_sample, copy_blob, list_blobs
 
-"""
-project_name          = 'xx-xx-xx'
-input_bucket_name     = 'xx-db-test'  #'xx_shell_input'
-project_id            = 'xxxxxx'
-location              = 'us'
-processor_id          = 'xxx6fxxec5xx'
-gcs_output_uri_prefix = 'daira_outputs'
-"""
-
-input_bucket_name = "daira_test_zaid_5"
-gcs_output_uri_prefix = "daira_outputs"
+input_bucket_name = "your_test_bucket_name"
+gcs_output_uri_prefix = "your_output_folder_prefix"
 
 # read the config data
 storage_client = storage.Client()
@@ -159,8 +153,6 @@ def batch_caller(gcs_input_uri, gcs_output_uri):
         gcs_input_uri (str): GCS path which contains all input files
         gcs_output_uri (str): GCS path to store processed JSON results
     """
-
-    print("batch_caller:")
     print(gcs_input_uri, gcs_output_uri)
     global project_id
     global location
@@ -205,11 +197,8 @@ def metadata_reader(metadata: documentai.BatchProcessMetadata) -> List:
                 "operation_id": i.output_gcs_destination.split("/")[-2],
                 "file_output_gcs_destination": i.output_gcs_destination,
                 "file_human_review_status": i.human_review_status.state.name,
-                "file_human_review_operation_id": i.human_review_status.human_review_operation.split(
-                    "/"
-                )[
-                    -1
-                ],
+                "file_human_review_operation_id": 
+                i.human_review_status.human_review_operation.split("/")[-1],
             }
         )
     return info_array
@@ -251,16 +240,17 @@ def file_copy(array_having_file_names: List, bucket_name_with_folder: str) -> No
 
 
 def concurrentProcessing(
-    batch_caller, daira_output_test: str, batch_array: List
+    daira_output_test: str, batch_array: List
 ) -> None:
     """
     To create a concurrent process for batch processing the files .
 
     Args:
         batch_caller (Function) : Function which will call the batch processing
-        daira_output_test (str): A temporary bucket name where all the batch processed file get stored.
-        batch_array (List): List of all the copied files from temporary bucket which needs to processed.
-
+        daira_output_test (str): A temporary bucket name where all 
+        the batch processed file get stored.
+        batch_array (List): List of all the copied files from 
+        temporary bucket which needs to processed.
     """
     print("--concurrentProcessing--")
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
@@ -342,7 +332,7 @@ def hello_world(request) -> str:
     ]
     print(batch_array)
 
-    concurrentProcessing(batch_caller, daira_output_test, batch_array)
+    concurrentProcessing(daira_output_test, batch_array)
 
     print("metadata_array:")
     print(metadata_array)
