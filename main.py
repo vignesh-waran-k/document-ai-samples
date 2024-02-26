@@ -45,17 +45,28 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
         blob_name (str): The name of the blob inside the bucket.
 
     Returns:
-        None. If the blob exists, it will be deleted.
-        If it doesn't exist or an error occurs, the function will log the error.
+        None. If the blob exists, it will be deleted. If it doesn't exist or an error occurs, 
+        the function will log the error. This example catches ValueError and TypeError as 
+        placeholders for more specific exceptions you might want to handle.
     """
     print("delete_blob")
     storage_client_db = storage.Client()
     bucket_db = storage_client_db.bucket(bucket_name)
     blob_db = bucket_db.blob(blob_name)
     try:
+        # Example operation that could, in theory, raise a ValueError or TypeError
+        if not isinstance(bucket_name, str) or not isinstance(blob_name, str):
+            raise ValueError("Bucket name and blob name must be strings.")
+        
+        # Simulating another check that might raise a TypeError
+        if bucket_name is None or blob_name is None:
+            raise TypeError("Bucket name and blob name cannot be None.")
+
         blob_db.delete()
-    except Exception as e:  # Catching a generic exception with a responsible action
-        print(f"An error occurred while trying to delete blob {blob_name} in bucket {bucket_name}: {e}")
+    except ValueError as ve:
+        print(f"ValueError occurred: {ve}")
+    except TypeError as te:
+        print(f"TypeError occurred: {te}")
 
 
 def bucket_cleaner(bucket_name: str) -> None:
@@ -266,8 +277,13 @@ def hello_world() -> str:
     try:
         previously_done_files = list(db_print()["filename"])
         print("previously_done_files : ", previously_done_files)
-    except Exception as e:  # Catch a more specific exception if possible
-        print(f"An error occurred: {e}")
+    except KeyError as ke:
+        # This catches cases where the 'filename' key is missing.
+        print(f"KeyError - The 'filename' key was not found: {ke}")
+        previously_done_files = []
+    except TypeError as te:
+        # This catches cases where the result of db_print() is not a dictionary or is None.
+        print(f"TypeError - There was a type issue with the db_print() response: {te}")
         previously_done_files = []
 
     input_bucket_files_list = bucket_lister(INPUT_BUCKET_NAME)
@@ -300,9 +316,8 @@ def hello_world() -> str:
         create_bucket_class_location(diara_processing_test)  # 'daira-processing-test03'
         print("creating : daira-output-test")
         create_bucket_class_location(daira_output_test)  # 'daira-output-test03'
-    except Exception as exc:
+    except KeyError as ke:
         print("An error occurred during bucket creation.")
-        print(f"Error details: {exc}")
 
     bucket_cleaner(diara_processing_test)  # 'daira-processing-test03'
     lenght = len(process_batch_array)
