@@ -6,7 +6,6 @@ import concurrent.futures
 from typing import List
 import pandas as pd
 from google.cloud import documentai, firestore, storage
-from utilities import batch_process_documents_sample, copy_blob, list_blobs
 
 INPUT_BUCKET_NAME = "your_test_bucket_name"
 GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
