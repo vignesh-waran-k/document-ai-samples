@@ -14,7 +14,7 @@ GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
 # read the config data
 storage_client = storage.Client()
 bucket = storage_client.bucket(INPUT_BUCKET_NAME)
-blob = bucket.blob("config/config.txt") 
+blob = bucket.blob("config/config.txt")
 config_data = blob.download_as_string().decode("utf-8")
 
 print(str(config_data).split("\n"))
@@ -257,89 +257,3 @@ def concurrent_processing(
     print(daira_output_test, batch_array)
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         print("processing completed", executor)
-
-def hello_world() -> str:
-    """
-    HTTP Cloud Function which will get deployed and run by the cloud scheduler every hour.
-    For more information on how to deploy cloud function
-    https://cloud.google.com/functions/docs/create-deploy-gcloud-1st-gen.
-    
-    Return:
-        str:
-        Returns the success message.
-
-    """
-    print("--STARTED--")
-
-    # delete previous ran diara-logs in firestore - if u r testing for same
-    # files
-    try:
-        previously_done_files = list(db_print()["filename"])
-        print("previously_done_files : ", previously_done_files)
-    except KeyError as ke:
-        # This catches cases where the 'filename' key is missing.
-        print(f"KeyError - The 'filename' key was not found: {ke}")
-        previously_done_files = []
-    except TypeError as te:
-        # This catches cases where the result of db_print() is not a dictionary or is None.
-        print(f"TypeError - There was a type issue with the db_print() response: {te}")
-        previously_done_files = []
-
-    input_bucket_files_list = bucket_lister(INPUT_BUCKET_NAME)
-
-    # pop the element (config file) from the input bucket file
-    input_bucket_files_list.remove("gs://" + INPUT_BUCKET_NAME + "/config/config.txt")
-
-    files_to_process = [
-        i
-        for i in input_bucket_files_list
-        if i.split("/")[-1] not in previously_done_files
-    ]
-    print("files_to_process : ", files_to_process)
-    start = 0
-    end = len(files_to_process)
-    step = 50
-
-    process_batch_array = []
-    for i in range(start, end, step):
-        x = i
-        process_batch_array.append(files_to_process[x : x + step])
-    print("process_batch_array : ", process_batch_array)
-
-    # test vars
-    diara_processing_test = "daira-processing-test02"
-    daira_output_test = "daira-output-test02"
-
-    try:
-        print("creating : daira-processing-test")
-        create_bucket_class_location(diara_processing_test)  # 'daira-processing-test03'
-        print("creating : daira-output-test")
-        create_bucket_class_location(daira_output_test)  # 'daira-output-test03'
-    except KeyError as ke:
-        print(f"An error occurred during bucket creation.{ke}")
-
-    bucket_cleaner(diara_processing_test)  # 'daira-processing-test03'
-    lenght = len(process_batch_array)
-    print(process_batch_array)
-
-    for i, array_having_file_names in enumerate(process_batch_array):
-        bucket_name_with_folder = "gs://" + diara_processing_test + "/batches/" + str(i) + "/"
-        print(i, " | ", array_having_file_names, " | ", bucket_name_with_folder)
-        file_copy(array_having_file_names, bucket_name_with_folder)
-
-    batch_array = [
-        "gs://" + diara_processing_test + "/batches/" + str(i) + "/"
-        for i in range(lenght)
-    ]
-    print(batch_array)
-
-    concurrent_processing(daira_output_test, batch_array)
-
-    print("metadata_array:")
-    print(metadata_array)
-
-    info_list_holder = [metadata_reader(i) for i in metadata_array]
-    db_insert(info_list_holder)
-    print(info_list_holder)
-    print("--ENDED--")
-    return "Diara Done!"
