@@ -8,12 +8,12 @@ import pandas as pd
 from google.cloud import documentai, firestore, storage
 from utilities import batch_process_documents_sample, copy_blob, list_blobs
 
-input_bucket_name = "your_test_bucket_name"
-gcs_output_uri_prefix = "your_output_folder_prefix"
+INPUT_BUCKET_NAME = "your_test_bucket_name"
+GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
 
 # read the config data
 storage_client = storage.Client()
-bucket = storage_client.bucket(input_bucket_name)
+bucket = storage_client.bucket(INPUT_BUCKET_NAME)
 blob = bucket.blob("config/config.txt")  # gs://daira-db-test/config/config.txt
 config_data = blob.download_as_string().decode("utf-8")
 
@@ -25,7 +25,7 @@ location = input_parameters[2].split(":")[1].strip()
 processor_id = input_parameters[6].split("/")[-1]
 project_id = input_parameters[6].split("/")[1]
 
-print("input_bucket_name ", input_bucket_name)
+print("INPUT_BUCKET_NAME", INPUT_BUCKET_NAME)
 print("project_name ", project_name)
 print("location ", location)
 print("processor_id ", processor_id)
@@ -50,8 +50,8 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
         the function will silently pass.
     """
     print("delete_blob")
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
+    storage_client_db = storage.Client()
+    bucket = storage_client_db.bucket(bucket_name)
     blob = bucket.blob(blob_name)
     try:
         blob.delete()
@@ -81,7 +81,6 @@ def db_insert(info_list_holder: List) -> None:
         contains metadata of the file, operation id, file storage location.
     """
     print("db_insert")
-    global connection
     for i in info_list_holder:
         for j in i:
             file_name = j["filename"]
@@ -98,7 +97,6 @@ def db_print() -> pd.DataFrame:
             It returns the dataframe having all the logs from the database.
     """
     print("db_print")
-    global connection
     db_entries = []
     reference = connection.collection("daira_logs")
     docs = reference.stream()
@@ -120,11 +118,11 @@ def bucket_lister(bucket_name: str) -> List:
     """
 
     print("bucket_lister")
-    storage_client = storage.Client()
-    blobs = storage_client.list_blobs(bucket_name)
+    storage_client_bl = storage.Client()
+    blobs = storage_client_bl.list_blobs(bucket_name)
     blob_arr = []
-    for blob in blobs:
-        blob_arr.append("gs://" + bucket_name + "/" + blob.name)
+    for blob_bl in blobs:
+        blob_arr.append("gs://" + bucket_name + "/" + blob_bl.name)
     return blob_arr
 
 
@@ -140,10 +138,10 @@ def create_bucket_class_location(bucket_name: str) -> str:
         The bucket name as string form.
     """
     print("create_bucket_class_location")
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    print("Bucket Created successfully : ", bucket)
-    return bucket
+    storage_client_cb = storage.Client()
+    bucket_cb = storage_client_cb.bucket(bucket_name)
+    print("Bucket Created successfully : ", bucket_cb)
+    return bucket_cb
 
 
 def batch_caller(gcs_input_uri, gcs_output_uri):
@@ -154,18 +152,13 @@ def batch_caller(gcs_input_uri, gcs_output_uri):
         gcs_output_uri (str): GCS path to store processed JSON results
     """
     print(gcs_input_uri, gcs_output_uri)
-    global project_id
-    global location
-    global processor_id
-    global gcs_output_uri_prefix
-    global metadata_array
     print("BATCH_CALLER project_id : ", project_id)
     operation = batch_process_documents_sample(
         project_id,
         location,
         processor_id,
         gcs_input_uri,
-        f"{gcs_output_uri}/{gcs_output_uri_prefix}/",
+        f"{gcs_output_uri}/{GCS_OUTPUT_URI_PREFIX}/",
     )
     metadata = documentai.BatchProcessMetadata(operation.metadata)
     metadata_array.append(metadata)
@@ -239,7 +232,7 @@ def file_copy(array_having_file_names: List, bucket_name_with_folder: str) -> No
         )
 
 
-def concurrentProcessing(
+def concurrent_processing(
     daira_output_test: str, batch_array: List
 ) -> None:
     """
@@ -252,7 +245,8 @@ def concurrentProcessing(
         batch_array (List): List of all the copied files from 
         temporary bucket which needs to processed.
     """
-    print("--concurrentProcessing--")
+    print("--concurrent_processing--")
+    print(daira_output_test, batch_array)
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         print("processing completed", executor)
 
@@ -280,10 +274,10 @@ def hello_world(request) -> str:
     except BaseException:
         previously_done_files = []
 
-    input_bucket_files_list = bucket_lister(input_bucket_name)
+    input_bucket_files_list = bucket_lister(INPUT_BUCKET_NAME)
 
     # pop the element (config file) from the input bucket file
-    input_bucket_files_list.remove("gs://" + input_bucket_name + "/config/config.txt")
+    input_bucket_files_list.remove("gs://" + INPUT_BUCKET_NAME + "/config/config.txt")
 
     files_to_process = [
         i
@@ -332,7 +326,7 @@ def hello_world(request) -> str:
     ]
     print(batch_array)
 
-    concurrentProcessing(daira_output_test, batch_array)
+    concurrent_processing(daira_output_test, batch_array)
 
     print("metadata_array:")
     print(metadata_array)
