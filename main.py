@@ -7,6 +7,24 @@ from typing import List
 import pandas as pd
 from google.cloud import documentai, firestore, storage
 from utilities import batch_process_documents_sample, copy_blob, list_blobs
+import subprocess
+import sys
+
+def install_packages():
+    packages = ["pandas", "google-cloud-firestore", "google-cloud-storage"]
+    subprocess.check_call([sys.executable, "-m", "pip", "install"] + packages)
+
+try:
+    # Attempt to import the packages
+    import pandas
+    from google.cloud import firestore, storage
+except ImportError:
+    # If the packages are not found, install them
+    install_packages()
+    # After installation, you must import the installed packages again
+    import pandas
+    from google.cloud import firestore, storage
+
 
 INPUT_BUCKET_NAME = "your_test_bucket_name"
 GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
