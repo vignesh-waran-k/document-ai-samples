@@ -6,6 +6,7 @@ import concurrent.futures
 from typing import List
 import pandas as pd
 from google.cloud import documentai, firestore, storage
+from utilities import batch_process_documents_sample, copy_blob, list_blobs
 
 INPUT_BUCKET_NAME = "your_test_bucket_name"
 GCS_OUTPUT_URI_PREFIX = "your_output_folder_prefix"
@@ -64,100 +65,6 @@ def delete_blob(bucket_name: str, blob_name: str) -> None:
         print(f"ValueError occurred: {ve}")
     except TypeError as te:
         print(f"TypeError occurred: {te}")
-
-def batch_process_documents_sample(
-    project_id: str,
-    location: str,
-    processor_id: str,
-    gcs_input_uri: str,
-    gcs_output_uri: str,
-    processor_version_id: Optional[str] = None,
-    timeout: int = 500,
-) -> Any:
-    """It will perform Batch Process on raw input documents
-
-    Args:
-        project_id (str): GCP project ID
-        location (str): Processor location us or eu
-        processor_id (str): GCP DocumentAI ProcessorID
-        gcs_input_uri (str): GCS path which contains all input files
-        gcs_output_uri (str): GCS path to store processed JSON results
-        processor_version_id (str, optional): VersionID of GCP DocumentAI Processor. Defaults to None.
-        timeout (int, optional): Maximum waiting time for operation to complete. Defaults to 500.
-
-    Returns:
-        operation.Operation: LRO operation ID for current batch-job
-    """
-
-    opts = {"api_endpoint": f"{location}-documentai.googleapis.com"}
-    client = documentai.DocumentProcessorServiceClient(client_options=opts)
-    input_config = documentai.BatchDocumentsInputConfig(
-        gcs_prefix=documentai.GcsPrefix(gcs_uri_prefix=gcs_input_uri)
-    )
-    output_config = documentai.DocumentOutputConfig(
-        gcs_output_config={"gcs_uri": gcs_output_uri}
-    )
-    print("Documents are processing(batch-documents)...")
-    name = (
-        client.processor_version_path(
-            project_id, location, processor_id, processor_version_id
-        )
-        if processor_version_id
-        else client.processor_path(project_id, location, processor_id)
-    )
-    request = documentai.types.document_processor_service.BatchProcessRequest(
-        name=name,
-        input_documents=input_config,
-        document_output_config=output_config,
-    )
-    operation = client.batch_process_documents(request)
-    print("Waiting for operation to complete...")
-    operation.result(timeout=timeout)
-    return operation
-
-def copy_blob(
-    bucket_name: str,
-    blob_name: str,
-    destination_bucket_name: str,
-    destination_blob_name: str,
-) -> None:
-    """
-    Copies a blob (file/object) from one GCP storage bucket to another.
-
-    Args:
-        bucket_name (str): Name of the source bucket.
-        blob_name (str): Name of the blob (file/object) in the source bucket to be copied.
-        destination_bucket_name (str): Name of the destination bucket.
-        destination_blob_name (str): Desired name for the blob in the destination bucket.
-
-    Output:
-        None. The blob is copied to the destination bucket with the specified name.
-    """
-    storage_client = storage.Client()
-    source_bucket = storage_client.bucket(bucket_name)
-    source_blob = source_bucket.blob(blob_name)
-    destination_bucket = storage_client.bucket(destination_bucket_name)
-    source_bucket.copy_blob(source_blob, destination_bucket, destination_blob_name)
-
-def list_blobs(bucket_name: str) -> List[str]:
-    """
-    Retrieves a list of filenames (blobs) from a specified Google Cloud Storage bucket.
-
-    Args:
-        bucket_name (str): The name of the bucket from which to retrieve the list of filenames.
-
-    Returns:
-        list: A list containing the names of all files (blobs) present in the specified bucket.
-    """
-
-    blob_list = []
-    storage_client = storage.Client()
-    blobs = storage_client.list_blobs(bucket_name)
-
-    for blob in blobs:
-        blob_list.append(blob.name)
-
-    return blob_list
 
 def bucket_cleaner(bucket_name: str) -> None:
     """
