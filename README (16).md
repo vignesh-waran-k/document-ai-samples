@@ -2,12 +2,12 @@
 
 This document guides to categorize the transactions for each account number from the bank statement parsed json.
 
-# Input Details
+## Input Details
 
-* **gcs_input_path**: Input GCS path which contains bank statement parser JSON files.         
+* **gcs_input_path**: Input GCS path which contains bank statement parser JSON files.
 * **gcs_output_path**: GCS path to store post processed(JSON) results.
 
-# Output Details
+## Output Details
 
 <table>
     <tr>
