@@ -7,9 +7,13 @@
 This tool is not supported by the Google engineering team or product team. It is provided and supported on a best-effort basis by the DocAI Incubator Team. No guarantees of performance are implied.
 <div style="padding-bottom:30px"></div>
 <h3> Introduction and Notes</h3>
-<div>This is preliminary documentation of internal API’s before they are readied for external use. There is <b>no guarantee that the API’s will not change</b>, though those are typically minimized. The necessary steps for training a CDE processor are all available in Python (as shown in Section 4) tho not fully documented here.<span style="color:red">  These are experimental, subject to change and generally not recommended unless prior arrangements are specifically made in advance. </span></div>
+<div>This is preliminary documentation of internal API’s before they are readied for external use.
+There is <b>no guarantee that the API’s will not change</b>, though those are typically minimized.
+The necessary steps for training a CDE processor are all available in Python (as shown in Section 4) not fully documented here.
+<span style="color:red">  These are experimental, subject to change and generally not recommended unless prior arrangements are specifically made in advance. </span></div>
 <br>
-<p ><span >NOTE 1: </span></p><p><span>The prediction / process document calls for CDE processors are the same as other processors, so these are not documented here. Refer to online </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/document-ai/docs/reference/rest/v1/projects.locations.processors&amp;sa=D&amp;source=editors&amp;ust=1704207105405744&amp;usg=AOvVaw2Qm4vh7sJhziy7EzPgmUfm">DocAI Documentation</a></span><span>. &nbsp;Either V1 or V1Beta3 may be used - they behave the same (For Java - V1 &amp; V1Beta3 differ significantly, It is advised to use V1beta3). </span></p>
+<p ><span >NOTE 1: </span></p><p><span>The prediction / process document calls for CDE processors are the same as other processors,
+so these are not documented here. Refer to online </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/document-ai/docs/reference/rest/v1/projects.locations.processors&amp;sa=D&amp;source=editors&amp;ust=1704207105405744&amp;usg=AOvVaw2Qm4vh7sJhziy7EzPgmUfm">DocAI Documentation</a></span><span>. &nbsp;Either V1 or V1Beta3 may be used - they behave the same (For Java - V1 &amp; V1Beta3 differ significantly, It is advised to use V1beta3). </span></p>
 
 <ul>
     <li><span>Python for v1beta3 </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_process_document&amp;sa=D&amp;source=editors&amp;ust=1704207105406068&amp;usg=AOvVaw07LfbSclRqCFaVJxf_mf91">here</a></span><span >. </span></li>
@@ -25,7 +29,9 @@ This tool is not supported by the Google engineering team or product team. It is
 </ul>
 <p><span></span></p>
 
-<p><span >NOTE 3: </span></p><p ><span>You may wish to FIRST review section</span><span >&nbsp;Part 1, section 4) Example Python Notebook Code</span><span>&nbsp;to see the Python code involved in training a CDE Parser. &nbsp;As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotation. Training datasets, properly prepared, may be imported from other sources.</span></p><p><span ></span></p>
+<p><span >NOTE 3: </span></p><p ><span>You may wish to FIRST review section</span><span >&nbsp;Part 1, section 4)
+Example Python Notebook Code</span><span>&nbsp;to see the Python code involved in training a CDE Parser. &nbsp;
+As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotation. Training datasets, properly prepared, may be imported from other sources.</span></p><p><span ></span></p>
 
 <p><span>NOTE 4: </span></p>
 
@@ -169,13 +175,19 @@ This tool is not supported by the Google engineering team or product team. It is
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Starts asynchronous cancellation on a long-running operation.</span></p>
-               <p><span>The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn&#39;t support this method, it returns google.rpc.Code.UNIMPLEMENTED.</span></p>
+               <p><span>The server makes a best effort to cancel the operation, but success is not guaranteed.
+                If the server doesn&#39;t support this method, it returns google.rpc.Code.UNIMPLEMENTED.</span></p>
                <p><span></span></p>
             </td>
          </tr>
          <tr>
             <td colspan="1" rowspan="7">
-               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 49.00px; height: 208.46px;"><img alt="" src="images/image1.png" style="width: 49.00px; height: 208.46px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
+               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; 
+                border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); 
+                width: 49.00px; height: 208.46px;"><img alt="" src="images/image1.png" style="width: 49.00px; 
+                height: 208.46px; margin-left: 0.00px; margin-top: 0.00px; 
+                transform: rotate(0.00rad) translateZ(0px); 
+                -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
             </td>
             <td colspan="1" rowspan="5">
                <p><span>Processor Management</span></p>
@@ -257,7 +269,7 @@ processor {
   display_name: "TEST_STUBBY"
 }</code>
 
-<b>Example payload (JSON):</b> https://us-documentai.googleapis.com/v1beta3/projects/PROJECT_ID/locations/us:createProcessor
+<b>Example payload (JSON):</b>
 <br>
 <code>{
   "parent": "projects/${GCP_PROJECT?}/locations/us",
@@ -364,10 +376,10 @@ processor {
 <br><br><h3> List Processors</h3>
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProcessorServiceUIV1Beta3.ListProcessors 
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProcessorServiceUIV1Beta3.ListProcessors
 
 
-<h2 style="">Python:</h2><h3><a href="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient#google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_list_processors">List_processor</a></h3>
+<h2 style="">Python:</h2><h3><ahref="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient#google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_list_processors">List_processor</a></h3>
 <h5>list_processors(request: Optional[Union[google.cloud.documentai_v1beta3.types.document_processor_service.ListProcessorsRequest, dict]] = None, *, parent: Optional[str] = None, retry: Union[google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault] = <_MethodDefault._DEFAULT_VALUE: <object object>>, timeout: Optional[float] = None, metadata: Sequence[Tuple[str, str]] = ())</h5>
 <h4>Lists all processors which belong to this project.</h4>
 
