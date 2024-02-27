@@ -1,9 +1,9 @@
 # Purpose and Description
- This readme files contains information about 5 tools.
- 
-* 1. Line Enhancement Basic Flow : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by enhancing input pdf files. 
- 
-# Input Details for this tool : Input for this step is GCS bucket containing re-builted PDF files(which have only tables)
+This readme files contains information about 5 tools.
+
+* 1. Line Enhancement Basic Flow : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by enhancing input pdf files.
+
+## Input Details for this tool : Input for this step is GCS bucket containing re-builted PDF files(which have only tables)
 * **project_id**: GCP project ID
 * **project_num**: GCP project Number
 * **location**: Processor location `us` or `eu`
@@ -27,16 +27,16 @@ Sample image after training CDE processor for row columns & header columns
 <table>
   <tr>
       <td><b>CDE Sample</b></td>
-    <td><img src="./Images/cde_train_sample.png" width=500 height=200></td>
+    <td><img src="./Images/cde_train_sample.png" width=500 height=200 alt="cde_train_sample.png"></td>
   </tr>
 </table>
 
-# Output Details : Table Sample from pdf file
-<img src="./Images/line_enhancement_basic_table_img.png)" width=800 height=400></img>
-    
+## Output Details : Table Sample from pdf file
+<img src="./Images/line_enhancement_basic_table_img.png" width=800 height=400 alt="line_enhancement_basic_table_img.png"></img>
+
 * 2.OCR Walk flow : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket without enhancing input pdf files by parsing them through Form Parser & CDE results.
 
-# Input Details for this tool : Input for this step is GCS bucket containing PDF files(which has only your specific-use-case tables) 
+## Input Details for this tool : Input for this step is GCS bucket containing PDF files(which has only your specific-use-case tables)
 
 * **project_id**: GCP project ID
 * **project_num**: GCP project Number
@@ -57,16 +57,16 @@ Sample image after training CDE processor for row columns & header columns
 <table>
   <tr>
       <td><b>CDE Sample</b></td>
-    <td><img src="./Images/cde_train_sample.png" width=500 height=200></td>
+    <td><img src="./Images/cde_train_sample.png" width=500 height=200 alt="cde_train_sample.png"></td>
   </tr>
-</table> 
+</table>
 
-# Output Details : One of the table Sample from pdf file
-<img src="./Images/ocr_walk_input_sample.png" width=800 height=400></img>
+## Output Details : One of the table Sample from pdf file
+<img src="./Images/ocr_walk_input_sample.png" width=800 height=400 alt="ocr_walk_input_sample.png"></img>
 
 * 3.FP_tables_to_csv : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by using Form Parser results.
 
-# Input Details : 
+## Input Details 
 * **project_id**: GCP project ID
 * **location**: Processor location `us` or `eu`
 * **fp_processor_id**: FP Processor ID to call batch process
@@ -78,12 +78,12 @@ Sample image after training CDE processor for row columns & header columns
 * **timeout**: to wait for batch process LRO operation to complete
 * **fp_processor_v**: FP version(V1 or V2) ID to call batch process
 
-# Output Details : output sample for one-table which stored as csv files in GCS bucket
-<img src="./Images/fp_tables_to_csv_output_csv_sample.png" width=800 height=400></img>
+## Output Details : output sample for one-table which stored as csv files in GCS bucket
+<img src="./Images/fp_tables_to_csv_output_csv_sample.png" width=800 height=400 alt="fp_tables_to_csv_output_csv_sample.png"></img>
 
 * 4. Table Extraction with Line Enhancement : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by enhancing input pdf files & parsing them through both Form Parser & CDE results.
 
-# Input Details : 
+## Input Details
 * **project_id**: GCP project ID
 * **project_num**: GCP project Number
 * **location**: Processor location `us` or `eu`
@@ -103,17 +103,17 @@ Sample image after training CDE processor for row columns & header columns
 * **gcs_line_enhance_output_prefix**: GCS prefix to store Line enhancement results
 * **gcs_fpoutput_uri_prefix**: GCS prefix to store FP results
 
+## Output Details
 
-# Output Details : 
-Table sample of pdf file after running **enhance_save_pdfs** function  
-<img src="./Images/after_line_enhancement_sample.png" width=800 height=400></img>
+Table sample of pdf file after running **enhance_save_pdfs** function
+<img src="./Images/after_line_enhancement_sample.png" width=800 height=400 alt="after_line_enhancement_sample.png"></img>
 
 output sample for one-table which stored as csv files in GCS bucket
-<img src="./Images/line_enhancement_basic_table_img(pg1_tb0.csv).png" width=800 height=400></img>
+<img src="./Images/line_enhancement_basic_table_img(pg1_tb0.csv).png" width=800 height=400 alt="line_enhancement_basic_table_img"></img>
 
 * 5. Table Spanning Page Merge Script : DocumentAI Page Merger is a tool built using Python programming language. Its purpose is to provide technique for merging table(Specific use case tables) which spans across two pages. This document highlights the working of the tool(script) and its requirements.
 
-# Input Details :
+## Input Details
 * **PROJECT_ID** : Provide your GCP Project ID
 * **LOCATION** : Provide the location of processor like `us` or `eu`
 * **PROCESSOR_ID** : Provide ID of CDE processor
@@ -123,21 +123,20 @@ output sample for one-table which stored as csv files in GCS bucket
 * **COL_HEADERS** : Provide list of all entities(entity type) which are annotated in CDE processor to identify *column headers*
 * **ROW_HEADERS** : Provide list of all entities(entity type) which are annotated in CDE processor to identify *row headers*
 
-# Output Details :
-### Input file have table across two pages
+## Output Details
+## Input file have table across two pages
 <table>
   <tr>
-    <td><img src="./Images/page_merger_input_1.png" width=300 height=150></td>
-    <td><img src="./Images/page_merger_input_2.png" width=300 height=150></td>
+    <td><img src="./Images/page_merger_input_1.png" width=300 height=150 alt="page_merger_input_1.png"></td>
+    <td><img src="./Images/page_merger_input_2.png" width=300 height=150 alt="page_merger_input_2.png"></td>
   </tr>
  </table>
 
-### After running page_merger script you can find table in single page
+## After running page_merger script you can find table in single page
 
 <table>
   <tr>
-    <td><img src="./Images/page_merger_output.png" width=600 height=300></td>
+    <td><img src="./Images/page_merger_output.png" width=600 height=300 alt="page_merger_output.png"></td>
       <td> </td>
   </tr>
     </table>
-    
