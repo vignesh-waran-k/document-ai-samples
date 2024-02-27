@@ -66,7 +66,7 @@ Sample image after training CDE processor for row columns & header columns
 
 * 3.FP_tables_to_csv : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by using Form Parser results.
 
-## Input Details 
+## Input Details : fp_tables_to_csv
 * **project_id**: GCP project ID
 * **location**: Processor location `us` or `eu`
 * **fp_processor_id**: FP Processor ID to call batch process
@@ -83,7 +83,7 @@ Sample image after training CDE processor for row columns & header columns
 
 * 4. Table Extraction with Line Enhancement : This tool built using Python programming language. It converts tables present in pdf to csv files and stores them in GCS bucket by enhancing input pdf files & parsing them through both Form Parser & CDE results.
 
-## Input Details
+## Input Details for Table Extraction with Line Enhancement
 * **project_id**: GCP project ID
 * **project_num**: GCP project Number
 * **location**: Processor location `us` or `eu`
@@ -113,7 +113,7 @@ output sample for one-table which stored as csv files in GCS bucket
 
 * 5. Table Spanning Page Merge Script : DocumentAI Page Merger is a tool built using Python programming language. Its purpose is to provide technique for merging table(Specific use case tables) which spans across two pages. This document highlights the working of the tool(script) and its requirements.
 
-## Input Details
+## Input Details for Table Spanning Page Merge Script
 * **PROJECT_ID** : Provide your GCP Project ID
 * **LOCATION** : Provide the location of processor like `us` or `eu`
 * **PROCESSOR_ID** : Provide ID of CDE processor
@@ -123,7 +123,7 @@ output sample for one-table which stored as csv files in GCS bucket
 * **COL_HEADERS** : Provide list of all entities(entity type) which are annotated in CDE processor to identify *column headers*
 * **ROW_HEADERS** : Provide list of all entities(entity type) which are annotated in CDE processor to identify *row headers*
 
-## Output Details
+## Output Details for Page Merger Script
 ## Input file have table across two pages
 <table>
   <tr>
