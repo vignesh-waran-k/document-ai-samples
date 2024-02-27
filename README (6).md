@@ -4,16 +4,16 @@ If you require a post processing script which corrects the negative values espec
 
 ## Input Details
 
-**input_path**: GCS Storage name. It is DocAI processed output json files. This bucket is used for processing input files and saving output files in the folders.
-**output_path**: GCS URI of the folder, where the dataset is exported from the processor.
-**types**:Input the name of the entities type for which the correction should happen in the list
+* **input_path**: GCS Storage name. It is DocAI processed output json files. This bucket is used for processing input files and saving output files in the folders.
+* **output_path**: GCS URI of the folder, where the dataset is exported from the processor.
+* **types**:Input the name of the entities type for which the correction should happen in the list
 
 ## Output Details
 
 The post processed json field can be found in the storage path provided by the user during the script execution that is output_bucket_path. <br><hr>
 <b>Comparison Between Input and Output File</b><br><br>
 <i><h4>Post processing results<h4><i><br>
-The following table shows the result of correction of entities having negative values from a sample json document. 
+The following table shows the result of correction of entities having negative values from a sample json document.
 The key:value pairs which are to be processed are as shown.There are two cases in the example.
 One is presence of the negative value in the entities key and other is the example of presence of negative value in the properties key belonging to the entities key. The script works by correcting both cases.
 
