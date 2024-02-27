@@ -78,7 +78,8 @@ def batch_process_documents(
     output_config = documentai.DocumentOutputConfig(gcs_output_config=gcs_output_config)
     if processor_version_id:
         # The full resource name of the processor version, e.g.:
-        # projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}
+        # projects/{project_id}/locations/{location}/processors/
+        {processor_id}/processorVersions/{processor_version_id}
         name = client.processor_version_path(
             project_id, location, processor_id, processor_version_id
         )
@@ -209,7 +210,8 @@ def get_matched_field(block_text: str, pattern: str = "([0-9]+)") -> str:
     Search particular pattern in cell values.
     Args:
         block_text (str): The text content of the block.
-        pattern (str): Regular expression pattern to search in the block text. Defaults to "([0-9]+)".
+        pattern (str): Regular expression pattern to search in the block text.
+        Defaults to "([0-9]+)".
     Returns:
         str: Matched field based on the specified pattern.
     """
@@ -265,10 +267,10 @@ def get_coordinates_map(
     Args:
         document(documentai.Document): Document containing information.
     Returns:
-        Tuple[Dict[int, List[List[int]]],Dict[int, List[int]],Dict[int, Dict[str, List[int]]],Dict[int, List[int]]]
+        Tuple
     """
 
-    # row_keywords = {"taxonomy", "total", "sum", "economic", "taxonomy-eligible", "taxonomy-non-eligible"}
+    #row_keywords = {"taxonomy","total","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
     x_coordinates_ = {}
     y_coord_ = {}
     row_map_ = {}
@@ -372,7 +374,7 @@ def poll_hitl_operations(
             )
             operations.append(operation_name)
     num_operations = len(operations)
-    print("Successfully scheduled `{}` HITL operations.".format(num_operations))
+    print(f"Successfully scheduled {num_operations} HITL operations.")
     while operations:
         operations = [
             operation
@@ -382,10 +384,10 @@ def poll_hitl_operations(
         if not operations:
             break
         print(
-            "Still waiting for `{}` HITL operations to complete".format(len(operations))
+            f"Still waiting for {len(operations)} HITL operations to complete"
         )
         time.sleep(100)
-    print("Finished waiting for all `{}` HITL operations.".format(num_operations))
+    print(f"Finished waiting for all {num_operations} HITL operations.")
 
 
 def get_table_data_(
@@ -417,7 +419,7 @@ def text_anchor_to_text(text_anchor: documentai.Document.TextAnchor, text: str) 
     Document AI identifies table data by their offsets in the entirety of the
     document's text. This function converts offsets to a string.
     Args:
-        text_anchor (documentai.Document.TextAnchor): Text anchor containing information about offsets.
+        text_anchor (documentai.Document.TextAnchor): It contains information about textanchor offsets.
         text (str): Full text of the document.
     Returns:
         str: Converted text based on the specified offsets.
@@ -574,7 +576,7 @@ def parse_and_split_pages(
             output_pdf_data.getvalue(), content_type="application/pdf"
         )
         print(
-            f"Pages {', '.join(map(str, taxonomy_page_no))} have been extracted to {output_pdf_blob.path}."
+            f"Pages {', '.join(map(str, taxonomy_page_no))} extracted to {output_pdf_blob.path}."
         )
 
 
@@ -655,12 +657,12 @@ def get_entire_row(
         # compare if the block coordinates falls under required row block
         if this_min_y >= min_y and this_max_y <= max_y:
             block_text = layout_to_text(block.layout, document_response.text)
-            x_valuesN = [
+            x_valuesn = [
                 round(vertex.x * width)
                 for vertex in block.layout.bounding_poly.normalized_vertices
             ]
-            # this_max_x = round(max(x_valuesN) / 10)
-            this_max_x = math.ceil(max(x_valuesN) / 10)
+            # this_max_x = round(max(x_valuesn) / 10)
+            this_max_x = math.ceil(max(x_valuesn) / 10)
             # get the column name corresponding to the x coordinate
             column, col_type = get_column_name_type_using_xcoord(
                 this_max_x, processed_map
@@ -991,7 +993,8 @@ def enhance_and_save_pdfs(
     factor: float = 0.75,
 ):
     """
-    Enhance the table structure by drawing the lines based on CDE output,headers and rows coordinates.
+    Enhance the table structure by drawing the lines based on CDE output,
+    headers and rows coordinates.
     """
 
     # Initialize Google Cloud Storage client
