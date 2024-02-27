@@ -6,7 +6,7 @@ This code facilitates sending an image to a specified Vertex object detection mo
 
 ## Prerequisite
 
-* Python : Jupyter notebook (Vertex) or Google Colab 
+* Python : Jupyter notebook (Vertex) or Google Colab
 * Access to Vertex Model Endpoint
 * Permissions, reference or access to Google projects are needed.
 * Sample Images
