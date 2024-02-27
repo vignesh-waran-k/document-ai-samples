@@ -4,7 +4,7 @@
 
 2. DocAI Email ingestion via Cloud function which can be used to ingest all the emails with their body, subject and the attachments and store it in the cloud bucket. [Email Ingestion Tool]
 
-# Input Details
+## Input Details
 
 * **GMAIL_ID** : The email address of the agent / support gmail inbox.
 * **GCP_PROJECT** :   GCP project id.
@@ -14,12 +14,12 @@
 * **ENTITY_EXTRACT_MODEL_ID** : The id of the entity extraction model which can be found in the AutoML Natural Language console for the deployed model.
 * **TOPIC_CLASSIFY_MODEL_ID** : The id of the topic classification model which can be found in the AutoML Natural Language console for the deployed model.
 
-# Output Details
+## Output Details
 
-Output from this script is stored in a bucket with folder name mentioned in config.yaml file as OUTPUT_PATH with respective mails IDs as folders inside it.  
+Output from this script is stored in a bucket with folder name mentioned in config.yaml file as OUTPUT_PATH with respective mails IDs as folders inside it.
 
-<img src='./images/output_sample_1.png' width=800 height=400> 
+<img src='./images/output_sample_1.png' width=800 height=400 alt="output_sample_1.png">
 
-Inside each folder there is  subject.txt containing the subject of that email, body.txt containing body of the mail and the attachments with their name in the email.  
+Inside each folder there is  subject.txt containing the subject of that email, body.txt containing body of the mail and the attachments with their name in the email.
 
-<img src='./images/output_sample_2.png' width=800 height=400> 
+<img src='./images/output_sample_2.png' width=800 height=400 alt="output_sample_2.png">
