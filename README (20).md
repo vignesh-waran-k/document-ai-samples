@@ -18,6 +18,6 @@ It allows for the migration of schemas within the same Google Cloud project and 
 
 <img src = "./Images/Project_A_Source_Schema.png" width=800 height=400 alt="Project_A_Source_Schema"></img>
 
-* Destination Project Processor Schema : 
+* Destination Project Processor Schema :
 
 <img src = "./Images/Project_B_Destination.png" width=800 height=400 alt="Project_B_Destination"></img>
