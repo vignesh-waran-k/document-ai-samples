@@ -1,16 +1,16 @@
-## Purpose and Description
+# Purpose and Description
 
 This document guides to backmap the entities from the parser output which is trained in different languages to the original language of the document using google translation API.
 
 ## Workflow to BackMap the Entities to Original language
 
-<img src='./images/workflow.png' width=800 height=800></img>
+<img src='./images/workflow.png' width=800 height=800 alt="workflow.png"></img>
 
 
 ## Input Details
 * **PROJECT_ID**: GCP project ID
 * **LOCATION**: Location of DocumentAI Processor, either `us` or `eu`
-* **PROCESSOR_ID**: DocumentAI Parser ProcessorID 
+* **PROCESSOR_ID**: DocumentAI Parser ProcessorID
 * **PROCESSOR_VERSION_ID**: DocumentAI Parser processor version id
 * **ORIGINAL_SAMPLES_GCS_PATH**: GCS folder apth containing native-language(non-english) documents
 * **OUTPUT_BUCKET**: GCS output bucket-name to store results(with-out gs://)
@@ -26,14 +26,14 @@ This document guides to backmap the entities from the parser output which is tra
 
 ## Output Details
 1. Raw Document sample(Greek PDF sample)  
-    <img src='./images/original_doc_greek.png' width=800 height=800></img><br>  
+    <img src='./images/original_doc_greek.png' width=800 height=800 alt="original_doc_greek.png"></img><br>  
 
 2. After Translation from Greek to English using Cloud Translation API
-     <img src='./images/after_translation_greek_to_eng.png' width=800 height=800></img>\n
+     <img src='./images/after_translation_greek_to_eng.png' width=800 height=800 alt="after_translation_greek_to_eng.png"></img>\n
 
 3. After using Translation API, every translated document contains `Machine Translated By Google` text at top-left conrner of translated page
-    <img src='./images/redact_noise_after_translation.png' width=800 height=800></img>
+    <img src='./images/redact_noise_after_translation.png' width=800 height=800 alt="redact_noise_after_translation.png"></img>
 
 4. Sample CSV output file data for comparision between original document entities mention text and translated document mention text
-    <img src='./images/df_comparision_output.png' width=800 height=800></img>
+    <img src='./images/df_comparision_output.png' width=800 height=800 alt="df_comparision_output.png"></img>
 
