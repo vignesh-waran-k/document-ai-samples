@@ -192,7 +192,7 @@ def upload_to_cloud_storage(
 
 def get_redact_bbox_from_text(
     text_redact: str, full_text: str, json_data: documentai.Document
-) -> Dict[str, List[float]]:
+) -> Dict[str, List[List[Any]]]:
     """
     Extracts the bounding box from the given document for a specific text to redact.
 
@@ -202,13 +202,13 @@ def get_redact_bbox_from_text(
         json_data (documentai.Document): The processed Document AI document.
 
     Returns:
-        Dict[str, List[float]]: 
-            A dictionary containing page numbers as keys and a list of 
+        Dict[str, List[List[Any]]]:
+            A dictionary containing page numbers as keys and a list of
             bounding boxes as values.
             Bounding box format: [x_min, y_min, x_max, y_max].
     """
 
-    part1=re.escape(text_redact.split(" ")[0])
+    part1 = re.escape(text_redact.split(" ")[0])
     part2 = re.escape(text_redact.split(" ")[-1])
     pattern = f"{part1}.*{part2}"
     matches = re.finditer(pattern, full_text, flags=re.IGNORECASE)
@@ -267,14 +267,14 @@ def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
 
 def draw_black_box(
     synthesized_images: List[Image.Image],
-    page_wise_bbox: Dict[str, List[List[float]]],
+    page_wise_bbox: Dict[str, List[float]],
 ) -> io.BytesIO:
     """
     Draw black boxes around PII entities in synthesized images and add synthetic data.
 
     Args:
         synthesized_images (List[Image.Image]): List of synthesized images.
-        page_wise_bbox (Dict[str, List[List[float]]]): Dictionary with page-wise bounding boxes.
+        page_wise_bbox (Dict[str, List[float]]): Dictionary with page-wise bounding boxes.
 
     Returns:
         io.BytesIO: Byte stream containing the final PDF with black boxes drawn.
@@ -354,7 +354,7 @@ def redact(
         False,
         False,
     )
-    redact_bbox = {}
+    redact_bbox: Dict[str, Any] = {}
     try:
         for t1 in redact_text:
             page_wise_bbox_text = get_redact_bbox_from_text(
@@ -380,10 +380,10 @@ def get_min_max_x_y(
     Function returns min-max x & y coordinates from the entity bounding box.
 
     Args:
-        bounding_box (MutableSequence[documentai.NormalizedVertex]): 
+        bounding_box (MutableSequence[documentai.NormalizedVertex]):
             A list of vertices representing the bounding bo
     Returns:
-        min_max_x_y (Tuple[float, float, float, float]): 
+        min_max_x_y (Tuple[float, float, float, float]):
             Minimum and maximum x,y coordinates of entity bounding box.
     """
 
@@ -405,7 +405,7 @@ def get_normalized_vertices(
         coords (Dict[str, float]): It contains min&max xy-coordinates
 
     Returns:
-        MutableSequence[documentai.NormalizedVertex]: 
+        MutableSequence[documentai.NormalizedVertex]:
             It returns list containing 4 NormalizedVertex Objects
     """
     coords_order = [
@@ -428,7 +428,7 @@ def get_formatted_dates(main_string: str) -> Dict[str, str]:
         main_string (str): The input string containing dates.
 
     Returns:
-        formatted_dates(Dict[str, str]): 
+        formatted_dates(Dict[str, str]):
             A dictionary containing original dates as keys and formatted dates as values.
     """
 
@@ -460,10 +460,10 @@ def find_matched_translation_pairs(
 
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
-        translation_api_output (List[Dict[str, str]])): 
+        translation_api_output (List[Dict[str, str]])):
             Mapping dictionary of source and corresponding translated text.
     Returns:
-        best_match_pairs (List[Dict[str, str]]): 
+        best_match_pairs (List[Dict[str, str]]):
             Pairs which are best matched with entity mention text.
     """
 
@@ -516,7 +516,7 @@ def get_page_text_anc_mentiontext(
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
-        min_max_x_y (Tuple[float, float, float, float]): 
+        min_max_x_y (Tuple[float, float, float, float]):
             Minimum and maximum x&y coordinates of entity bounding box.
         mapping_text (str): Source text from translation text units.
         diff_y (float): Y-coordinate offset.
@@ -524,16 +524,16 @@ def get_page_text_anc_mentiontext(
         english_page_num (int): Document page number.
     Returns:
         Tuple[
-            Dict[str, float], 
-            Dict[str, MutableSequence[documentai.Document.TextAnchor.TextSegment]], 
-            str, 
-            List[List[str]], 
+            Dict[str, float],
+            Dict[str, MutableSequence[documentai.Document.TextAnchor.TextSegment]],
+            str,
+            List[List[str]],
             str
         ]
-            - bbox (Dict[str, float]): 
+            - bbox (Dict[str, float]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
             - expected_text_anc (Dict[
-                str, 
+                str,
                 MutableSequence[documentai.Document.TextAnchor.TextSegment]
             ]):
                 List of start and end indexes of the mapped entity.
@@ -543,8 +543,8 @@ def get_page_text_anc_mentiontext(
     """
 
     min_x, _, min_y, _ = min_max_x_y
-    matches = []
-    match_string_pair = []
+    matches: List[Any] = []
+    match_string_pair: List[Any] = []
     # Track whether entity is matched from OCR or Translated units
     method = ""
     orig_text = orig_invoice_json.text
@@ -642,19 +642,19 @@ def updated_entity_secondary(
 
     Args:
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
-        min_max_x_y (Tuple[float, float, float, float]): 
+        min_max_x_y (Tuple[float, float, float, float]):
             Minimum and maximum x&y coordinates of entity bounding box.
         mapping_text (str): Source text from translation text units.
         english_page_num (int): Document page number.
     Returns:
         - Tuple[
-            Dict[str, float], 
-            Dict[str, List[documentai.Document.TextAnchor.TextSegment]], 
-            str, 
-            List[List[str]], 
+            Dict[str, float],
+            Dict[str, List[documentai.Document.TextAnchor.TextSegment]],
+            str,
+            List[List[str]],
             str
         ]:
-        - updated_page_anc (Dict[str, float]): 
+        - updated_page_anc (Dict[str, float]):
             Dictionary containing min-max x&y coordinates of the mapped entity.
         - updated_text_anc (Dict[str, List[documentai.Document.TextAnchor.TextSegment]]):
             List of start and end indexes of the mapped entity..
@@ -753,12 +753,12 @@ def get_token(
     Args:
         json_dict (documentai.Document): The loaded JSON document.
         page (int): The page number.
-        text_anchors_check (MutableSequence[documentai.Document.TextAnchor.TextSegment]): 
+        text_anchors_check (MutableSequence[documentai.Document.TextAnchor.TextSegment]):
             List of text anchors to check.
 
     Returns:
         Tuple[
-            Union[Dict[str, float], None], 
+            Union[Dict[str, float], None],
             Union[MutableSequence[documentai.Document.TextAnchor.TextSegment], None]
         ]
             - A tuple containing the final page anchors, text anchors, and confidence.
@@ -836,25 +836,25 @@ def get_updated_entity(
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
-        translation_api_output (List[Dict[str, str]]): 
+        translation_api_output (List[Dict[str, str]]):
             Mapping dictionary of source and corresponding translated text.
         english_page_num (int): Document page number.
         diff_y (float): Y-coordinate offset.
         diff_x (float): X-coordinate offset.
     Returns:
         Tuple[
-            Dict[str, float], 
-            MutableSequence[documentai.Document.TextAnchor.TextSegment], 
+            Dict[str, float],
+            MutableSequence[documentai.Document.TextAnchor.TextSegment],
             str, List[List[str]], str,List[Dict[str, str]]
         ]
-            - main_page_anc (Dict[str, float]): 
+            - main_page_anc (Dict[str, float]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
             - main_text_anc (MutableSequence[documentai.Document.TextAnchor.TextSegment]):
                 List of start and end indexes of the mapped entity.
             - main_mentiontext (str): Mapped entity text.
             - unique_list (List[List[str]]): Unique list of matched string pairs.
             - method (str): Based on mapping block.
-            - mapping_text_list (List[Dict[str, str]]]): 
+            - mapping_text_list (List[Dict[str, str]]]):
                 List of matched translation units with entity text.
     """
 
@@ -1030,7 +1030,7 @@ def translation_text_units(
         output_gcs_prefix (str): GCS prefix where to store the file.
         save_translated_doc (bool, optional): True, to save the translated doc. Defaults to False.
         is_native (bool, optional): True, if input doc is native. Defaults to False.
-        remove_shadow (bool, optional): 
+        remove_shadow (bool, optional):
             True, to remove the shadow text from translated doc. Defaults to True.
 
     Returns:
@@ -1092,9 +1092,9 @@ def run_consolidate(
     and gives an updated json and comparison dataframe as output.
 
     Args:
-        english_invoice_json (documentai.Document): 
+        english_invoice_json (documentai.Document):
             JSON output from DocAI Invoice parser when translated.
-        orig_invoice_json (documentai.Document): 
+        orig_invoice_json (documentai.Document):
             JSON output from DocAI Invoice parser for the target language.
         translation_api_output (List[Dict[str, str]]): Text units (sourceText, targetText pairs).
         diff_y: Y-coordinate offset.
