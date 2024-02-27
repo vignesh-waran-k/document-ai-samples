@@ -182,11 +182,11 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="7">
-               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; 
-                border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); 
-                width: 49.00px; height: 208.46px;"><img alt="" src="images/image1.png" style="width: 49.00px; 
-                height: 208.46px; margin-left: 0.00px; margin-top: 0.00px; 
-                transform: rotate(0.00rad) translateZ(0px); 
+               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px;
+                border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);
+                width: 49.00px; height: 208.46px;"><img alt="" src="images/image1.png" style="width: 49.00px;
+                height: 208.46px; margin-left: 0.00px; margin-top: 0.00px;
+                transform: rotate(0.00rad) translateZ(0px);
                 -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
             </td>
             <td colspan="1" rowspan="5">
@@ -258,11 +258,10 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
 ## Create Processor
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProcessorServiceUIV1Beta3.CreateProcessor 
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProcessorServiceUIV1Beta3.CreateProcessor
 
 <hr>
  <b>Example RPC payload:</b>
- 
 <code>parent:"projects/${GCP_PROJECT?}/locations/us"
 processor {
   type: "SAMPLE_PROCESSOR"
@@ -751,20 +750,18 @@ enable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.d
             </td>
          </tr>
       </table>
-    
 <div style="padding-bottom:30px"></div>
 <p><span>Class<a href="https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3#enableprocessorrequest">EnableProcessorRequest</a></span></p>
 <div><span style="background-color:#c9d1cf">public final class EnableProcessorRequest extends GeneratedMessageV3 implements EnableProcessorRequestOrBuilder</span></div>
 <p><span>Request message for the enable processor method.</span></p>
       <p><span>Protobuf type google.cloud.documentai.v1beta3.EnableProcessorRequest</span></p>
       <p><span>Please Check </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessorRequest_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105453680&amp;usg=AOvVaw3DN6i-QSE3bwepfWPs1ikm">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessorRequest_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105453852&amp;usg=AOvVaw3dxKQGcAjMv5po1Smi5J6Z">Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
-    
-# Disable Processor
+
+## Disable Processor
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br> <code>DocumentProcessorServiceUIV1Beta3.DisableProcessor <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}"'<code>
 
 ## Python: <a href="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient#google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_disable_processor">disable_processor </a><br>
-    
 disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.document_processor_service.DisableProcessorRequest, dict]] = None, *, retry: Union[google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault] = <_MethodDefault._DEFAULT_VALUE: <object object>>, timeout: Optional[float] = None, metadata: Sequence[Tuple[str, str]] = ())
 <h4>It disables a processor</h4><br>
 <p><span><b>Parameters</b></span></p>
@@ -837,7 +834,8 @@ disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.
 <div style="padding-bottom:30px"></div>
     
 <p><span>Class<a href="https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3#disableprocessorrequest">DisableProcessorRequest</a></span></p>
-<div><span style="background-color:#c9d1cf">public final class DisableProcessorRequest extends GeneratedMessageV3 implements DisableProcessorRequestOrBuilder</span></div>
+<div><span style="background-color:#c9d1cf">public final class DisableProcessorRequest extends
+GeneratedMessageV3 implements DisableProcessorRequestOrBuilder</span></div>
 <p><span>Request message for the disable processor method.</span></p>
       <p><span>Protobuf type google.cloud.documentai.v1beta3.DisableProcessorRequest</span></p>
       <p><span>Please Check </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessorRequest_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105459634&amp;usg=AOvVaw2Jh8NvXY1f07ocWPOqZijc">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessorRequest_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105459918&amp;usg=AOvVaw0moPU8_ZxaqNYxmklOOf03">Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
@@ -850,33 +848,29 @@ disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.
 NOTE: Only flat schemas are currently supported (no EntityType.properties).</div>
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 <br> <code>DocumentProcessorServiceUIV1Beta3.TrainProcessorVersion <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}"'<code>
-    
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 <br> <code>DocumentProcessorServiceUIV1Beta3.TrainProcessorVersion <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}"'<code>    
 <div>
-    
 <b>RETURNS:</b>longrunning.Operation<br>
-
 <b>HTTP ARGUMENTS:</b>
     <ol>
     <li><b>parent:</b> Resource name of the document processor in  "projects/*/locations/*/processors/*" format.</li>
-     <li><b>display_name:</b> Display name of the new processor version.</li>
-     <li><b>schema:</b> Processor schema.
+    <li><b>display_name:</b> Display name of the new processor version.</li>
+    <li><b>schema:</b> Processor schema.
  display_name: "custom_schema_name"
   entity_types {
-    type: "custom_field_name" 
+    type: "custom_field_name"
     base_type: "string"
     occurrence_type: REQUIRED_ONCE
 }
 schema.base_type’s: string, datetime, money, number date, address
 occurrence_type: optional once, optional multiple, required once, required multiple</li>
     <li><b>training_data_path:</b> Path to the training data directory.</li>
-     <li><b>test_data_path:</b> Path to the test data directory.</li>
+    <li><b>test_data_path:</b> Path to the test data directory.</li>
 <span style="color:red">INTERNAL OPTIONS:</span>
      <li><b>extraction_options:</b> Options for training extraction processors.</li>
      <li><b>classification_options:</b> Options for training classification processors.</li>
     </ol>
 </div>
- 
 <b><i>Example:</i></b>
 <code>
 parent:
@@ -920,60 +914,52 @@ schema {
 };
     
 </code>
-    
+
 ## Deploy Processor Version
 
 <div style="color:#1a6ebb; background-color:#b2d6f7">NOTE: This step is not required for pre-trained processors.
 </div>
 <br>
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br> 
-    
- <code> DocumentProcessorServiceUIV1Beta3.DeployProcessorVersion 
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br>
+ <code> DocumentProcessorServiceUIV1Beta3.DeployProcessorVersion
  <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}" ' </code>
-    
+ 
 ## Undeploy Processor Version
 
 <div style="color:#1a6ebb; background-color:#b2d6f7">NOTE: This step is not required for pre-trained processors.
 </div>
 <br>
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br> 
-    
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br>
+
  <code> DocumentProcessorServiceUIV1Beta3.UndeployProcessorVersion
  <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}" ' </code>
-  
-    
 ## Get Processor Version
-
-
 <br>
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br> 
-    
- <code>DocumentProcessorServiceUIV1Beta3.GetProcessorVersion 
- <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}"'
- </code>
-  
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br>
+<code>DocumentProcessorServiceUIV1Beta3.GetProcessorVersion
+<br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}"'
+</code>
+
 ## Process Document (UI preview)
-#### Using the default version:
-
+## Using the default version
 <br>
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br> 
-    
- <code>DocumentProcessorServiceUIV1Beta3.ProcessDocument 
- <br>'document.content=readfile(/my-dir/taulia_1.pdf) ' 
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br>
+ <code>DocumentProcessorServiceUIV1Beta3.ProcessDocument
+ <br>'document.content=readfile(/my-dir/taulia_1.pdf)'
   'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}" document mime_type: "application/pdf" '
  </code>
- 
-#### Using the specific version:
+
+## Using the specific version
 <br>
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br> 
-    
- <code>DocumentProcessorServiceUIV1Beta3.ProcessDocument 
- <br>'document.content=readfile(/my-dir/taulia_1.pdf) ' 
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br>
+
+ <code>DocumentProcessorServiceUIV1Beta3.ProcessDocument
+ <br>'document.content=readfile(/my-dir/taulia_1.pdf) '
   'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}" document mime_type: "application/pdf"'
  </code>
 <div style="padding-bottom:30px"></div>
@@ -981,24 +967,24 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3<br>
 <h3> Get Operation</h3>
 
 <b>RPC:</b>
-google.longrunning.clouddocumentaicoreoperations 
-<br> 
-<code>CloudDocumentAICoreOperations.GetOperation 
+google.longrunning.clouddocumentaicoreoperations
+<br>
+<code>CloudDocumentAICoreOperations.GetOperation
  <br>'name: "projects/${GCP_PROJECT?}/locations/us/operations/${OPERATION_ID?}"’
 <code>
 
 ## Cancel Operation
 <b>RPC:</b>
-google.longrunning.clouddocumentaicoreoperations 
-<br> 
-<code>CloudDocumentAICoreOperations.CancelOperation 
+google.longrunning.clouddocumentaicoreoperations
+<br>
+<code>CloudDocumentAICoreOperations.CancelOperation
  <br>'name: "projects/${GCP_PROJECT?}/locations/us/operations/${OPERATION_ID?}"’
 <code>
 <div style="padding-bottom:30px"></div>
 # 4) Document Service Sample Calls
  These involve:
 <ul>
-   
+
 <li>GCP project</li>
 <li>Location </li>
 <li>Processor ID</li>
@@ -1008,17 +994,17 @@ google.longrunning.clouddocumentaicoreoperations
 
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.GetDataset  
+<br>
+<code>DocumentServiceUIV1Beta3.GetDataset
  <br>name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 <code>
 
 ## Import Documents
-#### Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.ImportDocuments  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3 
+<br>
+<code>DocumentServiceUIV1Beta3.ImportDocuments
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 batch_documents_import_configs {
@@ -1031,12 +1017,12 @@ batch_documents_import_configs {
 
 </code>
 
-#### Use a list of individual GCS documents
+## Use a list of individual GCS documents
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.ImportDocuments  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3 
+<br>
+<code>DocumentServiceUIV1Beta3.ImportDocuments
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 batch_documents_import_configs {
@@ -1055,13 +1041,13 @@ batch_documents_import_configs {
 }
 '
 </code>
-   
+
 ## Get Documents
-#### Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.GetDocument  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.GetDocument
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 document_id {
@@ -1074,13 +1060,13 @@ page_range {
   end: -1
 }
 </code>
-    
+
 ## Get Documents Thumbnails
-#### Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.GetThumbnails  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.GetThumbnails
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 document_id {
@@ -1095,23 +1081,23 @@ page_range {
 }
 </code>
     
- ## List Documents
-#### Use GCS prefix to import a set of documents
+## List Documents
+## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.ListDocuments  
-    
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.ListDocuments
+
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 '
 </code>
 
 ## Update Documents
-#### Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.UpdateDocument  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.UpdateDocument
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/__LOCATIONS__/processors/${PROCESSOR_ID?}/dataset"
 document_update {
@@ -1133,13 +1119,13 @@ document_update {
 }
 
 </code>
-    
+
 ## Batch Move Documents
-    
+
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.BatchMoveDocuments  
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.BatchMoveDocuments
     <b><i>Example Payload:</i></b>
  <br>dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 document_ids {
@@ -1152,29 +1138,29 @@ dataset_type: DATASET_SPLIT_TEST
 </code>
     
 ## Get All Dataset Split Stats
-    
+
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.GetAllDatasetSplitStats  
-   
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.GetAllDatasetSplitStats
+
  <br>‘dataset:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset"
 '
 </code>
-    
+
 ## Get Dataset Schema
-    
+
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
-<code>DocumentServiceUIV1Beta3.GetDatasetSchema  
-   
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
+<br>
+<code>DocumentServiceUIV1Beta3.GetDatasetSchema
+
  <br>‘name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset/datasetSchema"
 '
 </code>
-  
+
 ## Update Dataset Schema
-#### Updatable items include:
+## Updatable items include:
 
 <ul>
    
