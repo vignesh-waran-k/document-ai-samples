@@ -270,7 +270,8 @@ def get_coordinates_map(
         Tuple
     """
 
-    #row_keywords = {"taxonomy","total","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
+    #row_keywords = {"taxonomy","total","sum","economic",
+                     "taxonomy-eligible","taxonomy-non-eligible"}
     x_coordinates_ = {}
     y_coord_ = {}
     row_map_ = {}
@@ -419,7 +420,7 @@ def text_anchor_to_text(text_anchor: documentai.Document.TextAnchor, text: str) 
     Document AI identifies table data by their offsets in the entirety of the
     document's text. This function converts offsets to a string.
     Args:
-        text_anchor (documentai.Document.TextAnchor): It contains information about textanchor offsets.
+        text_anchor (object): It contains information about textanchor offsets.
         text (str): Full text of the document.
     Returns:
         str: Converted text based on the specified offsets.
