@@ -502,8 +502,8 @@ def get_page_text_anc_mentiontext(
     diff_x: float,
     english_page_num: int,
 ) -> Tuple[
-    Dict[str, float],
-    Dict[str, MutableSequence[documentai.Document.TextAnchor.TextSegment]],
+    Any,
+    Dict[str, List[Any]],
     str,
     List[List[str]],
     str,
@@ -524,8 +524,8 @@ def get_page_text_anc_mentiontext(
         english_page_num (int): Document page number.
     Returns:
         Tuple[
-            Dict[str, float],
-            Dict[str, MutableSequence[documentai.Document.TextAnchor.TextSegment]],
+            Any,
+            Dict[str, List[Any]],
             str,
             List[List[str]],
             str
@@ -586,7 +586,7 @@ def get_page_text_anc_mentiontext(
 
     # Initialize variables.
     bbox = {}
-    text_anc_1 = None
+    text_anc_1 = ""
     new_mention_text = ""
     expected_text_anc = {}
 
@@ -629,7 +629,7 @@ def updated_entity_secondary(
     mapping_text: str,
     english_page_num: int,
 ) -> Tuple[
-    Dict[str, float],
+    Any,
     Dict[str, List[documentai.Document.TextAnchor.TextSegment]],
     str,
     List[List[str]],
@@ -648,7 +648,7 @@ def updated_entity_secondary(
         english_page_num (int): Document page number.
     Returns:
         - Tuple[
-            Dict[str, float],
+            Any,
             Dict[str, List[documentai.Document.TextAnchor.TextSegment]],
             str,
             List[List[str]],
@@ -666,7 +666,7 @@ def updated_entity_secondary(
     min_x, max_x, min_y, max_y = min_max_x_y
     text_anc_tokens = []
     confidence = []
-    page_anc = {"x": [], "y": []}
+    page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     mapping_list = mapping_text.split()
     method = "OCR-TU"
     match_string_pair = []
@@ -744,7 +744,7 @@ def get_token(
     text_anchors_check: MutableSequence[documentai.Document.TextAnchor.TextSegment],
 ) -> Tuple[
     Union[Dict[str, float], None],
-    Union[MutableSequence[documentai.Document.TextAnchor.TextSegment], None],
+    Any,
 ]:
     """
     This function takes a loaded JSON, page number, and text anchors as input
@@ -766,7 +766,7 @@ def get_token(
 
     temp_text_anc = []
     temp_confidence = []
-    temp_ver = {"x": [], "y": []}
+    temp_ver: Dict[str, List[float]] = {"x": [], "y": []}
     ta_si = text_anchors_check[0].start_index
     ta_ei = text_anchors_check[0].end_index
     for token in json_dict.pages[page].tokens:
@@ -823,8 +823,8 @@ def get_updated_entity(
     diff_y: float = 0.05,
     diff_x: float = 0.3,
 ) -> Tuple[
-    Dict[str, float],
-    MutableSequence[documentai.Document.TextAnchor.TextSegment],
+    Dict[str, Any],
+    List[Any],
     str,
     List[List[str]],
     str,
@@ -843,11 +843,11 @@ def get_updated_entity(
         diff_x (float): X-coordinate offset.
     Returns:
         Tuple[
-            Dict[str, float],
-            MutableSequence[documentai.Document.TextAnchor.TextSegment],
+            Dict[str, Any],
+            List[Any],
             str, List[List[str]], str,List[Dict[str, str]]
         ]
-            - main_page_anc (Dict[str, float]):
+            - main_page_anc (Dict[str, List[float]]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
             - main_text_anc (MutableSequence[documentai.Document.TextAnchor.TextSegment]):
                 List of start and end indexes of the mapped entity.
@@ -862,13 +862,13 @@ def get_updated_entity(
     mapping_text_list = find_matched_translation_pairs(entity, translation_api_output)
     main_mentiontext = ""
     main_text_anc = []
-    main_page_anc = {"x": [], "y": []}
+    main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
     updated_page_anc = ""
     method = ""
     mentiontext = ""
-    match_str_pair = []
+    match_str_pair: List[Any] = []
     # Iterate over matched pairs {source: other lang, target: english}.
     for map_text in mapping_text_list:
         (
@@ -1108,7 +1108,7 @@ def run_consolidate(
     """
 
     _updated_entities = []
-    updated_text_anchor = []
+    updated_text_anchor: List[Any] = []
     df = pd.DataFrame(
         columns=[
             "English_entity_type",
@@ -1185,7 +1185,7 @@ def run_consolidate(
             else:
                 _child_properties = []
                 _parent_text_segments = []
-                _parent_x_y = {"x": [], "y": []}
+                _parent_x_y: Dict[str, List[Any]] = {"x": [], "y": []}
                 for _child_ent in _entity.properties:
                     child_ent_eng_type = _child_ent.type_
                     child_ent_eng_mt = _child_ent.mention_text
@@ -1311,7 +1311,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12 = ""
+            ent_eng_bbox12 = tuple()
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
