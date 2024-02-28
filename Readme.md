@@ -20,7 +20,9 @@ ust=1704207105405744&amp;usg=AOvVaw2Qm4vh7sJhziy7EzPgmUfm">DocAI Documentation</
 It is advised to use V1beta3). </span></p>
 
 <ul>
-    <li><span>Python for v1beta3 </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_process_document&amp;sa=D&amp;source=editors&amp;ust=1704207105406068&amp;usg=AOvVaw07LfbSclRqCFaVJxf_mf91">here</a></span><span >. </span></li>
+    <li><span>Python for v1beta3 </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.                                             document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document
+_processor_service_DocumentProcessorServiceClient_process_document&amp;sa=D&amp;source=editors&amp;
+ust=1704207105406068&amp;usg=AOvVaw07LfbSclRqCFaVJxf_mf91">here</a></span><span >. </span></li>
     <li ><span>For JAVA Client , use v1beta3 </span><span ><a  href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3&amp;sa=D&amp;source=editors&amp;ust=1704207105406321&amp;usg=AOvVaw3jqZFEiCpKrQcdiCgWrGDd">here</a></span></li>
 
 </ul>
@@ -64,7 +66,13 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="13">
-               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 49.00px; height: 208.00px;"><img alt="" src="images/image2.png" style="width: 49.00px; height: 208.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
+               <p><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px;
+                border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px);
+                -webkit-transform: rotate(0.00rad) translateZ(0px); width: 49.00px;
+                height: 208.00px;"><img alt="" src="images/image2.png" style="width: 49.00px;
+                height: 208.00px; margin-left: 0.00px; margin-top: 0.00px;
+                transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);
+                " title=""></span></p>
             </td>
             <td colspan="1" rowspan="6">
                <p><span>Processor Management</span></p>
