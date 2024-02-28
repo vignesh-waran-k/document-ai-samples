@@ -13,7 +13,11 @@ The necessary steps for training a CDE processor are all available in Python (as
 <span style="color:red">  These are experimental, subject to change and generally not recommended unless prior arrangements are specifically made in advance. </span></div>
 <br>
 <p ><span >NOTE 1: </span></p><p><span>The prediction / process document calls for CDE processors are the same as other processors,
-so these are not documented here. Refer to online </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/document-ai/docs/reference/rest/v1/projects.locations.processors&amp;sa=D&amp;source=editors&amp;ust=1704207105405744&amp;usg=AOvVaw2Qm4vh7sJhziy7EzPgmUfm">DocAI Documentation</a></span><span>. &nbsp;Either V1 or V1Beta3 may be used - they behave the same (For Java - V1 &amp; V1Beta3 differ significantly, It is advised to use V1beta3). </span></p>
+so these are not documented here. Refer to online </span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/document-ai/docs/reference/rest/v1/projects.locations.processors&amp;sa=D&amp;source=editors&amp;
+ust=1704207105405744&amp;usg=AOvVaw2Qm4vh7sJhziy7EzPgmUfm">DocAI Documentation</a>
+</span><span>. &nbsp;Either V1 or V1Beta3 may be used - they behave the same (For Java - V1 &amp; V1Beta3 differ significantly,
+It is advised to use V1beta3). </span></p>
 
 <ul>
     <li><span>Python for v1beta3 </span><span ><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_process_document&amp;sa=D&amp;source=editors&amp;ust=1704207105406068&amp;usg=AOvVaw07LfbSclRqCFaVJxf_mf91">here</a></span><span >. </span></li>
