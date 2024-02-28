@@ -19,10 +19,10 @@ from collections import defaultdict
 from io import BytesIO
 from typing import DefaultDict, Dict, List, MutableSequence, Tuple, Union
 
+import traceback
 import numpy as np
 import pandas as pd
 import PyPDF2
-import traceback
 from google.api_core.client_options import ClientOptions
 from google.api_core.exceptions import InternalServerError, RetryError
 from google.cloud import documentai, storage
