@@ -586,7 +586,7 @@ def get_page_text_anc_mentiontext(
 
     # Initialize variables.
     bbox = {}
-    text_anc_1 = ""
+    text_anc_1 = {}
     new_mention_text = ""
     expected_text_anc = {}
 
