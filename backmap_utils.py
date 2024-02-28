@@ -839,6 +839,8 @@ def get_updated_entity(
                 english_page_num,
             )
         if updated_page_anc:
+            main_page_anc1["x"] = []
+            main_page_anc1["y"] = []
             main_page_anc1["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
             main_page_anc1["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
             for text_anc in updated_text_anc["textSegments"]:
