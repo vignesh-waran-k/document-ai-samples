@@ -892,6 +892,7 @@ def get_updated_entity(
                 updated_text_anc,
                 mentiontext,
                 match_str_pair,
+                method
             ) = updated_entity_secondary(
                 orig_invoice_json,
                 min_max_x_y,
@@ -938,7 +939,7 @@ def get_updated_entity(
         text_anchor.text_segments,
         main_mentiontext,
         unique_list,
-        ,
+        method,
         mapping_text_list,
     )
 
