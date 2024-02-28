@@ -862,7 +862,7 @@ def get_updated_entity(
     for item in match_str_pair:
         if item not in unique_list:
             unique_list.append(item)
-    main_page_anc1 = {
+    main_page_anc = {
         "min_x": min(main_page_anc["x"]),
         "min_y": min(main_page_anc["y"]),
         "max_x": max(main_page_anc["x"]),
@@ -871,7 +871,7 @@ def get_updated_entity(
     text_anchor = documentai.Document.TextAnchor()
     text_anchor.text_segments = main_text_anc
     return (
-        main_page_anc1,
+        main_page_anc,
         text_anchor.text_segments,
         main_mentiontext,
         unique_list,
@@ -1238,7 +1238,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12 = tuple()
+            ent_eng_bbox12: Tuple[float, float, float, float] = tuple()
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
