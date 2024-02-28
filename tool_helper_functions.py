@@ -268,21 +268,12 @@ def get_coordinates_map(
         Tuple
     """
 
-    """
-    row_keywords = {
-    "taxonomy",
-    "total",
-    "sum",
-    "economic",
-    "taxonomy-eligible",
-    "taxonomy-non-eligible"
-    }
-    """
+    #row_keywords={"taxonomy","total","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
     x_coordinates_ = {}
     y_coord_ = {}
     row_map_ = {}
     max_ycd_ = {}
-    for pn, page in enumerate(document.pages):
+    for pn, _ in enumerate(document.pages):
         row_coords = []
         x_coordinates = []
         y_coord = []
@@ -457,7 +448,7 @@ def parse_document_tables(output_bucket, output_prefix, output_csv_prefix):
         output_bucket=output_bucket, output_prefix=output_prefix
     )
     for file_key, document in doc_obj_dict.items():
-        for idx, page in enumerate(document.pages):
+        for _ , page in enumerate(document.pages):
             header_row_values: List[List[str]] = []
             body_row_values: List[List[str]] = []
             for index, table in enumerate(page.tables):
