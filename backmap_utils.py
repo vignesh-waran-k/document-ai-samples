@@ -228,7 +228,7 @@ def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
         List[Image.Image]: List of synthesized images.
     """
     synthesized_images = []
-    
+
     def decode_image(image_bytes: bytes) -> Image.Image:
         with io.BytesIO(image_bytes) as image_file:
             image = Image.open(image_file)
@@ -370,10 +370,10 @@ def get_normalized_vertices(
             It returns list containing 4 NormalizedVertex Objects
     """
     coords_order = [
-        ("min_x_1", "min_y"),
+        ("min_x", "min_y"),
         ("max_x", "min_y"),
         ("max_x", "max_y"),
-        ("min_x_1", "max_y"),
+        ("min_x", "max_y"),
     ]
     nvs = []
     for x, y in coords_order:
@@ -551,9 +551,9 @@ def get_page_text_anc_mentiontext(
             continue
         # Difference between the original and mapped bbox should be within defined offset.
         cond1 = abs(bb["min_y"] - min_y) <= diff_y
-        cond2 = abs(bb["min_x_1"] - min_x) <= diff_x
+        cond2 = abs(bb["min_x"] - min_x) <= diff_x
         if cond1 and cond2:
-            diff_x = abs(bb["min_x_1"] - min_x)
+            diff_x = abs(bb["min_x"] - min_x)
             diff_y = abs(bb["min_y"] - min_y)
             bbox = bb
             text_anc_1 = text_anc
@@ -656,7 +656,7 @@ def updated_entity_secondary(
         temp_mention_text += ent_text
     try:
         updated_page_anc = {
-            "min_x_1": min(page_anc["x"]),
+            "min_x": min(page_anc["x"]),
             "min_y": min(page_anc["y"]),
             "max_x": max(page_anc["x"]),
             "max_y": max(page_anc["y"]),
@@ -664,7 +664,7 @@ def updated_entity_secondary(
     except ValueError:
         # recheck the format
         updated_page_anc = {
-            "min_x_1": min_x,
+            "min_x": min_x,
             "min_y": min_y,
             "max_x": max_x,
             "max_y": max_y,
@@ -745,7 +745,7 @@ def get_token(
                     temp_text_anc = text_segs
     if temp_text_anc and temp_ver["x"]:
         final_ver = {
-            "min_x_1": min(temp_ver["x"]),
+            "min_x": min(temp_ver["x"]),
             "min_y": min(temp_ver["y"]),
             "max_x": max(temp_ver["x"]),
             "max_y": max(temp_ver["y"]),
@@ -839,7 +839,7 @@ def get_updated_entity(
                 english_page_num,
             )
         if updated_page_anc:
-            main_page_anc["x"].extend([updated_page_anc["min_x_1"], updated_page_anc["max_x"]])
+            main_page_anc["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
             main_page_anc["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
             for text_anc in updated_text_anc["textSegments"]:
                 if text_anc not in main_text_anc:
@@ -863,7 +863,7 @@ def get_updated_entity(
         if item not in unique_list:
             unique_list.append(item)
     main_page_anc = {
-        "min_x_1": min(main_page_anc["x"]),
+        "min_x": min(main_page_anc["x"]),
         "min_y": min(main_page_anc["y"]),
         "max_x": max(main_page_anc["x"]),
         "max_y": max(main_page_anc["y"]),
@@ -1102,7 +1102,7 @@ def run_consolidate(
                     map_text_list,
                     ent_eng_bbox,
                     [
-                        updated_page_anchor["min_x_1"],
+                        updated_page_anchor["min_x"],
                         updated_page_anchor["min_y"],
                         updated_page_anchor["max_x"],
                         updated_page_anchor["max_y"],
@@ -1184,7 +1184,7 @@ def run_consolidate(
                             map_text_list,
                             child_ent_eng_bbox,
                             [
-                                updated_page_anchor["min_x_1"],
+                                updated_page_anchor["min_x"],
                                 updated_page_anchor["min_y"],
                                 updated_page_anchor["max_x"],
                                 updated_page_anchor["max_y"],
@@ -1213,7 +1213,7 @@ def run_consolidate(
                     temp = orig_invoice_doc.text[si:ei]
                     _parent_mention_text += f" {temp}"
                 parent_page_anchor = {
-                    "min_x_1": min(_parent_x_y["x"]),
+                    "min_x": min(_parent_x_y["x"]),
                     "min_y": min(_parent_x_y["y"]),
                     "max_x": max(_parent_x_y["x"]),
                     "max_y": max(_parent_x_y["y"]),
