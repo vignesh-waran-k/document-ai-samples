@@ -503,7 +503,7 @@ def get_page_text_anc_mentiontext(
     english_page_num: int,
 ) -> Tuple[
     Any,
-    Dict[str, Dict[Any,Any]],
+    Dict[str, Dict[Any, Any]],
     str,
     List[List[str]],
     str,
@@ -648,10 +648,10 @@ def updated_entity_secondary(
         english_page_num (int): Document page number.
     Returns:
         - Tuple[
-            Any,
+            Dict[str, float],
             Dict[str, List[documentai.Document.TextAnchor.TextSegment]],
             str,
-            List[List[str]],
+            List[List[Any]],
             str
         ]:
         - updated_page_anc (Dict[str, float]):
@@ -845,7 +845,7 @@ def get_updated_entity(
         Tuple[
             Dict[str, Any],
             List[Any],
-            str, List[List[str]], Dict[str, float],List[Dict[str, str]]
+            str, List[List[str]], str, List[Dict[str, str]]
         ]
             - main_page_anc (Dict[str, List[float]]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
@@ -853,7 +853,7 @@ def get_updated_entity(
                 List of start and end indexes of the mapped entity.
             - main_mentiontext (str): Mapped entity text.
             - unique_list (List[List[str]]): Unique list of matched string pairs.
-            - method (Dict[str, float]): Based on mapping block.
+            - method (str): Based on mapping block.
             - mapping_text_list (List[Dict[str, str]]]):
                 List of matched translation units with entity text.
     """
@@ -865,8 +865,8 @@ def get_updated_entity(
     main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
-    updated_page_anc = ""
-    method: Dict[str, float] = {}
+    updated_page_anc: Dict[str, float] = {}
+    method = ""
     mentiontext = ""
     match_str_pair: List[Any] = []
     # Iterate over matched pairs {source: other lang, target: english}.
@@ -892,7 +892,7 @@ def get_updated_entity(
                 updated_text_anc,
                 mentiontext,
                 match_str_pair,
-                method,
+                ,
             ) = updated_entity_secondary(
                 orig_invoice_json,
                 min_max_x_y,
@@ -939,7 +939,7 @@ def get_updated_entity(
         text_anchor.text_segments,
         main_mentiontext,
         unique_list,
-        method,
+        ,
         mapping_text_list,
     )
 
@@ -1115,7 +1115,7 @@ def run_consolidate(
             "English_entity_MT",
             "Original_entity_MT",
             "match_pair",
-            "method",
+            "",
             "map_text_list",
             "English_entity_bbox",
             "Original_entity_bbox",
@@ -1140,7 +1140,7 @@ def run_consolidate(
                     updated_text_anchor,
                     mentiontext,
                     match_str_pair,
-                    method,
+                    ,
                     map_text_list,
                 ) = get_updated_entity(
                     _entity,
@@ -1171,7 +1171,7 @@ def run_consolidate(
                     ent_eng_mt.strip("\n"),
                     mentiontext.strip("\n"),
                     match_str_pair,
-                    method,
+                    ,
                     map_text_list,
                     ent_eng_bbox,
                     [
@@ -1199,7 +1199,7 @@ def run_consolidate(
                                 updated_text_anchor,
                                 mentiontext,
                                 match_str_pair,
-                                method,
+                                ,
                                 map_text_list,
                             ) = get_updated_entity(
                                 _child_ent,
@@ -1215,7 +1215,7 @@ def run_consolidate(
                                 updated_text_anchor,
                                 mentiontext,
                                 match_str_pair,
-                                method,
+                                ,
                                 map_text_list,
                             ) = get_updated_entity(
                                 _child_ent,
@@ -1253,7 +1253,7 @@ def run_consolidate(
                             child_ent_eng_mt.strip("\n"),
                             mentiontext.strip("\n"),
                             match_str_pair,
-                            method,
+                            ,
                             map_text_list,
                             child_ent_eng_bbox,
                             [
