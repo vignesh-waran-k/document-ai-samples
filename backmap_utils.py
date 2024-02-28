@@ -801,7 +801,7 @@ def get_updated_entity(
     mapping_text_list = find_matched_translation_pairs(entity, translation_api_output)
     main_mentiontext = ""
     main_text_anc = []
-    main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
+    main_page_anc1: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
     updated_page_anc: Dict[str, List[float]] = {}
@@ -839,8 +839,8 @@ def get_updated_entity(
                 english_page_num,
             )
         if updated_page_anc:
-            main_page_anc["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
-            main_page_anc["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
+            main_page_anc1["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
+            main_page_anc1["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
             for text_anc in updated_text_anc["textSegments"]:
                 if text_anc not in main_text_anc:
                     main_text_anc.append(text_anc)
@@ -862,16 +862,16 @@ def get_updated_entity(
     for item in match_str_pair:
         if item not in unique_list:
             unique_list.append(item)
-    main_page_anc = {
-        "min_x": min(main_page_anc["x"]),
-        "min_y": min(main_page_anc["y"]),
-        "max_x": max(main_page_anc["x"]),
-        "max_y": max(main_page_anc["y"]),
+    main_page_anc2 = {
+        "min_x": min(main_page_anc1["x"]),
+        "min_y": min(main_page_anc1["y"]),
+        "max_x": max(main_page_anc1["x"]),
+        "max_y": max(main_page_anc1["y"]),
     }
     text_anchor = documentai.Document.TextAnchor()
     text_anchor.text_segments = main_text_anc
     return (
-        main_page_anc,
+        main_page_anc2,
         text_anchor.text_segments,
         main_mentiontext,
         unique_list,
@@ -1238,7 +1238,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12: Tuple[float, float, float, float] = ()
+            ent_eng_bbox12: Tuple[float, float, float, float] = (0.0, 0.0, 0.0, 0.0)
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
