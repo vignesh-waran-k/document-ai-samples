@@ -804,7 +804,7 @@ def get_updated_entity(
     main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
-    updated_page_anc = {}
+    updated_page_anc: Dict[str, List[float]] = {}
     method = ""
     mentiontext = ""
     match_str_pair: List[Any] = []
@@ -862,7 +862,7 @@ def get_updated_entity(
     for item in match_str_pair:
         if item not in unique_list:
             unique_list.append(item)
-    main_page_anc = {
+    main_page_anc1 = {
         "min_x": min(main_page_anc["x"]),
         "min_y": min(main_page_anc["y"]),
         "max_x": max(main_page_anc["x"]),
@@ -871,7 +871,7 @@ def get_updated_entity(
     text_anchor = documentai.Document.TextAnchor()
     text_anchor.text_segments = main_text_anc
     return (
-        main_page_anc,
+        main_page_anc1,
         text_anchor.text_segments,
         main_mentiontext,
         unique_list,
