@@ -30,6 +30,8 @@ from google import auth
 from google.cloud import documentai_v1beta3 as documentai
 from google.cloud import storage
 from PIL import Image
+
+
 def get_access_token() -> Union[str, Any]:
     """
     Retrieves and returns an access token for API authentication.
@@ -40,6 +42,8 @@ def get_access_token() -> Union[str, Any]:
     credentials.refresh(google.auth.transport.requests.Request())
     token = credentials.token
     return token
+
+
 def download_pdf(gcs_input_path: str, file_prefix: str) -> bytes:
     """
     Reads the PDF file from Google Cloud Storage (GCS).
@@ -55,6 +59,8 @@ def download_pdf(gcs_input_path: str, file_prefix: str) -> bytes:
     blob = bucket.blob(file_prefix)
     pdf_content = blob.download_as_bytes()
     return pdf_content
+
+
 def process_document(
     project_id: str,
     location: str,
@@ -111,6 +117,8 @@ def process_document(
     )
     result = client.process_document(request=request)
     return result.document
+
+
 def document_to_json(result: documentai.Document) -> Dict[str, Any]:
     """
     Converts a Document AI process response to a JSON-friendly format.
@@ -127,6 +135,8 @@ def document_to_json(result: documentai.Document) -> Dict[str, Any]:
         json_string = a.read().decode("utf-8")
         json_data = json.loads(json_string)
     return json_data
+
+
 def upload_to_cloud_storage(
     filename: str,
     data: Union[bytes, Dict[str, Any], pd.DataFrame],
@@ -161,6 +171,8 @@ def upload_to_cloud_storage(
         print(f"\tSaved the DataFrame to GCS: {gcs_uri}")
     else:
         print("\tUnsupported data type for upload")
+
+
 def get_redact_bbox_from_text(
     text_redact: str, full_text: str, json_data: documentai.Document
 ) -> Dict[str, List[List[Any]]]:
@@ -205,6 +217,8 @@ def get_redact_bbox_from_text(
                 redact_bbox[str(page)] = [[min(x), min(y), max(x), max(y)]]
             page_num = page_num + 1
     return redact_bbox
+
+
 def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
     """
     Convert JSON data into a list of images.
@@ -222,6 +236,8 @@ def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
     for page in json_data.pages:
         synthesized_images.append(decode_image(page.image.content))
     return synthesized_images
+
+
 def draw_black_box(
     synthesized_images: List[Image.Image],
     page_wise_bbox: Any ,
@@ -267,6 +283,8 @@ def draw_black_box(
         format="PDF",
     )
     return pdf_stream
+
+
 def redact(
     project_id: str,
     location: str,
@@ -317,6 +335,8 @@ def redact(
     pdf_stream = draw_black_box(synthesized_images, redact_bbox)
     redacted_pdf_stream = pdf_stream.getvalue()
     return redacted_pdf_stream
+
+
 def get_min_max_x_y(
     bounding_box: MutableSequence[documentai.NormalizedVertex],
 ) -> Tuple[float, float, float, float]:
@@ -335,6 +355,8 @@ def get_min_max_x_y(
     max_y = max(item.y for item in bounding_box)
     min_max_x_y = (min_x, max_x, min_y, max_y)
     return min_max_x_y
+
+
 def get_normalized_vertices(
     coords: Dict[str, float]
 ) -> MutableSequence[documentai.NormalizedVertex]:
@@ -356,6 +378,8 @@ def get_normalized_vertices(
     for x, y in coords_order:
         nvs.append(documentai.NormalizedVertex(x=coords[x], y=coords[y]))
     return nvs
+
+
 def get_formatted_dates(main_string: str) -> Dict[str, str]:
     """
     This function checks for dates in the given string and returns them in a specific format.
@@ -383,6 +407,8 @@ def get_formatted_dates(main_string: str) -> Dict[str, str]:
             # Handle invalid date formats gracefully
             pass
     return formatted_dates
+
+
 def find_matched_translation_pairs(
     entity: documentai.Document.Entity, translation_api_output: List[Dict[str, str]]
 ) -> List[Dict[str, str]]:
@@ -418,6 +444,8 @@ def find_matched_translation_pairs(
             if best_match_pair:
                 best_match_pairs.append(best_match_pair)
     return best_match_pairs
+
+
 def get_page_text_anc_mentiontext(
     entity: documentai.Document.Entity,
     orig_invoice_json: documentai.Document,
@@ -539,6 +567,8 @@ def get_page_text_anc_mentiontext(
                 new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
+
+
 def updated_entity_secondary(
     orig_invoice_json: documentai.Document,
     min_max_x_y: Tuple[float, float, float, float],
@@ -649,6 +679,8 @@ def updated_entity_secondary(
         match_string_pair,
         method,
     )
+
+
 def get_token(
     json_dict: documentai.Document,
     page: int,
@@ -721,6 +753,8 @@ def get_token(
         return final_ver, final_text_anc
     # else:
     return None, None
+
+
 def get_updated_entity(
     entity: documentai.Document.Entity,
     orig_invoice_json: documentai.Document,
@@ -804,10 +838,8 @@ def get_updated_entity(
                 english_page_num,
             )
         if updated_page_anc:
-            xa = [updated_page_anc["min_x"], updated_page_anc["max_x"]]
-            ya = [updated_page_anc["min_y"], updated_page_anc["max_y"]]
-            main_page_anc["x"].extend(xa)
-            main_page_anc["y"].extend(ya)
+            main_page_anc["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
+            main_page_anc["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
             for text_anc in updated_text_anc["textSegments"]:
                 if text_anc not in main_text_anc:
                     main_text_anc.append(text_anc)
@@ -845,6 +877,8 @@ def get_updated_entity(
         method,
         mapping_text_list,
     )
+
+
 def find_substring_indexes(
     text: str, substring: str
 ) -> Tuple[List[Tuple[int, int]], List[List[str]]]:
@@ -897,6 +931,8 @@ def find_substring_indexes(
                     matches.append((si, ei))
                     match_string_pair.append([substring, text1[si:ei]])
     return matches, match_string_pair
+
+
 def translation_text_units(
     project_id: str,
     location: str,
@@ -970,6 +1006,8 @@ def translation_text_units(
         )
     doc_text_units = doc_trans["textUnits"]
     return redacted_pdf_bytes, doc_text_units, json_response
+
+
 def run_consolidate(
     english_invoice_doc: documentai.Document,
     orig_invoice_doc: documentai.Document,
