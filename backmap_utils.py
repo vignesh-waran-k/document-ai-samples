@@ -1238,7 +1238,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12: Tuple[float, float, float, float] = tuple()
+            ent_eng_bbox12: Tuple[float, float, float, float] = ()
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
