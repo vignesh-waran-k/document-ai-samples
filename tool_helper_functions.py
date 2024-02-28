@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""This module contains helper functions for Advance Table Parsing Tool"""
 import math
 import re
 import time
@@ -36,7 +36,6 @@ def batch_process_documents(
     location: str,
     processor_id: str,
     gcs_input_uri: str,
-    input_mime_type: str,
     gcs_output_bucket: str,
     gcs_output_uri_prefix: str,
     field_mask: Union[str, None] = None,
@@ -50,7 +49,6 @@ def batch_process_documents(
         location (str): Location of the processor.
         processor_id (str): ID of the Document AI processor.
         gcs_input_uri (str): Cloud Storage URI for the input GCS folder.
-        input_mime_type (str): MIME type of the input documents.
         gcs_output_bucket (str): Google Cloud Storage bucket for output.
         gcs_output_uri_prefix (str): Output GCS URI prefix.
         field_mask (Union[str, None]): Field mask for output. Defaults to None.
@@ -78,10 +76,8 @@ def batch_process_documents(
     output_config = documentai.DocumentOutputConfig(gcs_output_config=gcs_output_config)
     if processor_version_id:
         # The full resource name of the processor version, e.g.:
-        """
-        projects/{project_id}/locations/{location}/processors/
-        {processor_id}/processorVersions/{processor_version_id}
-        """
+        # base_url = "projects/{project_id}/locations/{location}/processors/{processor_id}/"
+        # url = base_url + "processorVersions/{processor_version_id}"
         name = client.processor_version_path(
             project_id, location, processor_id, processor_version_id
         )
