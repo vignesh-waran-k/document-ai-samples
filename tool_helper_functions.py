@@ -1,4 +1,4 @@
-# # Copyright 2023 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,8 +78,10 @@ def batch_process_documents(
     output_config = documentai.DocumentOutputConfig(gcs_output_config=gcs_output_config)
     if processor_version_id:
         # The full resource name of the processor version, e.g.:
-        # projects/{project_id}/locations/{location}/processors/
+        """
+        projects/{project_id}/locations/{location}/processors/
         {processor_id}/processorVersions/{processor_version_id}
+        """
         name = client.processor_version_path(
             project_id, location, processor_id, processor_version_id
         )
