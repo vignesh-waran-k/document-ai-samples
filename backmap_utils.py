@@ -478,7 +478,7 @@ def get_page_text_anc_mentiontext(
     Returns:
         Tuple[
             Any,
-            Dict[str, str],
+            Dict[str, Dict[Any, Any]],
             str,
             List[List[str]],
             str
@@ -576,8 +576,8 @@ def updated_entity_secondary(
     mapping_text: str,
     english_page_num: int,
 ) -> Tuple[
-    Dict[str, float],
-    Dict[str, List[Any]],
+    Any,
+    Any,
     str,
     List[List[Any]],
     str,
@@ -594,8 +594,8 @@ def updated_entity_secondary(
         english_page_num (int): Document page number.
     Returns:
         - Tuple[
-            Dict[str, float],
-            Dict[str, List[documentai.Document.TextAnchor.TextSegment]],
+            Any,
+            Any,
             str,
             List[List[Any]],
             str
