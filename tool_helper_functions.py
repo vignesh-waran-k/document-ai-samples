@@ -270,8 +270,16 @@ def get_coordinates_map(
         Tuple
     """
 
-    #row_keywords = {"taxonomy","total","sum","economic",
-                     "taxonomy-eligible","taxonomy-non-eligible"}
+    """
+    row_keywords = {
+    "taxonomy",
+    "total",
+    "sum",
+    "economic",
+    "taxonomy-eligible",
+    "taxonomy-non-eligible"
+    }
+    """
     x_coordinates_ = {}
     y_coord_ = {}
     row_map_ = {}
