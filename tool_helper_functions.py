@@ -268,7 +268,7 @@ def get_coordinates_map(
         Tuple
     """
 
-    #row_keywords={"taxonomy","total","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
+    # row_keywords = {"taxonomy","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
     x_coordinates_ = {}
     y_coord_ = {}
     row_map_ = {}
@@ -490,7 +490,6 @@ def parse_and_split_pages(
     individual_process_statuses: MutableSequence[
         documentai.BatchProcessMetadata.IndividualProcessStatus
     ],
-    hitl_path: str,
     output_bucket_name: str,
     output_folder: str,
     label: str,
@@ -501,7 +500,6 @@ def parse_and_split_pages(
     then stores them in the specified output directory.
     Args:
         individual_process_statuses (MutableSequence): List of individual process statuses.
-        hitl_path (str): Path for HITL.
         output_bucket_name (str): Output bucket name.
         output_folder (str): Output folder.
         label (str): Taxonomy label.
@@ -596,14 +594,13 @@ def get_column_name_type_using_xcoord(
             col_string = col.split("_")
             if "DNSH" in col_string or "safeguards" in col_string:
                 return col, ["Y", "N", "N/A", "S", "n/a"]
-            elif "SCC" in col_string or "proportion" in col_string:
+            if "SCC" in col_string or "proportion" in col_string:
                 return col, ["%"]
-            elif "business" in col_string:
+            if "business" in col_string:
                 return col, ["number"]
-            elif "code" in col_string:
+            if "code" in col_string:
                 return col, ["code"]
-            else:
-                return col, None
+            return col, None
     return None, None
 
 
@@ -825,8 +822,7 @@ def post_process(
     for idx, row in dest_df.iterrows():
         if row["taxonomy_disclosure"] is np.nan:
             continue
-        else:
-            st = row["taxonomy_disclosure"]
+        st = row["taxonomy_disclosure"]
         # search for taxonomy pattern
         ea = re.search(r"^[A-Z]\.\s[a-zA-Z\s-]+", st)
         if ea:
