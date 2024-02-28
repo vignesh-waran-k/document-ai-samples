@@ -11,10 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """This module contains helper functions for Backmapping Tool"""
-
-
 import base64
 import io
 import json
@@ -22,7 +19,6 @@ import os
 import re
 from collections import defaultdict
 from typing import Any, Dict, List, MutableSequence, Optional, Tuple, Union
-
 import cv2
 import google.auth.transport.requests
 import numpy
@@ -34,42 +30,31 @@ from google import auth
 from google.cloud import documentai_v1beta3 as documentai
 from google.cloud import storage
 from PIL import Image
-
-
 def get_access_token() -> Union[str, Any]:
     """
     Retrieves and returns an access token for API authentication.
-
     Returns:
         str: access token.
     """
-
     credentials, _ = auth.default()
     credentials.refresh(google.auth.transport.requests.Request())
     token = credentials.token
     return token
-
-
 def download_pdf(gcs_input_path: str, file_prefix: str) -> bytes:
     """
     Reads the PDF file from Google Cloud Storage (GCS).
-
     Args:
         gcs_input_path (str): GCS document path.
         file_prefix (str): Prefix for the GCS document name.
-
     Returns:
         pdf_content (bytes): bytes object containing the PDF content.
     """
-
     client = storage.Client()
     bucket_name = gcs_input_path.split("/")[2]
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(file_prefix)
     pdf_content = blob.download_as_bytes()
     return pdf_content
-
-
 def process_document(
     project_id: str,
     location: str,
@@ -83,7 +68,6 @@ def process_document(
 ) -> documentai.Document:
     """
     This function processes a document using either PDF content in bytes or a GCS file URI.
-
     Args:
         project_id (str): The project ID for Google Cloud services.
         location (str): The location of the Google Cloud project.
@@ -94,11 +78,9 @@ def process_document(
         mime_type (str): Type of document, e.g., application/pdf.
         is_native (bool): True, if the input PDF is native.
         ocr (bool): True, if running OCR processor.
-
     Returns:
         documentai.Document: Parsed JSON data of the document as Document-object.
     """
-
     opts = {"api_endpoint": f"{location}-documentai.googleapis.com"}
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
     name = client.processor_version_path(
@@ -129,19 +111,14 @@ def process_document(
     )
     result = client.process_document(request=request)
     return result.document
-
-
 def document_to_json(result: documentai.Document) -> Dict[str, Any]:
     """
     Converts a Document AI process response to a JSON-friendly format.
-
     Args:
         result (documentai.Document): The result object from Document AI processing.
-
     Returns:
         Dict[str, Any]: A dictionary representing the JSON format of the processed document.
     """
-
     # Convert the result to a JSON-friendly format
     with io.BytesIO() as _:
         a = io.BytesIO()
@@ -150,8 +127,6 @@ def document_to_json(result: documentai.Document) -> Dict[str, Any]:
         json_string = a.read().decode("utf-8")
         json_data = json.loads(json_string)
     return json_data
-
-
 def upload_to_cloud_storage(
     filename: str,
     data: Union[bytes, Dict[str, Any], pd.DataFrame],
@@ -160,14 +135,12 @@ def upload_to_cloud_storage(
 ) -> None:
     """
     Uploads the document to GCS.
-
     Args:
         filename: File name.
         data: Bytes, JSON data, or DataFrame to store as a file.
         output_bucket: GCS Bucket name.
         output_prefix: GCS prefix where to store the file.
     """
-
     storage_client = storage.Client()
     bucket = storage_client.bucket(output_bucket)
     gcs_uri = f"gs://{output_bucket}/{output_prefix}/{filename}"
@@ -188,26 +161,21 @@ def upload_to_cloud_storage(
         print(f"\tSaved the DataFrame to GCS: {gcs_uri}")
     else:
         print("\tUnsupported data type for upload")
-
-
 def get_redact_bbox_from_text(
     text_redact: str, full_text: str, json_data: documentai.Document
 ) -> Dict[str, List[List[Any]]]:
     """
     Extracts the bounding box from the given document for a specific text to redact.
-
     Args:
         text_redact (str): The text to redact.
         full_text (str): The full text content of the document.
         json_data (documentai.Document): The processed Document AI document.
-
     Returns:
         Dict[str, List[List[Any]]]:
             A dictionary containing page numbers as keys and a list of
             bounding boxes as values.
             Bounding box format: [x_min, y_min, x_max, y_max].
     """
-
     part1 = re.escape(text_redact.split(" ")[0])
     part2 = re.escape(text_redact.split(" ")[-1])
     pattern = f"{part1}.*{part2}"
@@ -233,57 +201,42 @@ def get_redact_bbox_from_text(
                             x.append(ver.x)
                             y.append(ver.y)
                         page = page_num
-
             if isinstance(page, int):
                 redact_bbox[str(page)] = [[min(x), min(y), max(x), max(y)]]
             page_num = page_num + 1
-
     return redact_bbox
-
-
 def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
     """
     Convert JSON data into a list of images.
-
     Args:
         json_data (documentai.Document): Document AI JSON data.
-
     Returns:
         List[Image.Image]: List of synthesized images.
     """
-
     synthesized_images = []
-
     def decode_image(image_bytes: bytes) -> Image.Image:
         with io.BytesIO(image_bytes) as image_file:
             image = Image.open(image_file)
             image.load()
         return image
-
     for page in json_data.pages:
         synthesized_images.append(decode_image(page.image.content))
     return synthesized_images
-
-
 def draw_black_box(
     synthesized_images: List[Image.Image],
     page_wise_bbox: Any ,
 ) -> io.BytesIO:
     """
     Draw black boxes around PII entities in synthesized images and add synthetic data.
-
     Args:
         synthesized_images (List[Image.Image]): List of synthesized images.
         page_wise_bbox (Any): Dictionary with page-wise bounding boxes.
-
     Returns:
         io.BytesIO: Byte stream containing the final PDF with black boxes drawn.
     """
-
     open_cv_image = {}
     for idx, _ in enumerate(synthesized_images):
         open_cv_image[idx] = numpy.array(synthesized_images[idx].convert("RGB"))
-
     img_final = []
     for i, image in open_cv_image.items():
         size = image.shape
@@ -301,10 +254,8 @@ def draw_black_box(
                         (255, 255, 255),
                         thickness=cv2.FILLED,
                     )
-
         img_temp = Image.fromarray(image)
         img_final.append(img_temp)
-
     pdf_stream = io.BytesIO()
     img_final[0].save(
         pdf_stream,
@@ -316,8 +267,6 @@ def draw_black_box(
         format="PDF",
     )
     return pdf_stream
-
-
 def redact(
     project_id: str,
     location: str,
@@ -328,7 +277,6 @@ def redact(
 ) -> bytes:
     """
     Main function to process documents, redact PII entities, and store the result.
-
     Args:
         project_id (str): GCP project id.
         location (str): Location of the docai processor.
@@ -337,11 +285,9 @@ def redact(
         pdf_bytes (bytes): PDF document bytes to process.
         mime_type (str, optional): Type of document, e.g., "application/pdf".
             Defaults to "application/pdf".
-
     Returns:
         bytes: Redacted PDF document bytes.
     """
-
     redact_text = ["Machine Translated by Google"]
     json_data = process_document(
         project_id,
@@ -371,14 +317,11 @@ def redact(
     pdf_stream = draw_black_box(synthesized_images, redact_bbox)
     redacted_pdf_stream = pdf_stream.getvalue()
     return redacted_pdf_stream
-
-
 def get_min_max_x_y(
     bounding_box: MutableSequence[documentai.NormalizedVertex],
 ) -> Tuple[float, float, float, float]:
     """
     Function returns min-max x & y coordinates from the entity bounding box.
-
     Args:
         bounding_box (MutableSequence[documentai.NormalizedVertex]):
             A list of vertices representing the bounding bo
@@ -386,24 +329,19 @@ def get_min_max_x_y(
         min_max_x_y (Tuple[float, float, float, float]):
             Minimum and maximum x,y coordinates of entity bounding box.
     """
-
     min_x = min(item.x for item in bounding_box)
     min_y = min(item.y for item in bounding_box)
     max_x = max(item.x for item in bounding_box)
     max_y = max(item.y for item in bounding_box)
     min_max_x_y = (min_x, max_x, min_y, max_y)
     return min_max_x_y
-
-
 def get_normalized_vertices(
     coords: Dict[str, float]
 ) -> MutableSequence[documentai.NormalizedVertex]:
     """
     It takes XY-Coordinates & creates normalized-verices for Document Object
-
     Args:
         coords (Dict[str, float]): It contains min&max xy-coordinates
-
     Returns:
         MutableSequence[documentai.NormalizedVertex]:
             It returns list containing 4 NormalizedVertex Objects
@@ -418,20 +356,15 @@ def get_normalized_vertices(
     for x, y in coords_order:
         nvs.append(documentai.NormalizedVertex(x=coords[x], y=coords[y]))
     return nvs
-
-
 def get_formatted_dates(main_string: str) -> Dict[str, str]:
     """
     This function checks for dates in the given string and returns them in a specific format.
-
     Args:
         main_string (str): The input string containing dates.
-
     Returns:
         formatted_dates(Dict[str, str]):
             A dictionary containing original dates as keys and formatted dates as values.
     """
-
     # Regular expression pattern to find dates
     date_pattern = (
         r"\b(?:\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}-\d{1,2}-\d{2,4}|"
@@ -450,14 +383,11 @@ def get_formatted_dates(main_string: str) -> Dict[str, str]:
             # Handle invalid date formats gracefully
             pass
     return formatted_dates
-
-
 def find_matched_translation_pairs(
     entity: documentai.Document.Entity, translation_api_output: List[Dict[str, str]]
 ) -> List[Dict[str, str]]:
     """
     Function returns the best mapping text pairs with entity mention text.
-
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
         translation_api_output (List[Dict[str, str]])):
@@ -466,17 +396,14 @@ def find_matched_translation_pairs(
         best_match_pairs (List[Dict[str, str]]):
             Pairs which are best matched with entity mention text.
     """
-
     pattern = r"^[0-9,.\n \\]*$"
     regex = re.compile(pattern)
     ent_mt = entity.mention_text
     if regex.match(ent_mt):
         best_match_pairs = [{"sourceText": ent_mt, "targetText": ent_mt}]
     else:
-
         def similar(a, b):
             return fuzz.ratio(a, b)
-
         target_lines = ent_mt.split("\n")
         best_match_pairs = []
         for target_line in target_lines:
@@ -491,8 +418,6 @@ def find_matched_translation_pairs(
             if best_match_pair:
                 best_match_pairs.append(best_match_pair)
     return best_match_pairs
-
-
 def get_page_text_anc_mentiontext(
     entity: documentai.Document.Entity,
     orig_invoice_json: documentai.Document,
@@ -503,7 +428,7 @@ def get_page_text_anc_mentiontext(
     english_page_num: int,
 ) -> Tuple[
     Any,
-    Dict[str, Dict[Any, Any]],
+    Dict[str, Dict[Any,Any]],
     str,
     List[List[str]],
     str,
@@ -512,7 +437,6 @@ def get_page_text_anc_mentiontext(
     Function returns the min-max coordinates, text anchors and mention text of backmapped entity
     using provided extracted source entity, corresponding x&y coordinates, and
     mapping text from translation api output, with coordinate offset check.
-
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
@@ -541,7 +465,6 @@ def get_page_text_anc_mentiontext(
             - match_string_pair (List[List[str]]): List of matched string pairs.
             - method (str): Based on mapping block.
     """
-
     min_x, _, min_y, _ = min_max_x_y
     matches: List[Any] = []
     match_string_pair: List[Any] = []
@@ -558,7 +481,6 @@ def get_page_text_anc_mentiontext(
         matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
         if matches:
             method = "OCR-TU"
-
     if not matches:
         matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
         if matches:
@@ -571,7 +493,6 @@ def get_page_text_anc_mentiontext(
                 for k2, v2 in dates_german_text.items():
                     if v1 == v2:
                         matched_dates[k1].append(k2)
-
             for _, mat_1 in matched_dates.items():
                 for mat_11 in mat_1:
                     match_temp, match_string_pair_temp = find_substring_indexes(
@@ -580,16 +501,13 @@ def get_page_text_anc_mentiontext(
                     for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
                         matches.append(mat_2)
                         match_string_pair.append(str_pair)
-
             if matches:
                 method = "OCR-EntityMT"
-
     # Initialize variables.
     bbox = {}
     text_anc_1 = {}
     new_mention_text = ""
     expected_text_anc = {}
-
     # Iterate through match pairs.
     for match, str_pair in zip(matches, match_string_pair):
         try:
@@ -621,8 +539,6 @@ def get_page_text_anc_mentiontext(
                 new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
-
-
 def updated_entity_secondary(
     orig_invoice_json: documentai.Document,
     min_max_x_y: Tuple[float, float, float, float],
@@ -639,7 +555,6 @@ def updated_entity_secondary(
     Function returns the min-max coordinates, text anchors and mention text of backmapped entity
     using provided extracted source entity x&y coordinates, and
     mapping text from translation api output, with original document tokens.
-
     Args:
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
         min_max_x_y (Tuple[float, float, float, float]):
@@ -662,7 +577,6 @@ def updated_entity_secondary(
         - match_string_pair (List[List[str]]): List of matched string pairs.
         - method (str): Based on mapping block.
     """
-
     min_x, max_x, min_y, max_y = min_max_x_y
     text_anc_tokens = []
     confidence = []
@@ -696,7 +610,6 @@ def updated_entity_secondary(
                             text_anc_tokens.append(an1)
                         page_anc["x"].extend([new_min_x, new_max_x])
                         page_anc["y"].extend([new_min_y, new_max_y])
-
                     confidence_temp = 0.9
                     confidence.append(confidence_temp)
     sorted_temp_token = sorted(text_anc_tokens, key=lambda x: x.end_index)
@@ -736,8 +649,6 @@ def updated_entity_secondary(
         match_string_pair,
         method,
     )
-
-
 def get_token(
     json_dict: documentai.Document,
     page: int,
@@ -749,13 +660,11 @@ def get_token(
     """
     This function takes a loaded JSON, page number, and text anchors as input
     and returns the text anchors and page anchors.
-
     Args:
         json_dict (documentai.Document): The loaded JSON document.
         page (int): The page number.
         text_anchors_check (MutableSequence[documentai.Document.TextAnchor.TextSegment]):
             List of text anchors to check.
-
     Returns:
         Tuple[
             Union[Dict[str, float], None],
@@ -763,7 +672,6 @@ def get_token(
         ]
             - A tuple containing the final page anchors, text anchors, and confidence.
     """
-
     temp_text_anc = []
     temp_confidence = []
     temp_ver: Dict[str, List[float]] = {"x": [], "y": []}
@@ -813,8 +721,6 @@ def get_token(
         return final_ver, final_text_anc
     # else:
     return None, None
-
-
 def get_updated_entity(
     entity: documentai.Document.Entity,
     orig_invoice_json: documentai.Document,
@@ -832,7 +738,6 @@ def get_updated_entity(
 ]:
     """
     Function maps the entity from source to target and gives the back mapped entity.
-
     Args:
         entity (documentai.Document.Entity): Document AI extracted entity dictionary.
         orig_invoice_json (documentai.Document): Original document Invoice processor json output.
@@ -845,7 +750,7 @@ def get_updated_entity(
         Tuple[
             Dict[str, Any],
             List[Any],
-            str, List[List[str]], str, List[Dict[str, str]]
+            str, List[List[str]], str,List[Dict[str, str]]
         ]
             - main_page_anc (Dict[str, List[float]]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
@@ -857,7 +762,6 @@ def get_updated_entity(
             - mapping_text_list (List[Dict[str, str]]]):
                 List of matched translation units with entity text.
     """
-
     # Get matched translated text units
     mapping_text_list = find_matched_translation_pairs(entity, translation_api_output)
     main_mentiontext = ""
@@ -865,7 +769,7 @@ def get_updated_entity(
     main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
-    updated_page_anc: Dict[str, float] = {}
+    updated_page_anc = ""
     method = ""
     mentiontext = ""
     match_str_pair: List[Any] = []
@@ -892,7 +796,7 @@ def get_updated_entity(
                 updated_text_anc,
                 mentiontext,
                 match_str_pair,
-                method
+                method,
             ) = updated_entity_secondary(
                 orig_invoice_json,
                 min_max_x_y,
@@ -921,7 +825,6 @@ def get_updated_entity(
             main_mentiontext += ent_text
     else:
         main_mentiontext = mentiontext
-
     unique_list = []
     for item in match_str_pair:
         if item not in unique_list:
@@ -942,15 +845,12 @@ def get_updated_entity(
         method,
         mapping_text_list,
     )
-
-
 def find_substring_indexes(
     text: str, substring: str
 ) -> Tuple[List[Tuple[int, int]], List[List[str]]]:
     """
     Function returns the start and end indexes of all the matches
     between ocr text and mapping/mention text.
-
     Args:
         text (str): DocAI OCR text output.
         substring (str): Translation API mapping text/DocAI entity mentioned text.
@@ -959,7 +859,6 @@ def find_substring_indexes(
             - matches  (List[Tuple[int, int]]): List of start and end indexes of all the matches.
             - match_string_pair (List[List[str]]): List of pair of matched strings.
     """
-
     substring = substring.replace(",", ".")
     list_str = substring.strip().split()
     matches = []
@@ -981,7 +880,6 @@ def find_substring_indexes(
         #     r"{}.*{}".format(re.escape(list_str[0]), re.escape(list_str[-1])),
         #     re.IGNORECASE,
         # )
-
         # full string
         part = f"{re.escape(substring.strip())}"
         pattern = re.compile(part, re.IGNORECASE)
@@ -999,8 +897,6 @@ def find_substring_indexes(
                     matches.append((si, ei))
                     match_string_pair.append([substring, text1[si:ei]])
     return matches, match_string_pair
-
-
 def translation_text_units(
     project_id: str,
     location: str,
@@ -1017,7 +913,6 @@ def translation_text_units(
 ) -> Tuple[bytes, List[Dict[str, str]], Dict[str, Any]]:
     """
     Function to translate the document from source to target language.
-
     Args:
         project_id (str): GCP project id.
         location (str): Location of the docai processor.
@@ -1032,14 +927,12 @@ def translation_text_units(
         is_native (bool, optional): True, if input doc is native. Defaults to False.
         remove_shadow (bool, optional):
             True, to remove the shadow text from translated doc. Defaults to True.
-
     Returns:
         Tuple[bytes, List[Dict[str, str]], Dict[str, Any]]: A tuple containing
             - pdf_bytes: Bytes of the translated document.
             - doc_text_units: Mapping dictionary of source and corresponding translated text.
             - json_response: Translated API json response.
     """
-
     # Translation API.
     url = (f"https://translate.googleapis.com/v3/projects/{project_id}"
            f"/locations/global:translateDocument")
@@ -1077,8 +970,6 @@ def translation_text_units(
         )
     doc_text_units = doc_trans["textUnits"]
     return redacted_pdf_bytes, doc_text_units, json_response
-
-
 def run_consolidate(
     english_invoice_doc: documentai.Document,
     orig_invoice_doc: documentai.Document,
@@ -1090,7 +981,6 @@ def run_consolidate(
     """
     This function takes the source, target parsed jsons, and text units as input
     and gives an updated json and comparison dataframe as output.
-
     Args:
         english_invoice_json (documentai.Document):
             JSON output from DocAI Invoice parser when translated.
@@ -1100,13 +990,11 @@ def run_consolidate(
         diff_y: Y-coordinate offset.
         diff_x: X-coordinate offset.
         lang: Original document language.
-
     Returns:
         Tuple[pd.DataFrame, documentai.Document] :
             - df (pd.DataFrame): Comparison dataframe.
             - orig_invoice_json (documentai.Document): Updated Original invoice JSON.
     """
-
     _updated_entities = []
     updated_text_anchor: List[Any] = []
     df = pd.DataFrame(
@@ -1115,7 +1003,7 @@ def run_consolidate(
             "English_entity_MT",
             "Original_entity_MT",
             "match_pair",
-            "",
+            "method",
             "map_text_list",
             "English_entity_bbox",
             "Original_entity_bbox",
@@ -1140,7 +1028,7 @@ def run_consolidate(
                     updated_text_anchor,
                     mentiontext,
                     match_str_pair,
-                    ,
+                    method,
                     map_text_list,
                 ) = get_updated_entity(
                     _entity,
@@ -1171,7 +1059,7 @@ def run_consolidate(
                     ent_eng_mt.strip("\n"),
                     mentiontext.strip("\n"),
                     match_str_pair,
-                    ,
+                    method,
                     map_text_list,
                     ent_eng_bbox,
                     [
@@ -1199,7 +1087,7 @@ def run_consolidate(
                                 updated_text_anchor,
                                 mentiontext,
                                 match_str_pair,
-                                ,
+                                method,
                                 map_text_list,
                             ) = get_updated_entity(
                                 _child_ent,
@@ -1215,7 +1103,7 @@ def run_consolidate(
                                 updated_text_anchor,
                                 mentiontext,
                                 match_str_pair,
-                                ,
+                                method,
                                 map_text_list,
                             ) = get_updated_entity(
                                 _child_ent,
@@ -1253,7 +1141,7 @@ def run_consolidate(
                             child_ent_eng_mt.strip("\n"),
                             mentiontext.strip("\n"),
                             match_str_pair,
-                            ,
+                            method,
                             map_text_list,
                             child_ent_eng_bbox,
                             [
@@ -1311,7 +1199,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12: Tuple[float, float, float, float] = tuple()
+            ent_eng_bbox12 = tuple()
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
