@@ -503,7 +503,7 @@ def get_page_text_anc_mentiontext(
     english_page_num: int,
 ) -> Tuple[
     Dict[str, float],
-    Dict[str, str],
+    Dict[str, Dict[Any,Any]],
     str,
     List[List[str]],
     str,
@@ -534,7 +534,7 @@ def get_page_text_anc_mentiontext(
                 Dictionary containing min-max x&y coordinates of the mapped entity.
             - expected_text_anc (Dict[
                 str,
-                MutableSequence[documentai.Document.TextAnchor.TextSegment]
+                str]
             ]):
                 List of start and end indexes of the mapped entity.
             - new_mention_text (str): Mapped entity text.
