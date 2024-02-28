@@ -267,14 +267,14 @@ def get_synthesized_images(json_data: documentai.Document) -> List[Image.Image]:
 
 def draw_black_box(
     synthesized_images: List[Image.Image],
-    page_wise_bbox: Dict[str, List[float]],
+    page_wise_bbox: Any ,
 ) -> io.BytesIO:
     """
     Draw black boxes around PII entities in synthesized images and add synthetic data.
 
     Args:
         synthesized_images (List[Image.Image]): List of synthesized images.
-        page_wise_bbox (Dict[str, List[float]]): Dictionary with page-wise bounding boxes.
+        page_wise_bbox (Any): Dictionary with page-wise bounding boxes.
 
     Returns:
         io.BytesIO: Byte stream containing the final PDF with black boxes drawn.
