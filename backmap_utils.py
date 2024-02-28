@@ -503,7 +503,7 @@ def get_page_text_anc_mentiontext(
     english_page_num: int,
 ) -> Tuple[
     Dict[str, float],
-    Dict[str, str]],
+    Dict[str, str],
     str,
     List[List[str]],
     str,
