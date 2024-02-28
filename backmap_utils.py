@@ -600,12 +600,12 @@ def updated_entity_secondary(
             List[List[Any]],
             str
         ]:
-        - updated_page_anc (Dict[str, float]):
+        - updated_page_anc (Any):
             Dictionary containing min-max x&y coordinates of the mapped entity.
-        - updated_text_anc (Dict[str, List[documentai.Document.TextAnchor.TextSegment]]):
+        - updated_text_anc (Any):
             List of start and end indexes of the mapped entity..
         - mentiontext (str): Mapped entity text.
-        - match_string_pair (List[List[str]]): List of matched string pairs.
+        - match_string_pair (List[List[Any]]): List of matched string pairs.
         - method (str): Based on mapping block.
     """
     min_x, max_x, min_y, max_y = min_max_x_y
@@ -804,7 +804,7 @@ def get_updated_entity(
     main_page_anc: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
-    updated_page_anc = ""
+    updated_page_anc = {}
     method = ""
     mentiontext = ""
     match_str_pair: List[Any] = []
