@@ -629,10 +629,10 @@ def updated_entity_secondary(
     mapping_text: str,
     english_page_num: int,
 ) -> Tuple[
-    Any,
-    Dict[str, Dict[Any,Any]],
+    Dict[str, float],
+    Dict[str, List[Any]],
     str,
-    List[List[str]],
+    List[List[Any]],
     str,
 ]:
     """
