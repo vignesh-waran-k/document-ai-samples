@@ -502,8 +502,8 @@ def get_page_text_anc_mentiontext(
     diff_x: float,
     english_page_num: int,
 ) -> Tuple[
-    Any,
-    Dict[str, List[Any]],
+    Dict[str, float],
+    Dict[str, str]],
     str,
     List[List[str]],
     str,
@@ -524,8 +524,8 @@ def get_page_text_anc_mentiontext(
         english_page_num (int): Document page number.
     Returns:
         Tuple[
-            Any,
-            Dict[str, List[Any]],
+            Dict[str, float]
+            Dict[str, str],
             str,
             List[List[str]],
             str
