@@ -845,7 +845,7 @@ def get_updated_entity(
         Tuple[
             Dict[str, Any],
             List[Any],
-            str, List[List[str]], str,List[Dict[str, str]]
+            str, List[List[str]], Dict[str, float],List[Dict[str, str]]
         ]
             - main_page_anc (Dict[str, List[float]]):
                 Dictionary containing min-max x&y coordinates of the mapped entity.
@@ -853,7 +853,7 @@ def get_updated_entity(
                 List of start and end indexes of the mapped entity.
             - main_mentiontext (str): Mapped entity text.
             - unique_list (List[List[str]]): Unique list of matched string pairs.
-            - method (str): Based on mapping block.
+            - method (Dict[str, float]): Based on mapping block.
             - mapping_text_list (List[Dict[str, str]]]):
                 List of matched translation units with entity text.
     """
@@ -866,7 +866,7 @@ def get_updated_entity(
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
     updated_page_anc = ""
-    method = ""
+    method: Dict[str, float] = {}
     mentiontext = ""
     match_str_pair: List[Any] = []
     # Iterate over matched pairs {source: other lang, target: english}.
@@ -1311,7 +1311,7 @@ def run_consolidate(
         except (IndexError, ValueError):
             ent_t = _entity.type_
             ent_mt = _entity.mention_text
-            ent_eng_bbox12 = tuple()
+            ent_eng_bbox12: Tuple[float, float, float, float] = tuple()
             pgrfs = _entity.page_anchor.page_refs[0]
             bounding_box = pgrfs.bounding_poly.normalized_vertices
             if bounding_box:
