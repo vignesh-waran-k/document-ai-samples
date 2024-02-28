@@ -884,7 +884,7 @@ disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.
          </tr>
       </table>
 <div style="padding-bottom:30px"></div>
-    
+
 <p><span>Class<a href="https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3#disableprocessorrequest">DisableProcessorRequest</a></span></p>
 <div><span style="background-color:#c9d1cf">public final class DisableProcessorRequest extends
 GeneratedMessageV3 implements DisableProcessorRequestOrBuilder</span></div>
@@ -900,7 +900,7 @@ GeneratedMessageV3 implements DisableProcessorRequestOrBuilder</span></div>
 NOTE: Only flat schemas are currently supported (no EntityType.properties).</div>
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 <br> <code>DocumentProcessorServiceUIV1Beta3.TrainProcessorVersion <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}"'<code>    
+google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 <br> <code>DocumentProcessorServiceUIV1Beta3.TrainProcessorVersion <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}"'<code>
 <div>
 <b>RETURNS:</b>longrunning.Operation<br>
 <b>HTTP ARGUMENTS:</b>
@@ -964,7 +964,7 @@ schema {
   }
 }
 };
-    
+
 </code>
 
 ## Deploy Processor Version
@@ -976,7 +976,7 @@ schema {
 google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3  <br>
  <code> DocumentProcessorServiceUIV1Beta3.DeployProcessorVersion
  <br>'name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/processorVersions/${PROCESSOR_VERSION_ID?}" ' </code>
- 
+
 ## Undeploy Processor Version
 
 <div style="color:#1a6ebb; background-color:#b2d6f7">NOTE: This step is not required for pre-trained processors.
@@ -1054,7 +1054,7 @@ google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 ## Import Documents
 ## Use GCS prefix to import a set of documents
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3 
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
 <code>DocumentServiceUIV1Beta3.ImportDocuments
     <b><i>Example Payload:</i></b>
@@ -1072,7 +1072,7 @@ batch_documents_import_configs {
 ## Use a list of individual GCS documents
 
 <b>RPC:</b>
-google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3 
+google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
 <code>DocumentServiceUIV1Beta3.ImportDocuments
     <b><i>Example Payload:</i></b>
@@ -1095,7 +1095,7 @@ batch_documents_import_configs {
 </code>
 
 ## Get Documents
-## Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents as follows
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
@@ -1114,7 +1114,7 @@ page_range {
 </code>
 
 ## Get Documents Thumbnails
-## Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents follows
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
@@ -1132,9 +1132,9 @@ page_range {
   end:1
 }
 </code>
-    
+
 ## List Documents
-## Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents for processors
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
@@ -1145,7 +1145,7 @@ google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 </code>
 
 ## Update Documents
-## Use GCS prefix to import a set of documents
+## Use GCS prefix to import a set of documents for locations
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 <br>
@@ -1188,7 +1188,7 @@ document_ids {
 dataset_type: DATASET_SPLIT_TEST
 
 </code>
-    
+
 ## Get All Dataset Split Stats
 
 <b>RPC:</b>
@@ -1212,14 +1212,14 @@ google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 </code>
 
 ## Update Dataset Schema
-## Updatable items include:
+## Updatable items include
 
 <ul>
-   
+
 <li>Dataset Schema Display Name</li>
 <li>Dataset Schema Description</li>
 <li>Base Type</li>
-<li>Occurrence Type</li> 
+<li>Occurrence Type</li>
 <li>Source</li>
 <li>Type</li>
 
@@ -1227,7 +1227,7 @@ google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3
 
 <b>RPC:</b>
 google.cloud.documentai.uiv1beta3.documentserviceuiv1beta3  
-<br> 
+<br>
 <code>DocumentServiceUIV1Beta3.UpdateDatasetSchema  
     <b><i>Example Payload:</i></b>
  <br>dataset_schema {
@@ -1247,12 +1247,12 @@ name:"projects/${GCP_PROJECT?}/locations/us/processors/${PROCESSOR_ID?}/dataset/
  <div style="color:#1a6ebb; background-color:#b2d6f7">NOTE: display_name and description can be empty string if not explicitly set
 
 </div>
-    
+
 
 <div style="padding-bottom:30px"></div>
 <h2> Part 2: Document AI Client for Java</h2>
 <h3> Quickstart</h3>
-If you are using Maven with [BOM][libraries-bom], add this to your pom.xml file:
+If you are using Maven with "libraries-bom", add this to your pom.xml file:
 
 <div style="padding-bottom:30px"></div>
 <dependencyManagement>
@@ -1652,7 +1652,7 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
       <hr style="page-break-before:always;display:none;">
 <div style="padding-bottom:30px"></div>
 <h2> 2. Processor Building</h2>
-   
+
 <p><span>Note: For calling these APIs, you need a local .zip file of DocumentAI API. As these functions are not available in GA/Preview , there is no git repository for these.</span><span>&nbsp;</span></p>
       <p><span></span></p>
       <h3 ><span>Train Processor Version</span></h3>
@@ -2022,7 +2022,7 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span>EvaluationName</span></p>
-               <p><span>The resource name of the &nbsp; &nbsp; [Evaluation][google.cloud.documentai.uiv1beta3.Evaluation] &nbsp; &nbsp;</span><span>projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}</span></p>
+               <p><span>The resource name of the &nbsp; &nbsp;"google.cloud.documentai.uiv1beta3.Evaluation"&nbsp; &nbsp;</span><span>projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}</span></p>
                <p><span>Note: You can evaluationID from the getProcessor(name) method. </span></p>
             </td>
          </tr>
@@ -2088,7 +2088,7 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span>parent</span></p>
-               <p><span>[ProcessorVersion][google.cloud.documentai.uiv1beta3.ProcessorVersion] to list evaluations for &nbsp; &nbsp; </span><span>projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}</span></p>
+               <p><span>"google.cloud.documentai.uiv1beta3.ProcessorVersion" to list evaluations for &nbsp; &nbsp; </span><span>projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}</span></p>
                <p><span></span></p>
             </td>
          </tr>
@@ -2756,20 +2756,17 @@ public class QuickStart {
 BatchProcessDocument.java
 This file describes the implementation of processing a batch of documents available in the GCS bucket and saves the output to the GCS location.
 /*
- * Copyright 2020 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2020 Google LLC
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 
 
@@ -2809,7 +2806,7 @@ public class BatchProcessDocument {
         // TODO(developer): Replace these variables before running the sample.
                 
         String projectId = "PROJECT ID";
-                
+        
         String location = "us"; // Format is "us" or "eu".
                 
         String processorId = "PROCESSOR ID";
