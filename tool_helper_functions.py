@@ -22,6 +22,7 @@ from typing import DefaultDict, Dict, List, MutableSequence, Tuple, Union
 import numpy as np
 import pandas as pd
 import PyPDF2
+import traceback
 from google.api_core.client_options import ClientOptions
 from google.api_core.exceptions import InternalServerError, RetryError
 from google.cloud import documentai, storage
@@ -819,7 +820,7 @@ def post_process(
     )
     # Post-processing code matches expected values and rearranges them into the final dataframe
     final_data_: DefaultDict[str, List[str]] = defaultdict(list)
-    for idx, row in dest_df.iterrows():
+    for _ , row in dest_df.iterrows():
         if row["taxonomy_disclosure"] is np.nan:
             continue
         st = row["taxonomy_disclosure"]
@@ -907,10 +908,10 @@ def run_table_extractor_pipeline(
         )
         final_data_2_processed = final_data_new2.copy()
         nrows = 0  # num of rows
-        for i, v in final_data_new2.items():
+        for _ , v in final_data_new2.items():
             nrows = max(len(v), nrows)
 
-        for k, v in final_data_2_processed.items():
+        for _ , v in final_data_2_processed.items():
             length = len(v)
             if length != nrows:
                 v.extend([np.nan] * (nrows - length))
@@ -959,7 +960,7 @@ def walk_the_ocr(
             )
             cde_document = cde_jsons[file[:-4]]
             print("NO HITL")
-        x_coordinates, y_coord, row_map_cde, max_ycd = get_coordinates_map(cde_document)
+        _ , y_coord, row_map_cde, _ = get_coordinates_map(cde_document)
         fp_document_path = fp_input_output_map[file]
         fp_document = read_json_output(
             output_bucket=gcs_output_bucket, output_prefix=fp_document_path
@@ -1019,7 +1020,7 @@ def enhance_and_save_pdfs(
         try:
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
-                x_coordinates, y_coord, row_map, max_ycd = get_coordinates_map(document)
+                x_coordinates, _ , _ , max_ycd = get_coordinates_map(document)
                 image_content = page.image.content
                 image = PilImage.open(BytesIO(image_content))
                 draw = ImageDraw.Draw(image)
@@ -1106,8 +1107,6 @@ def enhance_and_save_pdfs(
             )
             print(f"Done Processing -{file_key}.pdf")
         except ValueError:
-            import traceback
-
             print(traceback.format_exc())
             print(f"Issue with processing -{file_key}.pdf")
             images_for_pdf = []
@@ -1134,5 +1133,4 @@ def enhance_and_save_pdfs(
             blob.upload_from_string(
                 pdf_stream.getvalue(), content_type="application/pdf"
             )
-            pass
     print("Completed Preprocessing")
