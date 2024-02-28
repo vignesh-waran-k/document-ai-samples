@@ -102,7 +102,10 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_delete_processor&amp;sa=D&amp;source=editors&amp;ust=1704207105412605&amp;usg=AOvVaw17H4jhFPvGod_F9DoxTZ6P">delete_processor</a></span><span>(request) </span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.
+services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_            services_document_processor_service_DocumentProcessorServiceClient_delete_processor&amp;sa=D&amp;
+source=editors&amp;ust=1704207105412605&amp;usg=AOvVaw17H4jhFPvGod_F9DoxTZ6P">
+delete_processor</a></span><span>(request) </span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Deletes the processor, unloads all deployed model artifacts if it was enabled and then deletes all artifacts associated with this processor.</span></p>
@@ -110,7 +113,9 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_enable_processor&amp;sa=D&amp;source=editors&amp;ust=1704207105413597&amp;usg=AOvVaw1sxCK23j0V9VhWnqwiF7cv">enable_processor</a></span><span>(request) </span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.
+document_processor_service.DocumentProcessorServiceClient%23google_cloud_documentai_v1beta3_services_                        document_processor_service_DocumentProcessorServiceClient_enable_processor&amp;sa=D&amp;source=editors&amp;
+ust=1704207105413597&amp;usg=AOvVaw1sxCK23j0V9VhWnqwiF7cv">enable_processor</a></span><span>(request)</span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>It enables a processor</span></p>
@@ -174,7 +179,9 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
                <p><span>Operation (Async) Management</span></p>
             </td>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceAsyncClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceAsyncClient_get_operation&amp;sa=D&amp;source=editors&amp;ust=1704207105418845&amp;usg=AOvVaw3sfZ_z_NGbDznJ-d3a1ctY">get_operation</a></span><span>(request)</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.Document        ProcessorServiceAsyncClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceAsync
+Client_get_operation&amp;sa=D&amp;source=editors&amp;ust=1704207105418845&amp;usg=AOvVaw3sfZ_z_NGbDznJ-d3a1ctY">get_operation</a>
+</span><span>(request)</span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Gets the latest state of a long-running operation.</span></p>
@@ -182,7 +189,9 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceAsyncClient%23google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceAsyncClient_cancel_operation&amp;sa=D&amp;source=editors&amp;ust=1704207105419622&amp;usg=AOvVaw1fUDR2CEler3LBmpzwal3D">cancel_operation</a></span><span>(request)</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_
+processor_service.DocumentProcessorServiceAsyncClient%23google_cloud_documentai_v1beta3_services_document_processor_service_Document  ProcessorServiceAsyncClient_cancel_operation&amp;sa=D&amp;source=editors&amp;ust=1704207105419622&amp;usg=AOvVaw1fUDR2CEler3LBmpzwal3D">
+cancel_operation</a></span><span>(request)</span></p>
                <h3 id="h.x3sper4sur7g"><span></span></h3>
             </td>
             <td colspan="1" rowspan="1">
@@ -205,7 +214,12 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
                <p><span>Processor Management</span></p>
             </td>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_google_cloud_documentai_v1beta3_Processor_&amp;sa=D&amp;source=editors&amp;ust=1704207105420731&amp;usg=AOvVaw3u2836Zh40dyD-mz3Vj26F">createProcessor</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_google_cloud_documentai_v1beta3_Processor_&amp;sa=D&amp;source=editors&amp;ust=1704207105420965&amp;usg=AOvVaw3Ml1m9xinmPhy3PrkM8aBx">(LocationName parent, Processor processor)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_
+google_cloud_documentai_v1beta3_Processor_&amp;sa=D&amp;source=editors&amp;ust=1704207105420731&amp;
+usg=AOvVaw3u2836Zh40dyD-mz3Vj26F">createProcessor</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_
+v1beta3_DocumentProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_                                             google_cloud_documentai_v1beta3_Processor_&amp;sa=D&amp;source=editors&amp;ust=1704207105420965&amp;
+usg=AOvVaw3Ml1m9xinmPhy3PrkM8aBx">(LocationName parent, Processor processor)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Creates a processor from the type processor that the user chose. The processor are &quot;ENABLED&quot; state by default after its creation.</span></p>
@@ -213,7 +227,12 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;source=editors&amp;ust=1704207105421648&amp;usg=AOvVaw0_ZHAlFUf8_nund9a9y1LC">listProcessors</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;source=editors&amp;ust=1704207105421818&amp;usg=AOvVaw1lPrEqcM6vKols8g8R3_Cd">(LocationName parent)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105421648&amp;usg=AOvVaw0_ZHAlFUf8_nund9a9y1LC">listProcessors</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105421818&amp;usg=AOvVaw1lPrEqcM6vKols8g8R3_Cd">(LocationName parent)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Lists all processors which belong to this project.</span></p>
@@ -221,7 +240,12 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;source=editors&amp;ust=1704207105422495&amp;usg=AOvVaw2Mnw7xuKuwYqluuucLyw02">delete Processor Async</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;source=editors&amp;ust=1704207105422659&amp;usg=AOvVaw1JE_szJ5AD30TPFsk6kE83">(ProcessorName name)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105422495&amp;usg=AOvVaw2Mnw7xuKuwYqluuucLyw02">delete Processor Async</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105422659&amp;usg=AOvVaw1JE_szJ5AD30TPFsk6kE83">(ProcessorName name)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Deletes the processor, unloads all deployed model artifacts if it was enabled and then deletes all artifacts associated with this processor.</span></p>
@@ -229,7 +253,12 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_enableProcessorAsync_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105423323&amp;usg=AOvVaw2xPBmB3sHSRkOqBHDWiimj">enableProcessorAsync</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_enableProcessorAsync_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105423501&amp;usg=AOvVaw2Xy6lojAz8t9TQt1rhpbWl">(EnableProcessorRequest request)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_enableProcessorAsync_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105423323&amp;usg=AOvVaw2xPBmB3sHSRkOqBHDWiimj">enableProcessorAsync</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_    DocumentProcessorServiceClient_enableProcessorAsync_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105423501&amp;usg=AOvVaw2Xy6lojAz8t9TQt1rhpbWl">(EnableProcessorRequest request)</a></span>
+</p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Enables a processor.</span></p>
@@ -237,7 +266,13 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_disableProcessorAsync_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105424266&amp;usg=AOvVaw0Pm3ymD4-bXWFd06SoFX48">disableProcessorAsync</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_disableProcessorAsync_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105424461&amp;usg=AOvVaw0mE4DHrr6f2RPaEVYBKWVq">(DisableProcessorRequest request)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_disableProcessorAsync_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105424266&amp;usg=AOvVaw0Pm3ymD4-bXWFd06SoFX48">disableProcessorAsync</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_disableProcessorAsync_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105424461&amp;usg=AOvVaw0mE4DHrr6f2RPaEVYBKWVq">(DisableProcessorRequest request)</a>
+</span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Disables a processor.</span></p>
@@ -248,7 +283,12 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
                <p><span>Processor Building</span></p>
             </td>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_processDocument_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105425165&amp;usg=AOvVaw0dUQnGUeDiY-EoDzSxFqt2">processDocument</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_processDocument_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105425330&amp;usg=AOvVaw0JI_T85q8_QWfe4E1aN7k6">(ProcessRequest request)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_processDocument_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105425165&amp;usg=AOvVaw0dUQnGUeDiY-EoDzSxFqt2">processDocument</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_
+DocumentProcessorServiceClient_processDocument_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105425330&amp;usg=AOvVaw0JI_T85q8_QWfe4E1aN7k6">(ProcessRequest request)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>Processes a single document</span></p>
@@ -256,7 +296,7 @@ As noted, this example leverages Google&rsquo;s HITL (Human Review) for annotati
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426004&amp;usg=AOvVaw15IPpo1oavx6w3BG-R0QwZ">batchProcessDocumentsAsync</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426219&amp;usg=AOvVaw1ZknCJK58YOKLdzB2vmWPq">(BatchProcessRequest request)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_                            DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426004&amp;usg=AOvVaw15IPpo1oavx6w3BG-R0QwZ">batchProcessDocumentsAsync</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426219&amp;usg=AOvVaw1ZknCJK58YOKLdzB2vmWPq">(BatchProcessRequest request)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.</span></p>
