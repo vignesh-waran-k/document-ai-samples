@@ -804,7 +804,7 @@ def get_updated_entity(
     main_page_anc1: Dict[str, List[float]] = {"x": [], "y": []}
     english_bb_area = entity.page_anchor.page_refs[0].bounding_poly.normalized_vertices
     min_max_x_y = get_min_max_x_y(english_bb_area)
-    updated_page_anc: Dict[str, List[float]] = {}
+    updated_page_anc: Dict[str, float] = {}
     method = ""
     mentiontext = ""
     match_str_pair: List[Any] = []
@@ -839,8 +839,6 @@ def get_updated_entity(
                 english_page_num,
             )
         if updated_page_anc:
-            main_page_anc1["x"] = []
-            main_page_anc1["y"] = []
             main_page_anc1["x"].extend([updated_page_anc["min_x"], updated_page_anc["max_x"]])
             main_page_anc1["y"].extend([updated_page_anc["min_y"], updated_page_anc["max_y"]])
             for text_anc in updated_text_anc["textSegments"]:
