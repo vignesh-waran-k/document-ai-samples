@@ -2947,7 +2947,7 @@ public class BatchProcessDocument {
     public static void batchProcessDocument()
             throws IOException, InterruptedException, TimeoutException, ExecutionException {
         // TODO(developer): Replace these variables before running the sample.
-                
+
         String projectId = "PROJECT ID";
         
         String location = "us"; // Format is "us" or "eu".
