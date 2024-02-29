@@ -1749,9 +1749,16 @@ DisableProcessorResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorSe
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;TrainProcessorVersionRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 TrainProcessorVersionRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setParent(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;
-</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setProcessorVersion(ProcessorVersion.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setSchema(Schema.newBuilder().build())<br> &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setDocumentSchema(DocumentSchema.newBuilder().build()) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setInputData(TrainProcessorVersionRequestTrainProcessorVersionRequest.InputData.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setBaseProcessorVersion(</span><span>&quot;baseProcessorVersion337709271&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;
-TrainProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.trainProcessorVersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
+</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setProcessorVersion(ProcessorVersion.newBuilder().build())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setSchema(Schema.newBuilder().build())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setDocumentSchema(DocumentSchema.newBuilder().build()) &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; .setInputData(TrainProcessorVersionRequestTrainProcessorVersionRequest.InputData.newBuilder().build())<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setBaseProcessorVersion(</span><span>&quot;baseProcessorVersion337709271&quot;
+</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;
+TrainProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.trainProcessor
+VersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -2319,14 +2326,21 @@ batchProcessDocumentsAsync(BatchProcessRequest request)</a></span></p>
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span>
-                  <span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient                             documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; BatchProcessRequest request =<br> &nbsp; &nbsp;                         &nbsp;BatchProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span>
-<span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-.addAllInputConfigs(</span><span>new</span><span>&nbsp;ArrayList&lt;BatchProcessRequest.BatchInputConfig&gt;())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setOutputConfig(BatchProcessRequest.BatchOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.
+                  </span><span><br> </span>
+                  <span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span>
+                   <span>&nbsp;(DocumentProcessorServiceClientdocumentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; BatchProcessRequest request =<br> &nbsp; &nbsp;                         &nbsp;BatchProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;
+[PROJECT]&quot;</span><span>, </span>
+<span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+.addAllInputConfigs(</span><span>new</span><span>&nbsp;ArrayList&lt;BatchProcessRequest.BatchInputConfig&gt;())<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setOutputConfig(BatchProcessRequest.BatchOutputConfig.newBuilder().build())<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 .setInputDocuments(BatchDocumentsInputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 .setDocumentOutputConfig(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 .setSkipHumanReview(</span><span>true</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp;
-BatchProcessResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.batchProcessDocumentsAsync(request).get();<br> }</span></p>
+BatchProcessResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.batchProcessDocumentsAsync
+(request).get();<br> }</span></p>
             </td>
          </tr>
       </table>
@@ -2943,7 +2957,7 @@ public class BatchProcessDocument {
         String outputGcsBucketName = "OUTPUT GCS BUCKET PATH"; // e.g. "bucket_name/"
                 
         String outputGcsPrefix = "OUTPUT GCS PREFIX"; // e.g. "output_v1"
-                
+
         String inputGcsUri = "INPUT GCS URI"; // e.g. "gs://bucket_name/document_folder_name/"
                 
         batchProcessDocument(
