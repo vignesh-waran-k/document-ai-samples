@@ -338,7 +338,9 @@ processor {
 
 <h2 style="">Python:</h2><h3><a href="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.DocumentProcessorServiceClient#google_cloud_documentai_v1beta3_services_document_processor_service_DocumentProcessorServiceClient_create_processor">create_processor</a></h3>
 <h5>
-(request: Optioncreate_processoral[Union[google.cloud.documentai_v1beta3.types.document_processor_service.CreateProcessorRequest, dict]] = None, *, parent: Optional[str] = None, processor: Optional[google.cloud.documentai_v1beta3.types.processor.Processor] = None, retry: Union[google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault] = <_MethodDefault._DEFAULT_VALUE: <object object>>, timeout: Optional[float] = None, metadata: Sequence[Tuple[str, str]] = ())</h5>
+(request: Optioncreate_processoral[Union[google.cloud.documentai_v1beta3.types.document_processor_service.Create
+ProcessorRequest, dict]] = None, *, parent: Optional[str] = None, processor: Optional[google.cloud.documentai_v1beta3.
+types.processor.Processor] = None, retry: Union[google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault] = <_MethodDefault._DEFAULT_VALUE: <object object>>, timeout: Optional[float] = None, metadata: Sequence[Tuple[str, str]] = ())</h5>
 <h4>Creates a processor from the type processor that the user chose. The processor is "ENABLED" state by default after its creation.</h4>
 
 <h3>Parameters</h3>
@@ -508,7 +510,8 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProc
          </tr>
          <tr style="border: 1px solid black">
             <td colspan="1" rowspan="1" style="border: 1px solid black">
-               <p><span><a href="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor_service.pagers.ListProcessorsPager">google.cloud.documentai_v1beta3.services.document_processor_service.pagers.ListProcessorsPager</a></span></p>
+               <p><span><a href="https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.services.document_processor               _service.pagers.ListProcessorsPager">google.cloud.documentai_v1beta3.services.document_processor_service.pagers.ListProcessorsPager
+</a></span></p>
             </td>
             <td colspan="1" rowspan="1" style="border: 1px solid black">
                <p><span>Response message for list processors. Iterating over this object yields results and resolve additional pages automatically.</span></p>
@@ -518,9 +521,14 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProc
 <div style="padding-bottom:30px"></div>
 <h2><span style="color:#646b67;font-weight:800">Class ListProcessorsPager</span><span>&nbsp;</span></h2>
       <p><span>A pager for iterating through list_processors requests.</span></p>
-      <p><span>This class thinly wraps an initial </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.ListProcessorsResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105438061&amp;usg=AOvVaw0gC0MV-RECzjCjVQAZa4K3">ListProcessorsResponse</a></span><span>&nbsp;object, and provides an __iter__ method to iterate through its processors field.</span></p>
+      <p><span>This class thinly wraps an initial </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.ListProcessorsResponse&amp;
+sa=D&amp;source=editors&amp;ust=1704207105438061&amp;usg=AOvVaw0gC0MV-RECzjCjVQAZa4K3">ListProcessorsResponse</a></span><span>&nbsp;
+object, and provides an __iter__ method to iterate through its processors field.</span></p>
       <p><span>If there are more pages, the __iter__ method makes additional ListProcessors requests and continue to iterate through the processors field on the corresponding responses.</span></p>
-      <p><span>All the usual </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.ListProcessorsResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105438353&amp;usg=AOvVaw3F1a4J7smdccnjQ8SgfeFa">ListProcessorsResponse</a></span><span>&nbsp;attributes are available on the pager. If multiple requests are made, only the most recent response is retained, and thus used for attribute lookup.</span></p>
+      <p><span>All the usual </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.ListProcessorsResponse&amp;
+sa=D&amp;source=editors&amp;ust=1704207105438353&amp;usg=AOvVaw3F1a4J7smdccnjQ8SgfeFa">ListProcessorsResponse</a></span><span>&nbsp;
+attributes are available on the pager. If multiple requests are made, only the most recent response is retained,
+and thus used for attribute lookup.</span></p>
 <br>
 
 <h2><span style="color:#646b67;font-weight:800">Class ListProcessorsResponse</span><span>&nbsp;</span></h2>
@@ -537,7 +545,9 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProc
          </tr>
          <tr style="border: 1px solid black">
             <td colspan="1" rowspan="1" style="border: 1px solid black">
-               <p><span>Sequence[</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.Processor&amp;sa=D&amp;source=editors&amp;ust=1704207105439208&amp;usg=AOvVaw2DLyx2K4b2SFqYpMdO287c">google.cloud.documentai_v1beta3.types.Processor</a></span><span>]</span></p>
+               <p><span>Sequence[</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.Processor&amp;
+sa=D&amp;source=editors&amp;ust=1704207105439208&amp;usg=AOvVaw2DLyx2K4b2SFqYpMdO287c">google.cloud.documentai_v1beta3.types.
+Processor</a></span><span>]</span></p>
             </td>
             <td colspan="1" rowspan="1" style="border: 1px solid black">
                <p><span>processors</span></p>
@@ -598,7 +608,9 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProc
          </tr>
          <tr style="border: 1px solid black">
             <td colspan="1" rowspan="1" style="border: 1px solid black">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.Processor.State&amp;sa=D&amp;source=editors&amp;ust=1704207105441945&amp;usg=AOvVaw0ftY5jqhZOiNaRIZl_g_Cq">google.cloud.documentai_v1beta3.types.Processor.State</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.Processor.State&amp;
+sa=D&amp;source=editors&amp;ust=1704207105441945&amp;usg=AOvVaw0ftY5jqhZOiNaRIZl_g_Cq">google.cloud.documentai_v1beta3.types.
+Processor.State</a></span></p>
             </td>
             <td colspan="1" rowspan="1" style="border: 1px solid black">
                <p><span>state</span></p>
@@ -638,7 +650,8 @@ google.cloud.documentai.uiv1beta3.documentprocessorserviceuiv1beta3 DocumentProc
             </td>
             <td colspan="1" rowspan="1" style="border: 1px solid black">
                <p><span>kms_key_name</span></p>
-               <p><span>The KMS key used for encryption/decryption in CMEK scenarios. See https://cloud.google.com/security-key- management.</span></p>
+               <p><span>The KMS key used for encryption/decryption in CMEK scenarios. See https://cloud.google.com/security-key- management.
+               </span></p>
             </td>
          </tr>
       </table>
@@ -726,7 +739,10 @@ delete_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.d
                <p><span>google.api_core.operation.Operation</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>An object representing a long-running operation. The result type for the operation is &nbsp;`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.</span></p>
+               <p><span>An object representing a long-running operation. The result type for the operation is &nbsp;
+`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs.
+A typical example is to use it as the request or the response type of an API method. For instance: service Foo
+{ rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.</span></p>
                <p><span></span></p>
             </td>
          </tr>
@@ -802,7 +818,8 @@ enable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.d
                <p><span>google.api_core.operation.Operation</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>An object representing a long-running operation. The result type for the operation is &nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.EnableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105452268&amp;usg=AOvVaw1mDk_XARZbZuP6thWdKEgw">EnableProcessorResponse</a></span><span>&nbsp;Response message for the enable processor method. Intentionally empty proto for adding fields in future.</span></p>
+               <p><span>An object representing a long-running operation. The result type for the operation is &nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.Enable
+ProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105452268&amp;usg=AOvVaw1mDk_XARZbZuP6thWdKEgw">EnableProcessorResponse</a></span><span>&nbsp;Response message for the enable processor method. Intentionally empty proto for adding fields in future.</span></p>
             </td>
          </tr>
       </table>
@@ -811,7 +828,11 @@ enable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.d
 <div><span style="background-color:#c9d1cf">public final class EnableProcessorRequest extends GeneratedMessageV3 implements EnableProcessorRequestOrBuilder</span></div>
 <p><span>Request message for the enable processor method.</span></p>
       <p><span>Protobuf type google.cloud.documentai.v1beta3.EnableProcessorRequest</span></p>
-      <p><span>Please Check </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessorRequest_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105453680&amp;usg=AOvVaw3DN6i-QSE3bwepfWPs1ikm">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessorRequest_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105453852&amp;usg=AOvVaw3dxKQGcAjMv5po1Smi5J6Z">Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
+      <p><span>Please Check </span><span><a href="https://www.google.com/url?
+q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessor
+Request_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105453680&amp;usg=AOvVaw3DN6i-QSE3bwepfWPs1ikm">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest%23com_google_cloud_documentai_v1beta3_EnableProcessor
+Request_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105453852&amp;usg=AOvVaw3dxKQGcAjMv5po1Smi5J6Z">
+Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
 
 ## Disable Processor
 <b>RPC:</b>
@@ -883,7 +904,9 @@ disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.
                <p><span>google.api_core.operation.Operation</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>An object representing a long-running operation. The result type for the operation is </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.DisableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105457757&amp;usg=AOvVaw1DSc8BDhLDfU0q-sCGAos9">DisableProcessorResponse</a></span><span>&nbsp;Response message for the disable processor method. Intentionally empty proto for adding fields in future.</span></p>
+               <p><span>An object representing a long-running operation. The result type for the operation is </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1beta3.types.DisableProcessorResponse&amp;
+sa=D&amp;source=editors&amp;ust=1704207105457757&amp;usg=AOvVaw1DSc8BDhLDfU0q-sCGAos9">DisableProcessorResponse</a></span><span>&nbsp;
+Response message for the disable processor method. Intentionally empty proto for adding fields in future.</span></p>
             </td>
          </tr>
       </table>
@@ -894,7 +917,11 @@ disable_processor(request: Optional[Union[google.cloud.documentai_v1beta3.types.
 GeneratedMessageV3 implements DisableProcessorRequestOrBuilder</span></div>
 <p><span>Request message for the disable processor method.</span></p>
       <p><span>Protobuf type google.cloud.documentai.v1beta3.DisableProcessorRequest</span></p>
-      <p><span>Please Check </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessorRequest_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105459634&amp;usg=AOvVaw2Jh8NvXY1f07ocWPOqZijc">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessorRequest_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105459918&amp;usg=AOvVaw0moPU8_ZxaqNYxmklOOf03">Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
+      <p><span>Please Check </span><span><a href="https://www.google.com/url?
+q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessor
+Request_NAME_FIELD_NUMBER&amp;sa=D&amp;source=editors&amp;ust=1704207105459634&amp;usg=AOvVaw2Jh8NvXY1f07ocWPOqZijc">Static Methods</a></span><span>&nbsp;and </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorRequest%23com_google_cloud_documentai_v1beta3_DisableProcessor
+Request_equals_java_lang_Object_&amp;sa=D&amp;source=editors&amp;ust=1704207105459918&amp;usg=AOvVaw0moPU8_ZxaqNYxmklOOf03">
+Non-Static Methods</a></span><span>&nbsp;Descriptions. </span></p>
 <div style="padding-bottom:30px"></div>
 <div style="padding-bottom:30px"></div>
 <h2> 2) Processor Building </h2>
@@ -1305,14 +1332,19 @@ Authentication
 See the <a href="https://github.com/googleapis/google-cloud-java#authentication">Authentication</a> section in the base directory's README.
 
 Authorization
-The client application making API calls must be granted <a href="https://developers.google.com/identity/protocols/oauth2/scopes">authorization scopes</a> required for the desired Document AI APIs, and the authenticated principal must have the <a href="https://cloud.google.com/iam/docs/understanding-roles#predefined_roles">IAM role(s)</a> required to access GCP resources using the Document AI API calls.
+The client application making API calls must be granted <a href="https://developers.google.com/identity/protocols/oauth2/scopes">authorization scopes</a> required for the desired Document AI APIs, and the authenticated principal must have the <a href="https://cloud.google.com/iam/docs/understanding-roles#predefined_roles">
+IAM role(s)</a> required to access GCP resources using the Document AI API calls.
 <div style="padding-bottom:30px"></div>
   <h2 ><span>Getting Started - Procedure</span></h2>
       <h4 ><span>Prerequisites</span></h4>
-      <p><span>You need a </span><span><a href="https://www.google.com/url?q=https://console.developers.google.com/&amp;sa=D&amp;source=editors&amp;ust=1704207105489935&amp;usg=AOvVaw0sCfwjsP6xrFl8WUbmTw4H">Google Cloud Platform Console</a></span><span>&nbsp;project with the Document AI </span><span><a href="https://www.google.com/url?q=https://console.cloud.google.com/flows/enableapi?apiid%3Ddocumentai.googleapis.com&amp;sa=D&amp;source=editors&amp;ust=1704207105490042&amp;usg=AOvVaw0uKl4iX3KQvb28dd2-qIfL">API enabled</a></span><span>.</span></p>
+      <p><span>You need a </span><span><a href="https://www.google.com/url?q=https://console.developers.google.com/&amp;sa=D&amp;source=editors&amp;ust=1704207105489935&amp;usg=AOvVaw0sCfwjsP6xrFl8WUbmTw4H">
+Google Cloud Platform Console</a></span><span>&nbsp;project with the Document AI </span><span><a href="https://www.google.com/url?q=https://console.cloud.google.com/flows/enableapi?apiid%3Ddocumentai.googleapis.com&amp;sa=D&amp;source=editors&amp;ust=1704207105490042&amp;usg=AOvVaw0uKl4iX3KQvb28dd2-qIfL">
+API enabled</a></span><span>.</span></p>
       <p><span>You need to </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/apis/docs/getting-started%23enabling_billing&amp;sa=D&amp;source=editors&amp;ust=1704207105490169&amp;usg=AOvVaw2-2oEkB1vkMsK5nwc19U4S">enable billing</a></span><span>&nbsp;to use Google Document AI.</span></p>
-      <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/resource-manager/docs/creating-managing-projects&amp;sa=D&amp;source=editors&amp;ust=1704207105490301&amp;usg=AOvVaw14EPtrktONX4l2rfmI9UM6">Follow these instructions</a></span><span>&nbsp;to get your project set up. You also need to set up the local development environment by</span></p>
-      <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/sdk/&amp;sa=D&amp;source=editors&amp;ust=1704207105490427&amp;usg=AOvVaw2IMs4i44l_a_rSxghOwDjd">installing the Google Cloud SDK</a></span><span>&nbsp;and running the following commands in command line:</span></p>
+      <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/resource-manager/docs/creating-managing-projects&amp;sa=D&amp;source=editors&amp;ust=1704207105490301&amp;usg=AOvVaw14EPtrktONX4l2rfmI9UM6">Follow these instructions</a>
+</span><span>&nbsp;to get your project set up. You also need to set up the local development environment by</span></p>
+      <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/sdk/&amp;sa=D&amp;source=editors&amp;ust=1704207105490427&amp;usg=AOvVaw2IMs4i44l_a_rSxghOwDjd">
+installing the Google Cloud SDK</a></span><span>&nbsp;and running the following commands in command line:</span></p>
 <div style="padding-bottom:30px"></div>
 <div style="padding-bottom:30px"></div>
 gcloud auth login and gcloud config set project [YOUR PROJECT ID]
