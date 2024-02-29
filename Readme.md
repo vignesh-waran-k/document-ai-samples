@@ -1359,7 +1359,9 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
 <div style="padding-bottom:30px"></div>
 <h2>1. Processor Management</h2>
 <h3><span>Create Processor</span></h3>
-<p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_google_cloud_documentai_v1beta3_Processor_&amp;sa=D&amp;source=editors&amp;ust=1704207105493477&amp;usg=AOvVaw3-Q3kydHo1Ao5e-dO0rjg7">createProcessor(LocationName parent, Processor processor)</a></span></p>
+<p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_createProcessor_com_google_cloud_documentai_v1beta3_LocationName_com_google_cloud_documentai_v1beta3_Processor_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105493477&amp;usg=AOvVaw3-Q3kydHo1Ao5e-dO0rjg7">createProcessor(LocationName parent, Processor processor)</a></span></p>
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black; font-weight:700;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
@@ -1424,13 +1426,19 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; LocationName parent = LocationName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>);<br> &nbsp; Processor processor = Processor.newBuilder().build();<br> &nbsp; Processor response = documentProcessorServiceClient.createProcessor(parent, processor);<br> }</span></p>
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br>
+</span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create())
+{<br> &nbsp; LocationName parent = LocationName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;
+[LOCATION]&quot;</span><span>);<br> &nbsp; Processor processor = Processor.newBuilder().build();<br> &nbsp; Processor response = documentProcessorServiceClient.createProcessor(parent, processor);<br> }</span></p>
             </td>
          </tr>
       </table>
       <p><span></span></p>
       <h3 ><span>List Processors</span></h3>
-      <p><span>Function </span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;source=editors&amp;ust=1704207105497607&amp;usg=AOvVaw15sX68Nym28GDdU6vhoHZl">listProcessors(LocationName parent)</a></span></p>
+      <p><span>Function </span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/
+docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_listProcessors_com_google_cloud_documentai_v1beta3_LocationName_&amp;sa=D&amp;source=editors&amp;
+ust=1704207105497607&amp;usg=AOvVaw15sX68Nym28GDdU6vhoHZl">listProcessors(LocationName parent)</a></span></p>
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
@@ -1487,12 +1495,18 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; LocationName parent = LocationName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>);<br> &nbsp; </span><span>for</span><span>&nbsp;(Processor element : documentProcessorServiceClient.listProcessors(parent).iterateAll()) {<br> &nbsp; &nbsp; </span><span>// doThingsWith(element);</span><span><br> &nbsp; }<br> }</span></p>
+               <p><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br>
+</span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create())
+{<br> &nbsp; LocationName parent = LocationName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;
+[LOCATION]&quot;</span><span>);<br> &nbsp; </span><span>for</span><span>&nbsp;(Processor element : documentProcessorServiceClient.listProcessors(parent).iterateAll()) {<br> &nbsp; &nbsp; </span><span>// doThingsWith(element);
+</span><span><br> &nbsp; }<br> }</span></p>
             </td>
          </tr>
       </table>
       <p><span></span></p>
-      <p><span>Function </span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;source=editors&amp;ust=1704207105501370&amp;usg=AOvVaw2Pu1YR43CvA9z9dh5DKIzR">deleteProcessorAsync(ProcessorName name)</a></span></p>
+      <p><span>Function </span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_deleteProcessorAsync_com_google_cloud_documentai_v1beta3_ProcessorName_&amp;sa=D&amp;source=editors&amp;
+ust=1704207105501370&amp;usg=AOvVaw2Pu1YR43CvA9z9dh5DKIzR">deleteProcessorAsync(ProcessorName name)</a></span></p>
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;"></tr>
       </table>
@@ -1538,7 +1552,10 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
          </tr>
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105503477&amp;usg=AOvVaw3um3qZY6ZXie-A903_VCAi">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.Empty.html&amp;sa=D&amp;source=editors&amp;ust=1704207105503603&amp;usg=AOvVaw2ksyvpFJhA2666j77TcheP">Empty</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DeleteProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105503737&amp;usg=AOvVaw2o0goFbJ99SAZTVyF4CCgX">DeleteProcessorMetadata</a></span><span>&gt;</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;
+source=editors&amp;ust=1704207105503477&amp;usg=AOvVaw3um3qZY6ZXie-A903_VCAi">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.Empty.html&amp;sa=D&amp;source=editors&amp;
+ust=1704207105503603&amp;usg=AOvVaw2ksyvpFJhA2666j77TcheP">Empty</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DeleteProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105503737&amp;
+usg=AOvVaw2o0goFbJ99SAZTVyF4CCgX">DeleteProcessorMetadata</a></span><span>&gt;</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span></span></p>
@@ -1552,7 +1569,11 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; ProcessorName name = ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>);<br> &nbsp; documentProcessorServiceClient.deleteProcessorAsync(name).get();<br> }<br> </span></p>
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br>
+</span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create())
+{<br> &nbsp; ProcessorName name = ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;
+</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>);<br> &nbsp; documentProcessorServiceClient.deleteProcessorAsync(name).get();
+<br> }<br> </span></p>
             </td>
          </tr>
       </table>
@@ -1583,7 +1604,8 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
                <p><span>request</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest&amp;sa=D&amp;source=editors&amp;ust=1704207105506702&amp;usg=AOvVaw2q269KFh4lb2wOuKdpKP1H">EnableProcessorRequest</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorRequest&amp;sa=D&amp;source=editors&amp;ust=1704207105506702&amp;
+usg=AOvVaw2q269KFh4lb2wOuKdpKP1H">EnableProcessorRequest</a></span></p>
                <p><span>The request object containing all of the parameters for the API call.</span></p>
             </td>
          </tr>
@@ -1601,7 +1623,10 @@ gcloud auth login and gcloud config set project [YOUR PROJECT ID]
          </tr>
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105508078&amp;usg=AOvVaw04h0CorwF-w-czRSmSAsc-">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105508260&amp;usg=AOvVaw3RRpkUqlX_UDtq4YIkOUkh">EnableProcessorResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105508414&amp;usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;
+source=editors&amp;ust=1704207105508078&amp;usg=AOvVaw04h0CorwF-w-czRSmSAsc-">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105508260&amp;
+usg=AOvVaw3RRpkUqlX_UDtq4YIkOUkh">EnableProcessorResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.EnableProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105508414&amp;
+usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span></span></p>
