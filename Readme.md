@@ -296,7 +296,11 @@ source=editors&amp;ust=1704207105425330&amp;usg=AOvVaw0JI_T85q8_QWfe4E1aN7k6">(P
          </tr>
          <tr>
             <td colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_                            DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426004&amp;usg=AOvVaw15IPpo1oavx6w3BG-R0QwZ">batchProcessDocumentsAsync</a></span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105426219&amp;usg=AOvVaw1ZknCJK58YOKLdzB2vmWPq">(BatchProcessRequest request)</a></span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_                            DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;
+sa=D&amp;source=editors&amp;ust=1704207105426004&amp;usg=AOvVaw15IPpo1oavx6w3BG-R0QwZ">batchProcessDocumentsAsync</a></span><span>
+<a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_Document
+ProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;
+source=editors&amp;ust=1704207105426219&amp;usg=AOvVaw1ZknCJK58YOKLdzB2vmWPq">(BatchProcessRequest request)</a></span></p>
             </td>
             <td colspan="1" rowspan="1">
                <p><span>LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.</span></p>
