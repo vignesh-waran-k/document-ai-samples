@@ -1579,7 +1579,8 @@ usg=AOvVaw2o0goFbJ99SAZTVyF4CCgX">DeleteProcessorMetadata</a></span><span>&gt;</
       </table>
       <p><span></span></p>
       <h3 ><span>Enable Processor</span></h3>
-      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_enableProcessorAsync_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105505138&amp;usg=AOvVaw1-6O2RDMHl_nFbc4XOHKEh">enableProcessorAsync(EnableProcessorRequest request)</a></span></p>
+      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_enableProcessor
+Async_com_google_cloud_documentai_v1beta3_EnableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105505138&amp;usg=AOvVaw1-6O2RDMHl_nFbc4XOHKEh">enableProcessorAsync(EnableProcessorRequest request)</a></span></p>
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
@@ -1640,13 +1641,20 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EnableProcessorRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp; EnableProcessorRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp; &nbsp; EnableProcessorResponse response = documentProcessorServiceClient.enableProcessorAsync(request).get();<br> &nbsp; &nbsp;}<br> &nbsp; &nbsp;}</span></p>
+               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp;
+&nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EnableProcessorRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp;
+EnableProcessorRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;
+</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp; &nbsp; EnableProcessorResponse response = documentProcessorServiceClient.enableProcessorAsync(request).get();
+<br> &nbsp; &nbsp;}<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
       <p><span></span></p>
       <h3 ><span>Disable Processor</span></h3>
-      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_disableProcessorAsync_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105509743&amp;usg=AOvVaw2FVytAK6Wm2NW8myGsZKzp">disableProcessorAsync(DisableProcessorRequest request)</a></span></p>
+      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_disableProcessor
+Async_com_google_cloud_documentai_v1beta3_DisableProcessorRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105509743&amp;usg=AOvVaw2FVytAK6Wm2NW8myGsZKzp">
+disableProcessorAsync(DisableProcessorRequest request)</a></span></p>
        <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
@@ -1691,7 +1699,9 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
          </tr>
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105512045&amp;usg=AOvVaw1-Raj1m_1DMPDRlHImNs7O">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105512187&amp;usg=AOvVaw13ppleR2Dq1aEPDCiZU2eP">DisableProcessorResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105512322&amp;usg=AOvVaw16615JdMmwNWz2G40TEQB1">DisableProcessorMetadata</a></span><span>&gt;</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105512045&amp;usg=AOvVaw1-Raj1m_1DMPDRlHImNs7O">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105512187&amp;usg=AOvVaw13ppleR2Dq1aEPDCiZU2eP">
+DisableProcessorResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DisableProcessorMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105512322&amp;usg=AOvVaw16615JdMmwNWz2G40TEQB1">
+DisableProcessorMetadata</a></span><span>&gt;</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span></span></p>
@@ -1706,7 +1716,12 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; DisableProcessorRequest request =<br> &nbsp; &nbsp; &nbsp; DisableProcessorRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp; DisableProcessorResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.disableProcessorAsync(request).get();<br> }<br> </span></p>
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br>
+</span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient document
+ProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; DisableProcessorRequest request =<br> &nbsp; &nbsp; &nbsp;
+DisableProcessorRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;
+[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp;
+DisableProcessorResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.disableProcessorAsync(request).get();<br> }<br> </span></p>
             </td>
          </tr>
       </table>
@@ -1732,7 +1747,11 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
 <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;TrainProcessorVersionRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TrainProcessorVersionRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setParent(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setProcessorVersion(ProcessorVersion.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setSchema(Schema.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setDocumentSchema(DocumentSchema.newBuilder().build()) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setInputData(TrainProcessorVersionRequestTrainProcessorVersionRequest.InputData.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setBaseProcessorVersion(</span><span>&quot;baseProcessorVersion337709271&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;TrainProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.trainProcessorVersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
+               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;TrainProcessorVersionRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+TrainProcessorVersionRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setParent(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;
+</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setProcessorVersion(ProcessorVersion.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setSchema(Schema.newBuilder().build())<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setDocumentSchema(DocumentSchema.newBuilder().build()) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setInputData(TrainProcessorVersionRequestTrainProcessorVersionRequest.InputData.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setBaseProcessorVersion(</span><span>&quot;baseProcessorVersion337709271&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;
+TrainProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.trainProcessorVersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -1798,7 +1817,10 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;DeployProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;documentProcessorServiceClient.deployProcessorVersionAsync(name).get();<br> &nbsp; }</span></p>
+               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;DeployProcessorVersionResponse response =<br> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;documentProcessorServiceClient.deployProcessorVersionAsync(name).get();<br> &nbsp; }</span></p>
             </td>
          </tr>
       </table>
@@ -1865,7 +1887,12 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
        <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;UndeployProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;documentProcessorServiceClient.undeployProcessorVersionAsync(name).get();<br> &nbsp; &nbsp;}</span></p>
+               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;
+DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;
+UndeployProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;documentProcessorServiceClient.undeployProcessorVersionAsync(name).get();
+<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -1929,7 +1956,13 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
       <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EvaluateProcessorVersionRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp; EvaluateProcessorVersionRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setProcessorVersion(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ProcessorVersionName.of(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationDocuments(BatchDocumentsInputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;EvaluateProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.evaluateProcessorVersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
+               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp;
+DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EvaluateProcessorVersionRequest request =<br> &nbsp; &nbsp; &nbsp; &nbsp;
+EvaluateProcessorVersionRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setProcessorVersion(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ProcessorVersionName.of(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span>&quot;
+[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR_VERSION]&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;.setEvaluationDocuments(BatchDocumentsInputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setEvaluationOutput(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.build();<br> &nbsp; &nbsp; &nbsp;
+EvaluateProcessorVersionResponse response =<br> &nbsp; &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.evaluateProcessorVersionAsync(request).get();<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -1986,7 +2019,8 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>public</span><span>&nbsp;</span><span>final</span><span>&nbsp;ProcessorVersion </span><span>getProcessorVersion</span><span>(ProcessorVersionName name)</span><span>&nbsp;</span></p>
+               <p><span>public</span><span>&nbsp;</span><span>final</span><span>&nbsp;ProcessorVersion </span>
+                  <span>getProcessorVersion</span><span>(ProcessorVersionName name)</span><span>&nbsp;</span></p>
             </td>
          </tr>
       </table>
@@ -1995,7 +2029,10 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;ProcessorVersion response = documentProcessorServiceClient.getProcessorVersion(name);<br> &nbsp; &nbsp;}</span></p>
+               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; &nbsp;
+DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; &nbsp;ProcessorVersionName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>);<br> &nbsp; &nbsp; &nbsp;ProcessorVersion response = documentProcessorServiceClient.getProcessorVersion(name);<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -2061,7 +2098,11 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EvaluationName name =<br> &nbsp; &nbsp; &nbsp; &nbsp; EvaluationName.of(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>, </span><span>&quot;[EVALUATION]&quot;</span><span>);<br> &nbsp; &nbsp; Evaluation response = documentProcessorServiceClient.getEvaluation(name);<br> &nbsp; &nbsp;}</span></p>
+               <p><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp;
+DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; EvaluationName name =<br> &nbsp; &nbsp; &nbsp; &nbsp;
+EvaluationName.of(<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;
+[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>, </span><span>&quot;
+[EVALUATION]&quot;</span><span>);<br> &nbsp; &nbsp; Evaluation response = documentProcessorServiceClient.getEvaluation(name);<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -2127,7 +2168,12 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
     <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; String parent =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ProcessorVersionName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;[PROCESSOR_VERSION]&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toString();<br> &nbsp; &nbsp; &nbsp;</span><span>for</span><span>&nbsp;(Evaluation element : documentProcessorServiceClient.listEvaluations(parent).iterateAll()) {<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span>// doThingsWith(element);</span><span><br> &nbsp; &nbsp; &nbsp;}<br> &nbsp; &nbsp;}</span></p>
+               <p><span>&nbsp;</span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; &nbsp;
+DocumentProcessorServiceClient.create()) {<br> &nbsp; &nbsp; String parent =<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ProcessorVersionName.of(</span><span>&quot;
+[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR_VERSION]&quot;</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toString();<br> &nbsp; &nbsp; &nbsp;</span><span>for</span><span>&nbsp;
+(Evaluation element : documentProcessorServiceClient.listEvaluations(parent).iterateAll()) {<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span>// doThingsWith(element);
+</span><span><br> &nbsp; &nbsp; &nbsp;}<br> &nbsp; &nbsp;}</span></p>
             </td>
          </tr>
       </table>
@@ -2182,7 +2228,9 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
 <div style="padding-bottom:30px"></div>
 <h2> 3. Processing Documents</h2>
 <h3 ><span>Process Single Document</span></h3>
-      <p><span>Function </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_processDocument_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105538146&amp;usg=AOvVaw23dBDZ48Z9w3XdFmc-gn7Q">processDocument(ProcessRequest request)</a></span></p>
+      <p><span>Function </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_process
+Document_com_google_cloud_documentai_v1beta3_ProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105538146&amp;usg=AOvVaw23dBDZ48Z9w3XdFmc-gn7Q">processDocument
+(ProcessRequest request)</a></span></p>
       <p><span></span></p>
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black; font-weight:700;">
@@ -2196,7 +2244,14 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; ProcessRequest request =<br> &nbsp; &nbsp; &nbsp; ProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setDocument(Document.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setSkipHumanReview(</span><span>true</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp; ProcessResponse response = documentProcessorServiceClient.processDocument(request);<br> }</span></p>
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span>
+<span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;
+(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp;
+ProcessRequest request =<br> &nbsp; &nbsp; &nbsp; ProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;
+[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setDocument(Document.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setSkipHumanReview(</span><span>true</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp;
+ProcessResponse response = documentProcessorServiceClient.processDocument(request);<br> }</span></p>
             </td>
          </tr>
       </table>
@@ -2249,7 +2304,9 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
       <p><span>throws</span><span>&nbsp;com.google.api.gax.rpc.ApiException</span><span>&nbsp;if the remote call fails</span></p>
       <p><span></span></p>
       <h3 ><span>Batch Process Document </span></h3>
-      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcessDocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105541898&amp;usg=AOvVaw0FrT2jBoz1Doh0rjq8PeeA">batchProcessDocumentsAsync(BatchProcessRequest request)</a></span></p>
+      <p><span>Function</span><span>&nbsp;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient%23com_google_cloud_documentai_v1beta3_DocumentProcessorServiceClient_batchProcess
+DocumentsAsync_com_google_cloud_documentai_v1beta3_BatchProcessRequest_&amp;sa=D&amp;source=editors&amp;ust=1704207105541898&amp;usg=AOvVaw0FrT2jBoz1Doh0rjq8PeeA">
+batchProcessDocumentsAsync(BatchProcessRequest request)</a></span></p>
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
@@ -2262,7 +2319,14 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
      <table style="border: 1px solid black;padding:0px; margin:0px">
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span><span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; BatchProcessRequest request =<br> &nbsp; &nbsp; &nbsp; BatchProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span><span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .addAllInputConfigs(</span><span>new</span><span>&nbsp;ArrayList&lt;BatchProcessRequest.BatchInputConfig&gt;())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setOutputConfig(BatchProcessRequest.BatchOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setInputDocuments(BatchDocumentsInputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setDocumentOutputConfig(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setSkipHumanReview(</span><span>true</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp; BatchProcessResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.batchProcessDocumentsAsync(request).get();<br> }</span></p>
+               <p><span>&nbsp;</span><span>// This snippet has been automatically generated for illustrative purposes only.</span><span><br> </span>
+                  <span>// It may require modifications to work in your environment.</span><span><br> </span><span>try</span><span>&nbsp;(DocumentProcessorServiceClient                             documentProcessorServiceClient =<br> &nbsp; &nbsp; DocumentProcessorServiceClient.create()) {<br> &nbsp; BatchProcessRequest request =<br> &nbsp; &nbsp;                         &nbsp;BatchProcessRequest.newBuilder()<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setName(ProcessorName.of(</span><span>&quot;[PROJECT]&quot;</span><span>, </span>
+<span>&quot;[LOCATION]&quot;</span><span>, </span><span>&quot;[PROCESSOR]&quot;</span><span>).toString())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.addAllInputConfigs(</span><span>new</span><span>&nbsp;ArrayList&lt;BatchProcessRequest.BatchInputConfig&gt;())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setOutputConfig(BatchProcessRequest.BatchOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setInputDocuments(BatchDocumentsInputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setDocumentOutputConfig(DocumentOutputConfig.newBuilder().build())<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+.setSkipHumanReview(</span><span>true</span><span>)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .build();<br> &nbsp;
+BatchProcessResponse response =<br> &nbsp; &nbsp; &nbsp; documentProcessorServiceClient.batchProcessDocumentsAsync(request).get();<br> }</span></p>
             </td>
          </tr>
       </table>
@@ -2303,7 +2367,10 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
          </tr>
          <tr style="border: 1px solid black;">
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
-               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105544708&amp;usg=AOvVaw0IPLYGLlYjhlDihgtNMA4N">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.BatchProcessResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105544849&amp;usg=AOvVaw25rdisxhcnGpjuTMzYtqAL">BatchProcessResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.BatchProcessMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105544986&amp;usg=AOvVaw2_i72IZRuA-SxFPk5OcVTA">BatchProcessMetadata</a></span><span>&gt;</span></p>
+               <p><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.longrunning.OperationFuture.html&amp;sa=D&amp;source=editors&amp;ust=1704207105544708&amp;
+usg=AOvVaw0IPLYGLlYjhlDihgtNMA4N">OperationFuture</a></span><span>&lt;</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.BatchProcessResponse&amp;sa=D&amp;source=editors&amp;ust=1704207105544849&amp;usg=AOvVaw25rdisxhcnGpjuTMzYtqAL">
+BatchProcessResponse</a></span><span>,</span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.BatchProcessMetadata&amp;sa=D&amp;source=editors&amp;ust=1704207105544986&amp;usg=AOvVaw2_i72IZRuA-SxFPk5OcVTA">
+BatchProcessMetadata</a></span><span>&gt;</span></p>
             </td>
             <td  style="border: 1px solid black;" colspan="1" rowspan="1">
                <p><span></span></p>
@@ -2329,7 +2396,8 @@ usg=AOvVaw3yynf0ulMohzwRxQtjbSDS">EnableProcessorMetadata</a></span><span>&gt;</
          <li ><span>For BatchProcessDocument.java , Create a class with name </span><span>Batch Process Document</span><span>&nbsp;and</span><span>&nbsp;</span><span>copy the given program</span></li>
       </ul>
       <h3><span>QuickStart.java</span></h3>
-      <p><span>The QuickStart.java file describes the function call of the above mentioned methods. For more info follow </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient&amp;sa=D&amp;source=editors&amp;ust=1704207105546838&amp;usg=AOvVaw1XdnlM6_EyCCWAehYoIEAd">DocumentProcessorServiceClient</a></span><span>&nbsp;</span><span>class and the </span><span><a href="https://www.google.com/url?q=https://github.com/googleapis/java-document-ai/tree/76fa19e5f8eb2b8e563bcc72139b5b33350232a5&amp;sa=D&amp;source=editors&amp;ust=1704207105546969&amp;usg=AOvVaw1LDWRaxkWpoTIw1QNGdw2o">Github Repo</a></span><span>&nbsp;</span></p>
+      <p><span>The QuickStart.java file describes the function call of the above mentioned methods. For more info follow </span><span><a href="https://www.google.com/url?q=https://cloud.google.com/java/docs/reference/google-cloud-document-ai/latest/com.google.cloud.documentai.v1beta3.DocumentProcessorServiceClient&amp;sa=D&amp;source=editors&amp;ust=1704207105546838&amp;usg=AOvVaw1XdnlM6_EyCCWAehYoIEAd">
+DocumentProcessorServiceClient</a></span><span>&nbsp;</span><span>class and the </span><span><a href="https://www.google.com/url?q=https://github.com/googleapis/java-document-ai/tree/76fa19e5f8eb2b8e563bcc72139b5b33350232a5&amp;sa=D&amp;source=editors&amp;ust=1704207105546969&amp;usg=AOvVaw1LDWRaxkWpoTIw1QNGdw2o">Github Repo</a></span><span>&nbsp;</span></p>
 <div style="padding-bottom:30px"></div>
 <div style="padding-bottom:30px"></div>
 package com.google.cloud.documentai.uiv1beta3;
