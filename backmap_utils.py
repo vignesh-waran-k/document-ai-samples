@@ -1,7 +1,6 @@
-#pylint: disable=R0913
-#pylint: disable=R0914
-#pylint: disable=E0401
-#pylint: disable=C0302
+# pylint: disable=R0913
+# pylint: disable=R0914
+# pylint: disable=E0401
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
