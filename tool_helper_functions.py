@@ -858,6 +858,27 @@ def process_taxonomy_disclosure_multiple(row: pd.Series) -> None:
         row["taxonomy_disclosure"] = "\n".join([ea.replace("\n", " ").strip() for ea in row_ea])
 
 
+def collect_multiple_values(row: pd.Series, col: str) -> None:
+    """
+    Collect multiple values from a specific column in a row.
+
+    Args:
+        row (pd.Series): Input row containing the specified column.
+        col (str): Name of the column containing multiple values.
+
+    Returns:
+        None: The collected values are appended to the "split_row" list.
+    """
+
+    split_row = []
+    for val in row[col].split("\n"):
+        try:
+            if re.search(r"^[0-9]+(.|,)[0-9]+", val):
+                split_row.append(val)
+        except ValueError:
+            pass
+
+
 def post_process(
     dest_df: pd.DataFrame, col: str, processed_map: Dict[str, List[int]]
 ) -> DefaultDict[str, List[str]]:
@@ -888,13 +909,7 @@ def post_process(
         process_taxonomy_disclosure_multiple(row)
         try:
             # collect values if particular col(business measure) has more than one value
-            split_row = []
-            for val in row[col].split("\n"):
-                try:
-                    if re.search(r"^[0-9]+(.|,)[0-9]+", val):
-                        split_row.append(val)
-                except ValueError:
-                    pass
+            collect_multiple_values(row, col)
             for column in final_df_.columns:
                 try:
                     if len(split_row) > 1:
