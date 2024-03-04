@@ -810,7 +810,7 @@ def process_taxonomy_disclosure(st: str) -> str:
     return interstr
 
 
-def process_taxonomy_disclosure_complex(st: str) -> str:
+def process_taxonomy_disclosure_complex(st: str) -> Tuple[str, str]:
     ea = re.search(r"^[A-Z]\.[1-9](.|)[a-zA-Z()\s-]+", st)
     if ea:
         span = ea.span()
