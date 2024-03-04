@@ -853,14 +853,13 @@ def post_process(
                         split_row.append(val)
                 except ValueError:
                     pass
-            n = len(split_row)
             for column in final_df_.columns:
                 try:
-                    if n > 1:
+                    if len(split_row) > 1:
                         column_data = [data for data in row[column].split("\n") if data]
 
                         # if no. of values in particular column doesn't match with n
-                        diff = n - len(column_data)
+                        diff = len(split_row) - len(column_data)
                         if diff != 0:
                             column_data.extend([np.nan] * diff)
                         final_data_[column].extend(column_data)
@@ -872,7 +871,7 @@ def post_process(
 
                         final_data_[column].extend([val])
                 except ValueError:
-                    final_data_[column].extend([np.nan] * n)
+                    final_data_[column].extend([np.nan] * len(split_row))
         except ValueError:
             ea_ = row["taxonomy_disclosure"].replace("\n", " ")
             final_data_ = update_data(final_df_, final_data_, ea_)
@@ -881,8 +880,6 @@ def post_process(
 
 def run_table_extractor_pipeline(
     offset: int,
-    project_id: str,
-    location: str,
     gcs_output_bucket: str,
     gcs_output_uri_prefix: str,
     document_fp: documentai.Document,
@@ -927,8 +924,6 @@ def run_table_extractor_pipeline(
 
 
 def walk_the_ocr(
-    project_id: str,
-    location: str,
     cde_input_output_map: Dict[str, Dict[str, str]],
     gcs_output_bucket: str,
     gcs_cde_hitl_output_prefix: str,
