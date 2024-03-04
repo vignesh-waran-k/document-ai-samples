@@ -815,7 +815,9 @@ def process_taxonomy_disclosure_complex(st: str) -> str:
     if ea:
         span = ea.span()
         interstr = st[span[0]:span[1]].split("\n")[0:-1]
-    return interstr
+        ans = " ".join(interstr)
+        st = st.replace(st[span[0] : span[1]], "")
+    return st, ans
 
 
 def post_process(
@@ -841,11 +843,10 @@ def post_process(
         row["taxonomy_disclosure"] = st
 
         st = row["taxonomy_disclosure"]
-        ans = " ".join(process_taxonomy_disclosure_complex(row["taxonomy_disclosure"]))
-        st = st.replace(st[span[0] : span[1]], "")
+        st1, ans = process_taxonomy_disclosure_complex(st)
         final_data_ = update_data(final_df_, final_data_, ans)
-        row["taxonomy_disclosure"] = st
-        
+        row["taxonomy_disclosure"] = st1
+
         st = row["taxonomy_disclosure"]
         row_ea = re.findall(r"\d.\d+ [a-zA-Z\s]+", st)
         if len(row_ea) > 1:
