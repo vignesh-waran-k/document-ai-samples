@@ -802,6 +802,22 @@ def update_data(
     return final_data_
 
 
+def process_taxonomy_disclosure(st: str) -> str:
+    ea = re.search(r"^[A-Z]\.\s[a-zA-Z\s-]+", st)
+    if ea:
+        span = ea.span()
+        interstr = st[span[0]:span[1]].split("\n")[0]
+    return interstr
+
+
+def process_taxonomy_disclosure_complex(st: str) -> str:
+    ea = re.search(r"^[A-Z]\.[1-9](.|)[a-zA-Z()\s-]+", st)
+    if ea:
+        span = ea.span()
+        interstr = st[span[0]:span[1]].split("\n")[0:-1]
+    return interstr
+
+
 def post_process(
     dest_df: pd.DataFrame, col: str, processed_map: Dict[str, List[int]]
 ) -> DefaultDict[str, List[str]]:
@@ -819,24 +835,16 @@ def post_process(
     for _ , row in dest_df.iterrows():
         if row["taxonomy_disclosure"] is np.nan:
             continue
-        st = row["taxonomy_disclosure"]
-        # search for taxonomy pattern
-        ea = re.search(r"^[A-Z]\.\s[a-zA-Z\s-]+", st)
-        if ea:
-            span = ea.span()
-            interstr = st[span[0] : span[1]].split("\n")[0]
-            st = st.replace(interstr + "\n", "").strip()
-            final_data_ = update_data(final_df_, final_data_, interstr)
-            row["taxonomy_disclosure"] = st
-        st = row["taxonomy_disclosure"]
-        ea = re.search(r"^[A-Z]\.[1-9](.|)[a-zA-Z()\s-]+", st)
-        if ea:
-            span = ea.span()
-            interstr = st[span[0] : span[1]].split("\n")[0:-1]
-            ans = " ".join(interstr)
-            st = st.replace(st[span[0] : span[1]], "")
-            final_data_ = update_data(final_df_, final_data_, ans)
-            row["taxonomy_disclosure"] = st
+
+        st = st.replace(process_taxonomy_disclosure(row["taxonomy_disclosure"]) + "\n", "").strip()
+        final_data_ = update_data(final_df_, final_data_, interstr)
+        row["taxonomy_disclosure"] = st
+        
+        ans = " ".join(process_taxonomy_disclosure_complex(row["taxonomy_disclosure"]))
+        st = st.replace(st[span[0] : span[1]], "")
+        final_data_ = update_data(final_df_, final_data_, ans)
+        row["taxonomy_disclosure"] = st
+        
         st = row["taxonomy_disclosure"]
         row_ea = re.findall(r"\d.\d+ [a-zA-Z\s]+", st)
         if len(row_ea) > 1:
