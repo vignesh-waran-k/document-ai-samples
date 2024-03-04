@@ -996,13 +996,13 @@ def enhance_and_save_pdfs(
                 hitl=True,
             )
             document = cde_jsons[operation]
-            print("HITL")
+            # print("HITL")
         else:
             cde_jsons = read_json_output(
                 output_bucket=output_bucket, output_prefix=data["cde"]
             )
             document = cde_jsons[file_key]
-            print("NO HITL")
+            # print("NO HITL")
         try:
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
@@ -1092,7 +1092,7 @@ def enhance_and_save_pdfs(
             )
             print(f"Done Processing -{file_key}.pdf")
         except ValueError:
-            print(traceback.format_exc())
+            # print(traceback.format_exc())
             print(f"Issue with processing -{file_key}.pdf")
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
