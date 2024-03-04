@@ -858,7 +858,7 @@ def process_taxonomy_disclosure_multiple(row: pd.Series) -> None:
         row["taxonomy_disclosure"] = "\n".join([ea.replace("\n", " ").strip() for ea in row_ea])
 
 
-def collect_multiple_values(row: pd.Series, col: str) -> None:
+def collect_multiple_values(row: pd.Series, col: str) -> List:
     """
     Collect multiple values from a specific column in a row.
 
@@ -867,7 +867,7 @@ def collect_multiple_values(row: pd.Series, col: str) -> None:
         col (str): Name of the column containing multiple values.
 
     Returns:
-        None: The collected values are appended to the "split_row" list.
+        List: The collected values are appended to the "split_row" list.
     """
 
     split_row = []
