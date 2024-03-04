@@ -959,8 +959,6 @@ def walk_the_ocr(
         )
         run_table_extractor_pipeline(
             offset=offset,
-            project_id=project_id,
-            location=location,
             gcs_output_bucket=gcs_output_bucket,
             gcs_output_uri_prefix=gcs_output_uri_prefix,
             document_fp=fp_document[file[:-4]],
@@ -1009,7 +1007,9 @@ def enhance_and_save_pdfs(
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
                 x_coordinates, _ , _ , max_ycd = get_coordinates_map(document)
-                image_content, image, draw = page.image.content, PilImage.open(BytesIO(image_content)), ImageDraw.Draw(image)
+                image_content = page.image.content
+                image = PilImage.open(BytesIO(image_content))
+                draw = ImageDraw.Draw(image)
                 min_height, max_height = max_ycd[idx][0], max_ycd[idx][-1]
                 min_x, max_x, hoffset_ = x_coordinates[idx][0][0], x_coordinates[idx][-1][1], factor * voffset
                 # Draw horizontal
@@ -1096,7 +1096,9 @@ def enhance_and_save_pdfs(
             print(f"Issue with processing -{file_key}.pdf")
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
-                image_content, image, draw = page.image.content, PilImage.open(BytesIO(image_content)), ImageDraw.Draw(image)
+                image_content = page.image.content
+                image = PilImage.open(BytesIO(image_content))
+                draw = ImageDraw.Draw(image)
                 # Append original image to the list
                 images_for_pdf.append(image)
 
