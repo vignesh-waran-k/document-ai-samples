@@ -835,11 +835,12 @@ def post_process(
     for _ , row in dest_df.iterrows():
         if row["taxonomy_disclosure"] is np.nan:
             continue
-
+        st = row["taxonomy_disclosure"]
         st = st.replace(process_taxonomy_disclosure(row["taxonomy_disclosure"]) + "\n", "").strip()
-        final_data_ = update_data(final_df_, final_data_, interstr)
+        final_data_ = update_data(final_df_, final_data_, process_taxonomy_disclosure(row["taxonomy_disclosure"]))
         row["taxonomy_disclosure"] = st
-        
+
+        st = row["taxonomy_disclosure"]
         ans = " ".join(process_taxonomy_disclosure_complex(row["taxonomy_disclosure"]))
         st = st.replace(st[span[0] : span[1]], "")
         final_data_ = update_data(final_df_, final_data_, ans)
