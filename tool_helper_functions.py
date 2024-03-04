@@ -17,7 +17,7 @@ import re
 import time
 from collections import defaultdict
 from io import BytesIO
-from typing import DefaultDict, Dict, List, MutableSequence, Tuple, Union, Any
+from typing import Dict, List, MutableSequence, Tuple, Union, Any
 
 import numpy as np
 import pandas as pd
@@ -788,10 +788,10 @@ def update_data(
     Update the final dataframe.
     Args:
         final_df_ (pd.DataFrame): DataFrame containing the final data.
-        final_data_ (DefaultDict[str, List[str]]): DefaultDict to be updated.
+        final_data_ (Dict[Any, Any]): Dict to be updated.
         ea (str): Value to be added to the "taxonomy_disclosure" column.
     Returns:
-        DefaultDict[str, List[str]]: Updated defaultdict.
+        Dict[str, List[str]]: Updated defaultdict.
     """
 
     for column in final_df_.columns:
@@ -1112,6 +1112,124 @@ def walk_the_ocr(
         )
 
 
+def draw_vertical(
+    idx: int,
+    x_coordinates: List[List[int]],
+    hoffset_: int,
+    min_height: int,
+    max_height: int,
+    line_colour: str,
+    line_width: int,
+    voffset: int,
+    draw: ImageDraw.ImageDraw,
+) -> None:
+    """
+    Draw vertical lines on an image using the provided coordinates and parameters.
+
+    Args:
+        idx (int): Index of the line to be drawn.
+        x_coordinates (List[List[int]]): List of x-coordinates for the lines.
+        hoffset_ (int): Horizontal offset for the lines.
+        min_height (int): Minimum height for the lines.
+        max_height (int): Maximum height for the lines.
+        line_colour (str): Color of the lines.
+        line_width (int): Width of the lines.
+        voffset (int): Vertical offset for the lines.
+        draw (ImageDraw.ImageDraw): ImageDraw object for drawing on an image.
+
+    Returns:
+        None: The function draws vertical lines on the image.
+    """
+    for n, cor in enumerate(x_coordinates[idx]):
+        if n == 0:
+            draw.line(
+                [
+                    (cor[0] - hoffset_, min_height - hoffset_),
+                    (cor[0] - hoffset_, max_height + hoffset_),
+                ],
+                fill=line_colour,
+                width=line_width,
+            )
+        if (
+            n + 1 < len(x_coordinates[idx])
+            and (x_coordinates[idx][n + 1][1] + voffset // 2)
+            - (cor[1] + voffset // 2)
+            > 50
+        ):
+            draw.line(
+                [
+                    (cor[1] + voffset // 2, min_height - hoffset_),
+                    (cor[1] + voffset // 2, max_height + hoffset_),
+                ],
+                fill=line_colour,
+                width=line_width,
+            )
+        elif n + 1 == len(x_coordinates[idx]):
+            draw.line(
+                [
+                    (cor[1] + voffset // 2, min_height - hoffset_),
+                    (cor[1] + voffset // 2, max_height + hoffset_),
+                ],
+                fill=line_colour,
+                width=line_width,
+            )
+
+
+def draw_horizontal(
+    idx: int,
+    max_ycd: List[int],
+    hoffset: int,
+    hoffset_: int,
+    min_x: int,
+    min_height: int,
+    max_x: int,
+    line_colour: str,
+    line_width: int,
+    draw: ImageDraw.ImageDraw,
+) -> None:
+    """
+    Draw horizontal lines on an image using the provided coordinates and parameters.
+
+    Args:
+        idx (int): Index of the line to be drawn.
+        max_ycd (List[int]): List of y-coordinates for the lines.
+        hoffset (int): Horizontal offset for the lines.
+        hoffset_ (int): Another horizontal offset for specific cases.
+        min_x (int): Minimum x-coordinate for the lines.
+        min_height (int): Minimum height for the lines.
+        max_x (int): Maximum x-coordinate for the lines.
+        line_colour (str): Color of the lines.
+        line_width (int): Width of the lines.
+        draw (ImageDraw.ImageDraw): ImageDraw object for drawing on an image.
+
+    Returns:
+        None: The function draws horizontal lines on the image.
+    """
+    for n, y in enumerate(max_ycd[idx]):
+        if n == 0:  # column header min y coord
+            draw.line(
+                (
+                    min_x - (1 * hoffset),
+                    min_height - hoffset_,
+                    max_x + (1.5 * hoffset),
+                    min_height - hoffset_,
+                ),
+                fill=line_colour,
+                width=line_width,
+            )
+        else:
+            draw.line(
+                (
+                    min_x - (2 * hoffset),
+                    y + hoffset,
+                    max_x + (1.5 * hoffset),
+                    y + hoffset,
+                ),
+                fill=line_colour,
+                width=line_width,
+            )
+
+
 def enhance_and_save_pdfs(
     output_bucket: str,
     gcs_cde_hitl_output_prefix: str,
@@ -1158,64 +1276,66 @@ def enhance_and_save_pdfs(
                 min_x, max_x, hoffset_ = x_coordinates[idx][0][0], x_coordinates[idx][-1][1], factor * voffset
                 # Draw horizontal
                 if idx in max_ycd:
-                    for n, y in enumerate(max_ycd[idx]):
-                        if n == 0:  # column header min y coord
-                            draw.line(
-                                (
-                                    min_x - (1 * hoffset),
-                                    min_height - hoffset_,
-                                    max_x + (1.5 * hoffset),
-                                    min_height - hoffset_,
-                                ),
-                                fill=line_colour,
-                                width=line_width,
-                            )
-                        else:
-                            draw.line(
-                                (
-                                    min_x - (2 * hoffset),
-                                    y + hoffset,
-                                    max_x + (1.5 * hoffset),
-                                    y + hoffset,
-                                ),
-                                fill=line_colour,
-                                width=line_width,
-                            )
+                    draw_horizontal(idx, max_ycd, hoffset, hoffset_, min_x, min_height, max_x, line_colour, line_width, draw)
+                    # for n, y in enumerate(max_ycd[idx]):
+                    #     if n == 0:  # column header min y coord
+                    #         draw.line(
+                    #             (
+                    #                 min_x - (1 * hoffset),
+                    #                 min_height - hoffset_,
+                    #                 max_x + (1.5 * hoffset),
+                    #                 min_height - hoffset_,
+                    #             ),
+                    #             fill=line_colour,
+                    #             width=line_width,
+                    #         )
+                    #     else:
+                    #         draw.line(
+                    #             (
+                    #                 min_x - (2 * hoffset),
+                    #                 y + hoffset,
+                    #                 max_x + (1.5 * hoffset),
+                    #                 y + hoffset,
+                    #             ),
+                    #             fill=line_colour,
+                    #             width=line_width,
+                    #         )
                 # Drawing vertical lines
                 if idx in x_coordinates:
-                    for n, cor in enumerate(x_coordinates[idx]):
-                        if n == 0:
-                            draw.line(
-                                [
-                                    (cor[0] - hoffset_, min_height - hoffset_),
-                                    (cor[0] - hoffset_, max_height + hoffset_),
-                                ],
-                                fill=line_colour,
-                                width=line_width,
-                            )
-                        if (
-                            n + 1 < len(x_coordinates[idx])
-                            and (x_coordinates[idx][n + 1][1] + voffset // 2)
-                            - (cor[1] + voffset // 2)
-                            > 50
-                        ):
-                            draw.line(
-                                [
-                                    (cor[1] + voffset // 2, min_height - hoffset_),
-                                    (cor[1] + voffset // 2, max_height + hoffset_),
-                                ],
-                                fill=line_colour,
-                                width=line_width,
-                            )
-                        elif n + 1 == len(x_coordinates[idx]):
-                            draw.line(
-                                [
-                                    (cor[1] + voffset // 2, min_height - hoffset_),
-                                    (cor[1] + voffset // 2, max_height + hoffset_),
-                                ],
-                                fill=line_colour,
-                                width=line_width,
-                            )
+                    draw_vertical(idx, x_coordinates, hoffset_, min_height, max_height, line_colour, line_width, voffset, draw)
+                    # for n, cor in enumerate(x_coordinates[idx]):
+                    #     if n == 0:
+                    #         draw.line(
+                    #             [
+                    #                 (cor[0] - hoffset_, min_height - hoffset_),
+                    #                 (cor[0] - hoffset_, max_height + hoffset_),
+                    #             ],
+                    #             fill=line_colour,
+                    #             width=line_width,
+                    #         )
+                    #     if (
+                    #         n + 1 < len(x_coordinates[idx])
+                    #         and (x_coordinates[idx][n + 1][1] + voffset // 2)
+                    #         - (cor[1] + voffset // 2)
+                    #         > 50
+                    #     ):
+                    #         draw.line(
+                    #             [
+                    #                 (cor[1] + voffset // 2, min_height - hoffset_),
+                    #                 (cor[1] + voffset // 2, max_height + hoffset_),
+                    #             ],
+                    #             fill=line_colour,
+                    #             width=line_width,
+                    #         )
+                    #     elif n + 1 == len(x_coordinates[idx]):
+                    #         draw.line(
+                    #             [
+                    #                 (cor[1] + voffset // 2, min_height - hoffset_),
+                    #                 (cor[1] + voffset // 2, max_height + hoffset_),
+                    #             ],
+                    #             fill=line_colour,
+                    #             width=line_width,
+                    #         )
                 # Append modified image to the list
                 images_for_pdf.append(image)
             # Save images to a single PDF
