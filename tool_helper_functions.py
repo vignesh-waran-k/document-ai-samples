@@ -880,6 +880,90 @@ def collect_multiple_values(row: pd.Series, col: str) -> List:
     return split_row
 
 
+def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict, row: pd.Series, col: str) -> None:
+    """
+    Collect and extend values from a specific column in a row to the final data structure.
+
+    Args:
+        final_df_ (pd.DataFrame): Final DataFrame structure.
+        final_data_ (dict): Final data structure to be extended.
+        row (pd.Series): Input row containing the specified column.
+        col (str): Name of the column containing multiple values.
+
+    Returns:
+        None: The values are extended to the final data structure.
+    """
+
+    try:
+        split_row: List[str] = collect_multiple_values(row, col)
+        for column in final_df_.columns:
+            try:
+                if len(split_row) > 1:
+                    extend_column_data(final_data_, row, column, split_row)
+                else:
+                    extend_single_value(final_data_, row, column)
+            except ValueError:
+                extend_nan_values(final_data_, column, split_row)
+    except ValueError:
+        ea_ = row["taxonomy_disclosure"].replace("\n", " ")
+        final_data_ = update_data(final_df_, final_data_, ea_)
+
+
+def extend_column_data(final_data_: dict, row: pd.Series, column: str, split_row: List[str]) -> None:
+    """
+    Extend column data in the final data structure.
+
+    Args:
+        final_data_ (dict): Final data structure to be extended.
+        row (pd.Series): Input row containing the specified column.
+        column (str): Name of the column to be extended.
+        split_row (List[str]): List of values to be extended.
+
+    Returns:
+        None: The column data is extended in the final data structure.
+    """
+
+    column_data = [data for data in row[column].split("\n") if data]
+    diff = len(split_row) - len(column_data)
+    if diff != 0:
+        column_data.extend([np.nan] * diff)
+    final_data_[column].extend(column_data)
+
+
+def extend_single_value(final_data_: dict, row: pd.Series, column: str) -> None:
+    """
+    Extend single value in the final data structure.
+
+    Args:
+        final_data_ (dict): Final data structure to be extended.
+        row (pd.Series): Input row containing the specified column.
+        column (str): Name of the column to be extended.
+
+    Returns:
+        None: The single value is extended in the final data structure.
+    """
+
+    val = row[column].replace("\n", " ").strip()
+    if column != "taxonomy_disclosure":
+        val = val.replace("-", "").strip()
+    final_data_[column].extend([val])
+
+
+def extend_nan_values(final_data_: dict, column: str, split_row: List[str]) -> None:
+    """
+    Extend NaN values in the final data structure.
+
+    Args:
+        final_data_ (dict): Final data structure to be extended.
+        column (str): Name of the column to be extended.
+        split_row (List[str]): List of NaN values to be extended.
+
+    Returns:
+        None: The NaN values are extended in the final data structure.
+    """
+
+    final_data_[column].extend([np.nan] * len(split_row))
+
 def post_process(
     dest_df: pd.DataFrame, col: str, processed_map: Dict[str, List[int]]
 ) -> DefaultDict[str, List[str]]:
@@ -908,31 +992,32 @@ def post_process(
         row["taxonomy_disclosure"] = st1
 
         process_taxonomy_disclosure_multiple(row)
-        try:
-            # collect values if particular col(business measure) has more than one value
-            split_row = collect_multiple_values(row, col)
-            for column in final_df_.columns:
-                try:
-                    if len(split_row) > 1:
-                        column_data = [data for data in row[column].split("\n") if data]
+        collect_and_extend_values(final_df_, final_data_, row, col)
+    #     try:
+    #         # collect values if particular col(business measure) has more than one value
+    #         split_row = collect_multiple_values(row, col)
+    #         for column in final_df_.columns:
+    #             try:
+    #                 if len(split_row) > 1:
+    #                     column_data = [data for data in row[column].split("\n") if data]
 
-                        # if no. of values in particular column doesn't match with n
-                        diff = len(split_row) - len(column_data)
-                        if diff != 0:
-                            column_data.extend([np.nan] * diff)
-                        final_data_[column].extend(column_data)
-                    else:
-                        # remove `-` character
-                        val = row[column].replace("\n", " ").strip()
-                        if column != "taxonomy_disclosure":
-                            val = val.replace("-", "").strip()
+    #                     # if no. of values in particular column doesn't match with n
+    #                     diff = len(split_row) - len(column_data)
+    #                     if diff != 0:
+    #                         column_data.extend([np.nan] * diff)
+    #                     final_data_[column].extend(column_data)
+    #                 else:
+    #                     # remove `-` character
+    #                     val = row[column].replace("\n", " ").strip()
+    #                     if column != "taxonomy_disclosure":
+    #                         val = val.replace("-", "").strip()
 
-                        final_data_[column].extend([val])
-                except ValueError:
-                    final_data_[column].extend([np.nan] * len(split_row))
-        except ValueError:
-            ea_ = row["taxonomy_disclosure"].replace("\n", " ")
-            final_data_ = update_data(final_df_, final_data_, ea_)
+    #                     final_data_[column].extend([val])
+    #             except ValueError:
+    #                 final_data_[column].extend([np.nan] * len(split_row))
+    #     except ValueError:
+    #         ea_ = row["taxonomy_disclosure"].replace("\n", " ")
+    #         final_data_ = update_data(final_df_, final_data_, ea_)
     return final_data_
 
 
