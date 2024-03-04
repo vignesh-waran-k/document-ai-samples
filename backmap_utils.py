@@ -1,6 +1,7 @@
 # pylint: disable=R0913
 # pylint: disable=R0914
 # pylint: disable=E0401
+# pylint: disable=C0302
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -493,10 +494,8 @@ def get_page_text_anc_mentiontext(
             - method (str): Based on mapping block.
     """
     min_x, _, min_y, _ = min_max_x_y
-    matches: List[Any] = []
-    match_string_pair: List[Any] = []
+    matches: List[Any], match_string_pair: List[Any], method = [], [], ""
     # Track whether entity is matched from OCR or Translated units
-    method = ""
     orig_text = orig_invoice_json.text
     try:
         matches, match_string_pair = find_substring_indexes(
@@ -531,10 +530,7 @@ def get_page_text_anc_mentiontext(
             if matches:
                 method = "OCR-EntityMT"
     # Initialize variables.
-    bbox = {}
-    text_anc_1 = {}
-    new_mention_text = ""
-    expected_text_anc = {}
+    bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
     # Iterate through match pairs.
     for match, str_pair in zip(matches, match_string_pair):
         try:
@@ -548,8 +544,7 @@ def get_page_text_anc_mentiontext(
         if not bb:
             continue
         # Difference between the original and mapped bbox should be within defined offset.
-        cond1 = abs(bb["min_y"] - min_y) <= diff_y
-        cond2 = abs(bb["min_x"] - min_x) <= diff_x
+        cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
         if cond1 and cond2:
             diff_x = abs(bb["min_x"] - min_x)
             diff_y = abs(bb["min_y"] - min_y)
