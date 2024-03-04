@@ -19,7 +19,6 @@ from collections import defaultdict
 from io import BytesIO
 from typing import DefaultDict, Dict, List, MutableSequence, Tuple, Union
 
-import traceback
 import numpy as np
 import pandas as pd
 import PyPDF2
@@ -1092,7 +1091,6 @@ def enhance_and_save_pdfs(
             )
             print(f"Done Processing -{file_key}.pdf")
         except ValueError:
-            # print(traceback.format_exc())
             print(f"Issue with processing -{file_key}.pdf")
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
