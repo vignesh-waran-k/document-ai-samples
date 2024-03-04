@@ -1115,7 +1115,7 @@ def walk_the_ocr(
 def draw_vertical(
     idx: int,
     x_coordinates: Dict[int, List[List[int]]],
-    hoffset_: int,
+    hoffset_: float,
     min_height: int,
     max_height: int,
     line_colour: str,
@@ -1129,7 +1129,7 @@ def draw_vertical(
     Args:
         idx (int): Index of the line to be drawn.
         x_coordinates (Dict[int, List[List[int]]]): List of x-coordinates for the lines.
-        hoffset_ (int): Horizontal offset for the lines.
+        hoffset_ (float): Horizontal offset for the lines.
         min_height (int): Minimum height for the lines.
         max_height (int): Maximum height for the lines.
         line_colour (str): Color of the lines.
@@ -1276,7 +1276,8 @@ def enhance_and_save_pdfs(
                 min_x, max_x, hoffset_ = x_coordinates[idx][0][0], x_coordinates[idx][-1][1], factor * voffset
                 # Draw horizontal
                 if idx in max_ycd:
-                    draw_horizontal(idx, max_ycd, hoffset, hoffset_, min_x, min_height, max_x, line_colour, line_width, draw)
+                    draw_horizontal(idx, max_ycd, hoffset, hoffset_, min_x,
+                                    min_height, max_x, line_colour, line_width, draw)
                     # for n, y in enumerate(max_ycd[idx]):
                     #     if n == 0:  # column header min y coord
                     #         draw.line(
@@ -1302,7 +1303,8 @@ def enhance_and_save_pdfs(
                     #         )
                 # Drawing vertical lines
                 if idx in x_coordinates:
-                    draw_vertical(idx, x_coordinates, hoffset_, min_height, max_height, line_colour, line_width, voffset, draw)
+                    draw_vertical(idx, x_coordinates, hoffset_, min_height,
+                                  max_height, line_colour, line_width, voffset, draw)
                     # for n, cor in enumerate(x_coordinates[idx]):
                     #     if n == 0:
                     #         draw.line(
