@@ -782,7 +782,7 @@ def get_table_data(
 
 
 def update_data(
-    final_df_: pd.DataFrame, final_data_: DefaultDict[str, List[str]], ea: str
+    final_df_: pd.DataFrame, final_data_: Dict[Any, Any], ea: str
 ) -> Dict[Any, Any]:
     """
     Update the final dataframe.
