@@ -1114,7 +1114,7 @@ def walk_the_ocr(
 
 def draw_vertical(
     idx: int,
-    x_coordinates: List[List[int]],
+    x_coordinates: Dict[int, List[List[int]]],
     hoffset_: int,
     min_height: int,
     max_height: int,
@@ -1128,7 +1128,7 @@ def draw_vertical(
 
     Args:
         idx (int): Index of the line to be drawn.
-        x_coordinates (List[List[int]]): List of x-coordinates for the lines.
+        x_coordinates (Dict[int, List[List[int]]]): List of x-coordinates for the lines.
         hoffset_ (int): Horizontal offset for the lines.
         min_height (int): Minimum height for the lines.
         max_height (int): Maximum height for the lines.
@@ -1177,9 +1177,9 @@ def draw_vertical(
 
 def draw_horizontal(
     idx: int,
-    max_ycd: List[int],
-    hoffset: int,
-    hoffset_: int,
+    max_ycd: Dict[int, List[int]],
+    hoffset: Union[int, float],
+    hoffset_: Union[int, float],
     min_x: int,
     min_height: int,
     max_x: int,
@@ -1192,9 +1192,9 @@ def draw_horizontal(
 
     Args:
         idx (int): Index of the line to be drawn.
-        max_ycd (List[int]): List of y-coordinates for the lines.
-        hoffset (int): Horizontal offset for the lines.
-        hoffset_ (int): Another horizontal offset for specific cases.
+        max_ycd (Dict[int, List[int]]): List of y-coordinates for the lines.
+        hoffset (Union[int, float]): Horizontal offset for the lines.
+        hoffset_ (Union[int, float]): Another horizontal offset for specific cases.
         min_x (int): Minimum x-coordinate for the lines.
         min_height (int): Minimum height for the lines.
         max_x (int): Maximum x-coordinate for the lines.
