@@ -992,12 +992,8 @@ def enhance_and_save_pdfs(
     # Initialize Google Cloud Storage client
     storage_client = storage.Client()
     bucket = storage_client.bucket(output_bucket)
-    voffset = voffset_
-    hoffset = hoffset_
-    line_width = 5
-    line_colour = "black"
+    voffset, hoffset, line_width, line_colour = voffset_, hoffset_, 5, "black"
     for file, data in cde_input_output_map.items():
-        print("File:", file)
         file_key = file[:-4]
         if data.get("hitl", None):
             operation = data["hitl"]
@@ -1018,12 +1014,9 @@ def enhance_and_save_pdfs(
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
                 x_coordinates, _ , _ , max_ycd = get_coordinates_map(document)
-                image_content = page.image.content
-                image = PilImage.open(BytesIO(image_content))
-                draw = ImageDraw.Draw(image)
+                image_content, image, draw = page.image.content, PilImage.open(BytesIO(image_content)), ImageDraw.Draw(image)
                 min_height, max_height = max_ycd[idx][0], max_ycd[idx][-1]
-                min_x, max_x = x_coordinates[idx][0][0], x_coordinates[idx][-1][1]
-                hoffset_ = factor * voffset
+                min_x, max_x, hoffset_ = x_coordinates[idx][0][0], x_coordinates[idx][-1][1], factor * voffset
                 # Draw horizontal
                 if idx in max_ycd:
                     for n, y in enumerate(max_ycd[idx]):
@@ -1108,9 +1101,7 @@ def enhance_and_save_pdfs(
             print(f"Issue with processing -{file_key}.pdf")
             images_for_pdf = []
             for idx, page in enumerate(document.pages):
-                image_content = page.image.content
-                image = PilImage.open(BytesIO(image_content))
-                draw = ImageDraw.Draw(image)
+                image_content, image, draw = page.image.content, PilImage.open(BytesIO(image_content)), ImageDraw.Draw(image)
                 # Append original image to the list
                 images_for_pdf.append(image)
 
