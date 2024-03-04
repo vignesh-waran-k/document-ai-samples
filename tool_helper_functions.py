@@ -967,7 +967,7 @@ def extend_nan_values(final_data_: dict, column: str, split_row: List[str]) -> N
 
 def post_process(
     dest_df: pd.DataFrame, col: str, processed_map: Dict[str, List[int]]
-) -> DefaultDict[str, List[str]]:
+) -> Dict[Any, Any]:
     """
     Process the final dataframe to remove noise from the data.
     """
@@ -978,7 +978,7 @@ def post_process(
         )
     )
     # Post-processing code matches expected values and rearranges them into the final dataframe
-    final_data_: DefaultDict[str, List[str]] = defaultdict(list)
+    final_data_: Dict[Any, Any] = defaultdict(list)
     for _ , row in dest_df.iterrows():
         if row["taxonomy_disclosure"] is np.nan:
             continue
