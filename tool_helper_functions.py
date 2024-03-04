@@ -884,7 +884,7 @@ def collect_multiple_values(row: pd.Series, col: str) -> List:
     return split_row
 
 
-def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict, 
+def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict,
                               row: pd.Series, col: str) -> None:
     """
     Collect and extend values from a specific column in a row to the final data structure.
@@ -914,7 +914,7 @@ def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict,
         final_data_ = update_data(final_df_, final_data_, ea_)
 
 
-def extend_column_data(final_data_: dict, row: pd.Series, 
+def extend_column_data(final_data_: dict, row: pd.Series,
                        column: str, split_row: List[str]) -> None:
     """
     Extend column data in the final data structure.
