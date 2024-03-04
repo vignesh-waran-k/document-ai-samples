@@ -783,7 +783,7 @@ def get_table_data(
 
 def update_data(
     final_df_: pd.DataFrame, final_data_: DefaultDict[str, List[str]], ea: str
-) -> DefaultDict[str, List[str]]:
+) -> Dict[Any, Any]:
     """
     Update the final dataframe.
     Args:
@@ -963,6 +963,7 @@ def extend_nan_values(final_data_: dict, column: str, split_row: List[str]) -> N
     """
 
     final_data_[column].extend([np.nan] * len(split_row))
+
 
 def post_process(
     dest_df: pd.DataFrame, col: str, processed_map: Dict[str, List[int]]
