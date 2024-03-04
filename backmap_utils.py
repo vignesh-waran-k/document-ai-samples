@@ -1,6 +1,7 @@
 #pylint: disable=R0913
 #pylint: disable=R0914
 #pylint: disable=E0401
+#pylint: disable=C0302
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -195,30 +196,25 @@ def get_redact_bbox_from_text(
     part2 = re.escape(text_redact.split(" ")[-1])
     pattern = f"{part1}.*{part2}"
     matches = re.finditer(pattern, full_text, flags=re.IGNORECASE)
+
     redact_bbox = {}
     for match in matches:
-        start = match.start()
-        end_temp = full_text[start : start + 50].find(text_redact.split(" ")[-1])
-        end = start + end_temp + len(text_redact.split(" ")[-1])
-        x, y = [], []
-        page_num = 0
-        for page in json_data.pages:
+        start, end = match.span()
+        for page_num, page in enumerate(json_data.pages):
+            x, y = [], []
             for token in page.tokens:
-                text_anch = token.layout.text_anchor.text_segments
-                for an in text_anch:
-                    si = an.start_index
-                    ei = an.end_index
-                    cond1 = si >= int(start)
-                    cond2 = ei <= int(end) + 2
-                    if cond1 and cond2:
+                if token.layout.text_anchor.text_segments:
+                    si = token.layout.text_anchor.text_segments[0].start_index
+                    ei = token.layout.text_anchor.text_segments[0].end_index
+                    if si >= start and ei <= end:
                         norm_ver = token.layout.bounding_poly.normalized_vertices
-                        for ver in norm_ver:
-                            x.append(ver.x)
-                            y.append(ver.y)
-                        page = page_num
-            if isinstance(page, int):
-                redact_bbox[str(page)] = [[min(x), min(y), max(x), max(y)]]
-            page_num = page_num + 1
+                        x.extend([ver.x for ver in norm_ver])
+                        y.extend([ver.y for ver in norm_ver])
+
+            if x and y:  # Check if x and y have been modified
+                bbox = [min(x), min(y), max(x), max(y)]
+                redact_bbox[str(page_num)] = [bbox]
+
     return redact_bbox
 
 
