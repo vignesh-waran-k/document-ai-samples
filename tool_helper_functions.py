@@ -803,6 +803,16 @@ def update_data(
 
 
 def process_taxonomy_disclosure(st: str) -> str:
+    """
+    Process a simple taxonomy disclosure string.
+
+    Args:
+        st (str): Input string containing a simple taxonomy disclosure.
+
+    Returns:
+        str: Extracted taxonomy disclosure.
+    """
+    
     ea = re.search(r"^[A-Z]\.\s[a-zA-Z\s-]+", st)
     if ea:
         span = ea.span()
@@ -811,6 +821,17 @@ def process_taxonomy_disclosure(st: str) -> str:
 
 
 def process_taxonomy_disclosure_complex(st: str) -> Tuple[str, str]:
+    """
+    Process a complex taxonomy disclosure string.
+
+    Args:
+        st (str): Input string containing a complex taxonomy disclosure.
+
+    Returns:
+        Tuple[str, str]: Tuple containing the remaining string after processing
+                        and the extracted complex taxonomy disclosure.
+    """
+    
     ea = re.search(r"^[A-Z]\.[1-9](.|)[a-zA-Z()\s-]+", st)
     if ea:
         span = ea.span()
