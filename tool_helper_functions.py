@@ -270,10 +270,7 @@ def get_coordinates_map(
     """
 
     # row_keywords = {"taxonomy","sum","economic","taxonomy-eligible","taxonomy-non-eligible"}
-    x_coordinates_ = {}
-    y_coord_ = {}
-    row_map_ = {}
-    max_ycd_ = {}
+    x_coordinates_, y_coord_, row_map_, max_ycd_ = {}, {}, {}, {}
     for pn, _ in enumerate(document.pages):
         row_coords = []
         x_coordinates = []
@@ -642,20 +639,20 @@ def get_entire_row(
         col: blockn + i for i, col in zip(range(dest_df.shape[1]), dest_df.columns)
     }
     col_occurence = {}
-    for bn, block in enumerate(page.blocks):
+    for bn, block1 in enumerate(page.blocks):
         # get the min and max y values for each block
         y_values = [
             round(vertex.y * height)
-            for vertex in block.layout.bounding_poly.normalized_vertices
+            for vertex in block1.layout.bounding_poly.normalized_vertices
         ]
         this_min_y = min(y_values) + 5
         this_max_y = max(y_values) - 5
         # compare if the block coordinates falls under required row block
         if this_min_y >= min_y and this_max_y <= max_y:
-            block_text = layout_to_text(block.layout, document_response.text)
+            block_text = layout_to_text(block1.layout, document_response.text)
             x_valuesn = [
                 round(vertex.x * width)
-                for vertex in block.layout.bounding_poly.normalized_vertices
+                for vertex in block1.layout.bounding_poly.normalized_vertices
             ]
             # this_max_x = round(max(x_valuesn) / 10)
             this_max_x = math.ceil(max(x_valuesn) / 10)
