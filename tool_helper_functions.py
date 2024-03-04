@@ -812,7 +812,7 @@ def process_taxonomy_disclosure(st: str) -> str:
     Returns:
         str: Extracted taxonomy disclosure.
     """
-    
+
     ea = re.search(r"^[A-Z]\.\s[a-zA-Z\s-]+", st)
     if ea:
         span = ea.span()
@@ -831,7 +831,7 @@ def process_taxonomy_disclosure_complex(st: str) -> Tuple[str, str]:
         Tuple[str, str]: Tuple containing the remaining string after processing
                         and the extracted complex taxonomy disclosure.
     """
-    
+
     ea = re.search(r"^[A-Z]\.[1-9](.|)[a-zA-Z()\s-]+", st)
     if ea:
         span = ea.span()
@@ -839,6 +839,23 @@ def process_taxonomy_disclosure_complex(st: str) -> Tuple[str, str]:
         ans = " ".join(interstr)
         st = st.replace(st[span[0] : span[1]], "")
     return st, ans
+
+
+def process_taxonomy_disclosure_multiple(row: pd.Series) -> None:
+    """
+    Process a row containing multiple taxonomy disclosures.
+
+    Args:
+        row (pd.Series): Input row containing a "taxonomy_disclosure" column.
+
+    Returns:
+        None: The "taxonomy_disclosure" column in the row is updated in-place.
+    """
+
+    st = row["taxonomy_disclosure"]
+    row_ea = re.findall(r"\d.\d+ [a-zA-Z\s]+", st)
+    if len(row_ea) > 1:
+        row["taxonomy_disclosure"] = "\n".join([ea.replace("\n", " ").strip() for ea in row_ea])
 
 
 def post_process(
@@ -868,12 +885,7 @@ def post_process(
         final_data_ = update_data(final_df_, final_data_, ans)
         row["taxonomy_disclosure"] = st1
 
-        st = row["taxonomy_disclosure"]
-        row_ea = re.findall(r"\d.\d+ [a-zA-Z\s]+", st)
-        if len(row_ea) > 1:
-            row["taxonomy_disclosure"] = "\n".join(
-                [ea.replace("\n", " ").strip() for ea in row_ea]
-            )
+        process_taxonomy_disclosure_multiple(row)
         try:
             # collect values if particular col(business measure) has more than one value
             split_row = []
