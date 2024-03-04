@@ -1,6 +1,7 @@
 # pylint: disable=R0913
 # pylint: disable=R0914
 # pylint: disable=E0401
+# pylint: disable=C0302
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -883,7 +884,8 @@ def collect_multiple_values(row: pd.Series, col: str) -> List:
     return split_row
 
 
-def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict, row: pd.Series, col: str) -> None:
+def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict, 
+                              row: pd.Series, col: str) -> None:
     """
     Collect and extend values from a specific column in a row to the final data structure.
 
@@ -912,7 +914,8 @@ def collect_and_extend_values(final_df_: pd.DataFrame, final_data_: dict, row: p
         final_data_ = update_data(final_df_, final_data_, ea_)
 
 
-def extend_column_data(final_data_: dict, row: pd.Series, column: str, split_row: List[str]) -> None:
+def extend_column_data(final_data_: dict, row: pd.Series, 
+                       column: str, split_row: List[str]) -> None:
     """
     Extend column data in the final data structure.
 
@@ -987,7 +990,8 @@ def post_process(
             continue
         st = row["taxonomy_disclosure"]
         st = st.replace(process_taxonomy_disclosure(row["taxonomy_disclosure"]) + "\n", "").strip()
-        final_data_ = update_data(final_df_, final_data_, process_taxonomy_disclosure(row["taxonomy_disclosure"]))
+        final_data_ = update_data(final_df_, final_data_, process_taxonomy_disclosure(
+                    row["taxonomy_disclosure"]))
         row["taxonomy_disclosure"] = st
 
         st = row["taxonomy_disclosure"]
@@ -1276,7 +1280,8 @@ def enhance_and_save_pdfs(
                 image = PilImage.open(BytesIO(image_content))
                 draw = ImageDraw.Draw(image)
                 min_height, max_height = max_ycd[idx][0], max_ycd[idx][-1]
-                min_x, max_x, hoffset_ = x_coordinates[idx][0][0], x_coordinates[idx][-1][1], factor * voffset
+                min_x, max_x = x_coordinates[idx][0][0], x_coordinates[idx][-1][1]
+                hoffset_ = factor * voffset
                 # Draw horizontal
                 if idx in max_ycd:
                     draw_horizontal(idx, max_ycd, hoffset, hoffset_, min_x,
