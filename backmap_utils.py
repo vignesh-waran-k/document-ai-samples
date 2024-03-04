@@ -494,7 +494,9 @@ def get_page_text_anc_mentiontext(
             - method (str): Based on mapping block.
     """
     min_x, _, min_y, _ = min_max_x_y
-    matches: List[Any], match_string_pair: List[Any], method = [], [], ""
+    matches: List[Any] = []
+    match_string_pair: List[Any] = []
+    method = ""
     # Track whether entity is matched from OCR or Translated units
     orig_text = orig_invoice_json.text
     try:
