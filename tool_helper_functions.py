@@ -877,6 +877,7 @@ def collect_multiple_values(row: pd.Series, col: str) -> None:
                 split_row.append(val)
         except ValueError:
             pass
+    return split_row
 
 
 def post_process(
@@ -909,7 +910,7 @@ def post_process(
         process_taxonomy_disclosure_multiple(row)
         try:
             # collect values if particular col(business measure) has more than one value
-            collect_multiple_values(row, col)
+            split_row = collect_multiple_values(row, col)
             for column in final_df_.columns:
                 try:
                     if len(split_row) > 1:
