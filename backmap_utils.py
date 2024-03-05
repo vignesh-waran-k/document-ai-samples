@@ -1,10 +1,3 @@
-# pylint: disable=R1702
-# pylint: disable=R0912
-# pylint: disable=R0913
-# pylint: disable=R0914
-# pylint: disable=R0915
-# pylint: disable=E0401
-# pylint: disable=C0302
 # Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# pylint: disable=R1702
+# pylint: disable=R0912
+# pylint: disable=R0913
+# pylint: disable=R0914
+# pylint: disable=R0915
+# pylint: disable=E0401
+# pylint: disable=C0302
 """This module contains helper functions for Backmapping Tool"""
 import base64
 import io
