@@ -445,64 +445,16 @@ def find_matched_translation_pairs(
                 best_match_pairs.append(best_match_pair)
     return best_match_pairs
 
-
-def get_page_text_anc_mentiontext(
-    entity: documentai.Document.Entity,
-    orig_invoice_json: documentai.Document,
-    min_max_x_y: Tuple[float, float, float, float],
+def find_matches_and_method(
+    orig_text: str,
+    entity_mention_text: str,
     mapping_text: str,
-    diff_y: float,
-    diff_x: float,
-    english_page_num: int,
-) -> Tuple[
-    Any,
-    Dict[str, Dict[Any, Any]],
-    str,
-    List[List[str]],
-    str,
-]:
-    """
-    Function returns the min-max coordinates, text anchors and mention text of backmapped entity
-    using provided extracted source entity, corresponding x&y coordinates, and
-    mapping text from translation api output, with coordinate offset check.
-    Args:
-        entity (documentai.Document.Entity): Document AI extracted entity dictionary.
-        orig_invoice_json (documentai.Document): Original document Invoice processor json output.
-        min_max_x_y (Tuple[float, float, float, float]):
-            Minimum and maximum x&y coordinates of entity bounding box.
-        mapping_text (str): Source text from translation text units.
-        diff_y (float): Y-coordinate offset.
-        diff_x (float): X-coordinate offset.
-        english_page_num (int): Document page number.
-    Returns:
-        Tuple[
-            Any,
-            Dict[str, Dict[Any, Any]],
-            str,
-            List[List[str]],
-            str
-        ]
-            - bbox (Dict[str, float]):
-                Dictionary containing min-max x&y coordinates of the mapped entity.
-            - expected_text_anc (Dict[
-                str,
-                str]
-            ]):
-                List of start and end indexes of the mapped entity.
-            - new_mention_text (str): Mapped entity text.
-            - match_string_pair (List[List[str]]): List of matched string pairs.
-            - method (str): Based on mapping block.
-    """
-    min_x, _, min_y, _ = min_max_x_y
-    matches: List[Any] = []
-    match_string_pair: List[Any] = []
+) -> Tuple[List[Tuple[int, int]], List[List[str]], str]:
+    matches: List[Tuple[int, int]] = []
+    match_string_pair: List[List[str]] = []
     method = ""
-    # Track whether entity is matched from OCR or Translated units
-    orig_text = orig_invoice_json.text
     try:
-        matches, match_string_pair = find_substring_indexes(
-            orig_text, entity.mention_text
-        )
+        matches, match_string_pair = find_substring_indexes(orig_text, entity_mention_text)
         if matches:
             method = "OCR-EntityMT"
     except ValueError:
@@ -515,7 +467,7 @@ def get_page_text_anc_mentiontext(
             method = "OCR-TU"
         if not matches:
             dates_german_text = get_formatted_dates(orig_text)
-            ent_date = get_formatted_dates(entity.mention_text)
+            ent_date = get_formatted_dates(entity_mention_text)
             matched_dates = defaultdict(list)
             for k1, v1 in ent_date.items():
                 for k2, v2 in dates_german_text.items():
@@ -523,29 +475,41 @@ def get_page_text_anc_mentiontext(
                         matched_dates[k1].append(k2)
             for _, mat_1 in matched_dates.items():
                 for mat_11 in mat_1:
-                    match_temp, match_string_pair_temp = find_substring_indexes(
-                        orig_text, mat_11
-                    )
+                    match_temp, match_string_pair_temp = find_substring_indexes(orig_text, mat_11)
                     for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
                         matches.append(mat_2)
                         match_string_pair.append(str_pair)
             if matches:
                 method = "OCR-EntityMT"
-    # Initialize variables.
+    return matches, match_string_pair, method
+
+def perform_mapping(
+    matches: List[Tuple[int, int]],
+    match_string_pair: List[List[str]],
+    method: str,
+    orig_invoice_json: documentai.Document,
+    min_x: float,
+    min_y: float,
+    diff_x: float,
+    diff_y: float,
+    orig_text: str,
+    english_page_num: int,
+) -> Tuple[
+    Dict[str, float],
+    Dict[str, Dict[str, Any]],
+    str,
+    List[List[str]],
+    str,
+]:
     bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
-    # Iterate through match pairs.
     for match, str_pair in zip(matches, match_string_pair):
         try:
-            _ts = documentai.Document.TextAnchor.TextSegment(
-                start_index=int(match[0]), end_index=int(match[1])
-            )
+            _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]), end_index=int(match[1]))
             bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
         except ValueError:
             continue
-        # bb can have empty string return by get_token
         if not bb:
             continue
-        # Difference between the original and mapped bbox should be within defined offset.
         cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
         if cond1 and cond2:
             diff_x = abs(bb["min_x"] - min_x)
@@ -562,6 +526,49 @@ def get_page_text_anc_mentiontext(
                     continue
                 new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
+    return bbox, expected_text_anc, new_mention_text, match_string_pair, method
+
+def get_page_text_anc_mentiontext(
+    entity: documentai.Document.Entity,
+    orig_invoice_json: documentai.Document,
+    min_max_x_y: Tuple[float, float, float, float],
+    mapping_text: str,
+    diff_y: float,
+    diff_x: float,
+    english_page_num: int,
+) -> Tuple[
+    Dict[str, float],
+    Dict[str, Dict[Any, Any]],
+    str,
+    List[List[str]],
+    str,
+]:
+    """
+    Main function to get the min-max coordinates, text anchors, and mention text of backmapped entity.
+    """
+    min_x, _, min_y, _ = min_max_x_y
+
+    # Step 1: Find matches and method
+    matches, match_string_pair, method = find_matches_and_method(
+        orig_invoice_json.text,
+        entity.mention_text,
+        mapping_text,
+    )
+
+    # Step 2: Perform mapping based on the matches
+    bbox, expected_text_anc, new_mention_text, match_string_pair, method = perform_mapping(
+        matches,
+        match_string_pair,
+        method,
+        orig_invoice_json,
+        min_x,
+        min_y,
+        diff_x,
+        diff_y,
+        orig_invoice_json.text,
+        english_page_num,
+    )
+
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
 
 
