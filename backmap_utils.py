@@ -567,6 +567,7 @@ def get_page_text_anc_mentiontext(
             expected_text_anc = {"textSegments": text_anc_1}
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
 
+
 def updated_entity_secondary(
     orig_invoice_json: documentai.Document,
     min_max_x_y: Tuple[float, float, float, float],
