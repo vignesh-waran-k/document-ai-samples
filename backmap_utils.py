@@ -600,15 +600,18 @@ def updated_entity_secondary(
         cond11 = abs(new_min_y - min_y) <= 0.01
         cond12 = abs(new_max_y - max_y) <= 0.01
         cond1 = cond11 and cond12
-        cond21 = new_min_x >= min_x and new_min_y >= min_y and new_max_x <= max_x and new_max_y <= max_y
+        cond21 = (
+            new_min_x >= min_x and
+            new_min_y >= min_y and
+            new_max_x <= max_x and
+            new_max_y <= max_y
+        )
         if not (cond1 or cond21):
             continue
-    
         text_anc_token = token.layout.text_anchor.text_segments
         si, ei = text_anc_token[0].start_index, text_anc_token[0].end_index
         orig_temp_text = orig_invoice_json.text[si:ei].strip().lower()
         mapping_text_stripped = mapping_text.strip().lower()
-    
         if orig_temp_text in mapping_text_stripped:
             for t3 in list(mapping_list):
                 ratio = fuzz.ratio(t3.lower(), orig_temp_text)
