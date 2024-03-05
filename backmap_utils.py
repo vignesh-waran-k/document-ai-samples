@@ -600,28 +600,25 @@ def updated_entity_secondary(
         cond11 = abs(new_min_y - min_y) <= 0.01
         cond12 = abs(new_max_y - max_y) <= 0.01
         cond1 = cond11 and cond12
-        cond21 = new_min_x >= min_x
-        cond22 = new_min_y >= min_y
-        cond23 = new_max_x <= max_x
-        cond24 = new_max_y <= max_y
-        cond2 = all([cond21, cond22, cond23, cond24])
-        if cond1 or cond2:
-            text_anc_token = token.layout.text_anchor.text_segments
-            si = text_anc_token[0].start_index
-            ei = text_anc_token[0].end_index
-            orig_temp_text = orig_invoice_json.text[si:ei]
-            if orig_temp_text.strip().lower() in mapping_text.strip().lower():
-                for t3 in mapping_list:
-                    ratio = fuzz.ratio(t3.lower(), orig_temp_text.lower())
-                    if ratio > 75:
-                        mapping_list.remove(t3)
-                        match_string_pair.append([t3, orig_temp_text])
-                        for an1 in text_anc_token:
-                            text_anc_tokens.append(an1)
-                        page_anc["x"].extend([new_min_x, new_max_x])
-                        page_anc["y"].extend([new_min_y, new_max_y])
-                    confidence_temp = 0.9
-                    confidence.append(confidence_temp)
+        cond21 = new_min_x >= min_x and new_min_y >= min_y and new_max_x <= max_x and new_max_y <= max_y
+        if not (cond1 or cond21):
+            continue
+    
+        text_anc_token = token.layout.text_anchor.text_segments
+        si, ei = text_anc_token[0].start_index, text_anc_token[0].end_index
+        orig_temp_text = orig_invoice_json.text[si:ei].strip().lower()
+        mapping_text_stripped = mapping_text.strip().lower()
+    
+        if orig_temp_text in mapping_text_stripped:
+            for t3 in list(mapping_list):
+                ratio = fuzz.ratio(t3.lower(), orig_temp_text)
+                if ratio > 75:
+                    mapping_list.remove(t3)
+                    match_string_pair.append([t3, orig_temp_text])
+                    text_anc_tokens.extend(text_anc_token)
+                    page_anc["x"].extend([new_min_x, new_max_x])
+                    page_anc["y"].extend([new_min_y, new_max_y])
+                    confidence.append(0.9)
     sorted_temp_token = sorted(text_anc_tokens, key=lambda x: x.end_index)
     temp_mention_text = ""
     for index, seg in enumerate(sorted_temp_token):
