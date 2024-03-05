@@ -493,58 +493,47 @@ def get_page_text_anc_mentiontext(
             - method (str): Based on mapping block.
     """
     min_x, _, min_y, _ = min_max_x_y
-    matches: List[Any] = []
-    match_string_pair: List[Any] = []
-    method = ""
-    # Track whether entity is matched from OCR or Translated units
     orig_text = orig_invoice_json.text
-    try:
-        matches, match_string_pair = find_substring_indexes(
-            orig_text, entity.mention_text
-        )
+    method = ""
+    matched_method = ""
+
+    def find_matches_and_method(text, mention_text, mapping_text):
+        nonlocal matched_method
+        matches, match_string_pair = find_substring_indexes(text, mention_text)
         if matches:
-            method = "OCR-EntityMT"
-    except ValueError:
-        matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
+            matched_method = "OCR-EntityMT"
+            return matches, match_string_pair
+        matches, match_string_pair = find_substring_indexes(text, mapping_text)
         if matches:
-            method = "OCR-TU"
+            matched_method = "OCR-TU"
+        return matches, match_string_pair
+
+    matches, match_string_pair = find_matches_and_method(orig_text, entity.mention_text, mapping_text)
     if not matches:
-        matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
+        dates_german_text = get_formatted_dates(orig_text)
+        ent_date = get_formatted_dates(entity.mention_text)
+        matched_dates = defaultdict(list)
+        for k1, v1 in ent_date.items():
+            for k2, v2 in dates_german_text.items():
+                if v1 == v2:
+                    matched_dates[k1].append(k2)
+        for _, mat_1 in matched_dates.items():
+            for mat_11 in mat_1:
+                match_temp, match_string_pair_temp = find_substring_indexes(orig_text, mat_11)
+                for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
+                    matches.append(mat_2)
+                    match_string_pair.append(str_pair)
         if matches:
-            method = "OCR-TU"
-        if not matches:
-            dates_german_text = get_formatted_dates(orig_text)
-            ent_date = get_formatted_dates(entity.mention_text)
-            matched_dates = defaultdict(list)
-            for k1, v1 in ent_date.items():
-                for k2, v2 in dates_german_text.items():
-                    if v1 == v2:
-                        matched_dates[k1].append(k2)
-            for _, mat_1 in matched_dates.items():
-                for mat_11 in mat_1:
-                    match_temp, match_string_pair_temp = find_substring_indexes(
-                        orig_text, mat_11
-                    )
-                    for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
-                        matches.append(mat_2)
-                        match_string_pair.append(str_pair)
-            if matches:
-                method = "OCR-EntityMT"
-    # Initialize variables.
+            matched_method = "OCR-EntityMT"
+
+    method = matched_method
     bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
-    # Iterate through match pairs.
+
     for match, str_pair in zip(matches, match_string_pair):
-        try:
-            _ts = documentai.Document.TextAnchor.TextSegment(
-                start_index=int(match[0]), end_index=int(match[1])
-            )
-            bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
-        except ValueError:
-            continue
-        # bb can have empty string return by get_token
+        _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]), end_index=int(match[1]))
+        bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
         if not bb:
             continue
-        # Difference between the original and mapped bbox should be within defined offset.
         cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
         if cond1 and cond2:
             diff_x = abs(bb["min_x"] - min_x)
@@ -552,15 +541,13 @@ def get_page_text_anc_mentiontext(
             bbox = bb
             text_anc_1 = text_anc
             for index, an3 in enumerate(text_anc_1):
-                si = an3.start_index
-                ei = an3.end_index
+                si, ei = an3.start_index, an3.end_index
                 ent_text = orig_text[si:ei]
-                cond1 = index in [0, len(text_anc_1) - 1]
-                cond2 = ent_text.strip() in [")", "(", ":", " ", "/", "\\"]
-                if cond1 and cond2:
-                    continue
-                new_mention_text += ent_text
+                if not (index in [0, len(text_anc_1) - 1] and ent_text.strip() in [")", "(", ":", " ", "/", "\\"]):
+                    new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
+            break
+
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
 
 def updated_entity_secondary(
