@@ -445,6 +445,7 @@ def find_matched_translation_pairs(
                 best_match_pairs.append(best_match_pair)
     return best_match_pairs
 
+
 def get_page_text_anc_mentiontext(
     entity: documentai.Document.Entity,
     orig_invoice_json: documentai.Document,
@@ -548,6 +549,7 @@ def get_page_text_anc_mentiontext(
             break
 
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
+
 
 def updated_entity_secondary(
     orig_invoice_json: documentai.Document,
