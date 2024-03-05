@@ -1,5 +1,8 @@
+# pylint: disable=R1702
+# pylint: disable=R0912
 # pylint: disable=R0913
 # pylint: disable=R0914
+# pylint: disable=R0915
 # pylint: disable=E0401
 # pylint: disable=C0302
 # Copyright 2024 Google LLC
@@ -494,62 +497,75 @@ def get_page_text_anc_mentiontext(
             - method (str): Based on mapping block.
     """
     min_x, _, min_y, _ = min_max_x_y
-    orig_text = orig_invoice_json.text
+    matches: List[Any] = []
+    match_string_pair: List[Any] = []
     method = ""
-    matched_method = ""
-
-    def find_matches_and_method(text, mention_text, mapping_text):
-        nonlocal matched_method
-        matches, match_string_pair = find_substring_indexes(text, mention_text)
+    # Track whether entity is matched from OCR or Translated units
+    orig_text = orig_invoice_json.text
+    try:
+        matches, match_string_pair = find_substring_indexes(
+            orig_text, entity.mention_text
+        )
         if matches:
-            matched_method = "OCR-EntityMT"
-            return matches, match_string_pair
-        matches, match_string_pair = find_substring_indexes(text, mapping_text)
+            method = "OCR-EntityMT"
+    except ValueError:
+        matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
         if matches:
-            matched_method = "OCR-TU"
-        return matches, match_string_pair
-
-    matches, match_string_pair = find_matches_and_method(orig_text, entity.mention_text,
-                                                         mapping_text)
+            method = "OCR-TU"
     if not matches:
-        dates_german_text = get_formatted_dates(orig_text)
-        ent_date = get_formatted_dates(entity.mention_text)
-        matched_dates = defaultdict(list)
-        for k1, v1 in ent_date.items():
-            for k2, v2 in dates_german_text.items():
-                if v1 == v2:
-                    matched_dates[k1].append(k2)
-        for _, mat_1 in matched_dates.items():
-            for mat_11 in mat_1:
-                match_temp, match_string_pair_temp = find_substring_indexes(orig_text, mat_11)
-                for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
-                    matches.append(mat_2)
-                    match_string_pair.append(str_pair)
+        matches, match_string_pair = find_substring_indexes(orig_text, mapping_text)
         if matches:
-            matched_method = "OCR-EntityMT"
-
-    method = matched_method
+            method = "OCR-TU"
+        if not matches:
+            dates_german_text = get_formatted_dates(orig_text)
+            ent_date = get_formatted_dates(entity.mention_text)
+            matched_dates = defaultdict(list)
+            for k1, v1 in ent_date.items():
+                for k2, v2 in dates_german_text.items():
+                    if v1 == v2:
+                        matched_dates[k1].append(k2)
+            for _, mat_1 in matched_dates.items():
+                for mat_11 in mat_1:
+                    match_temp, match_string_pair_temp = find_substring_indexes(
+                        orig_text, mat_11
+                    )
+                    for mat_2, str_pair in zip(match_temp, match_string_pair_temp):
+                        matches.append(mat_2)
+                        match_string_pair.append(str_pair)
+            if matches:
+                method = "OCR-EntityMT"
+    # Initialize variables.
     bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
-
+    # Iterate through match pairs.
     for match, str_pair in zip(matches, match_string_pair):
-        _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]),
-                                                         end_index=int(match[1]))
-        bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
+        try:
+            _ts = documentai.Document.TextAnchor.TextSegment(
+                start_index=int(match[0]), end_index=int(match[1])
+            )
+            bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
+        except ValueError:
+            continue
+        # bb can have empty string return by get_token
         if not bb:
             continue
-        if abs(bb["min_y"] - min_y) <= diff_y and abs(bb["min_x"] - min_x) <= diff_x:
+        # Difference between the original and mapped bbox should be within defined offset.
+        cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
+        if cond1 and cond2:
+            diff_x = abs(bb["min_x"] - min_x)
+            diff_y = abs(bb["min_y"] - min_y)
             bbox = bb
             text_anc_1 = text_anc
-            new_mention_text = ''.join(orig_text[an3.start_index:an3.end_index]
-                                       for index, an3 in enumerate(text_anc_1)
-                                       if not (index in [0, len(text_anc_1) - 1] and
-                                       orig_text[an3.start_index:an3.end_index].strip() in
-                                               [")", "(", ":", " ", "/", "\\"]))
+            for index, an3 in enumerate(text_anc_1):
+                si = an3.start_index
+                ei = an3.end_index
+                ent_text = orig_text[si:ei]
+                cond1 = index in [0, len(text_anc_1) - 1]
+                cond2 = ent_text.strip() in [")", "(", ":", " ", "/", "\\"]
+                if cond1 and cond2:
+                    continue
+                new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
-            break
-
     return bbox, expected_text_anc, new_mention_text, match_string_pair, method
-
 
 def updated_entity_secondary(
     orig_invoice_json: documentai.Document,
@@ -891,12 +907,6 @@ def find_substring_indexes(
                 matches.append((si, ei))
                 match_string_pair.append([substring, text[si:ei]])
     else:
-        # match first and last string as a combined str with OCR text
-        # pattern = re.compile(
-        #     r"{}.*{}".format(re.escape(list_str[0]), re.escape(list_str[-1])),
-        #     re.IGNORECASE,
-        # )
-        # full string
         part = f"{re.escape(substring.strip())}"
         pattern = re.compile(part, re.IGNORECASE)
         # remove new line if present
