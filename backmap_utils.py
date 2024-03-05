@@ -450,6 +450,22 @@ def find_matches_and_method(
     entity_mention_text: str,
     mapping_text: str,
 ) -> Tuple[List[Tuple[int, int]], List[List[str]], str]:
+    """
+    Finds matches in the original text for the given entity mention text or mapping text,
+    and identifies the method of match. It handles direct text matches, translation unit (TU) matches,
+    and special case handling for formatted dates.
+
+    Args:
+        orig_text (str): The original text of the document.
+        entity_mention_text (str): The text mentioned in the entity to find in the original text.
+        mapping_text (str): The text to find in the original text, usually derived from translation.
+
+    Returns:
+        Tuple[List[Tuple[int, int]], List[List[str]], str]: A tuple containing three elements:
+            - A list of tuples, each representing the start and end indexes of matches found.
+            - A list of lists, where each sub-list contains matched string pairs.
+            - A string indicating the method of matching used ('OCR-EntityMT', 'OCR-TU', or 'OCR-EntityMT' for dates).
+    """
     matches: List[Tuple[int, int]] = []
     match_string_pair: List[List[str]] = []
     method = ""
@@ -501,8 +517,35 @@ def perform_mapping(
     List[List[str]],
     str,
 ]:
+    """
+    Performs mapping of the matched text to its corresponding location in the original document,
+    taking into account the coordinates and method of matching. It calculates the bounding box,
+    text anchors, and new mention text based on the matches and applies coordinate offset checks.
+
+    Args:
+        matches (List[Tuple[int, int]]): List of match indexes from the original text.
+        match_string_pair (List[List[str]]): List of matched string pairs.
+        method (str): Method used for matching.
+        orig_invoice_json (documentai.Document): Original document Invoice processor JSON output.
+        min_x (float): Minimum x coordinate of entity bounding box.
+        min_y (float): Minimum y coordinate of entity bounding box.
+        diff_x (float): Allowed x-coordinate offset.
+        diff_y (float): Allowed y-coordinate offset.
+        orig_text (str): Original text of the document.
+        english_page_num (int): Page number in the document.
+
+    Returns:
+        Tuple[
+            Dict[str, float], Dict[str, Dict[str, Any]], str, List[List[str]], str
+        ]: A tuple containing:
+            - Bounding box coordinates of the mapped entity.
+            - Text anchors with start and end indexes.
+            - New mention text after mapping.
+            - Match string pair involved in the mapping.
+            - Method used for mapping.
+    """
     bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
-    for match, str_pair in zip(matches, match_string_pair):
+    for match in matches:  # Removed str_pair from iteration
         try:
             _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]), end_index=int(match[1]))
             bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
@@ -512,8 +555,6 @@ def perform_mapping(
             continue
         cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
         if cond1 and cond2:
-            diff_x = abs(bb["min_x"] - min_x)
-            diff_y = abs(bb["min_y"] - min_y)
             bbox = bb
             text_anc_1 = text_anc
             for index, an3 in enumerate(text_anc_1):
@@ -526,7 +567,7 @@ def perform_mapping(
                     continue
                 new_mention_text += ent_text
             expected_text_anc = {"textSegments": text_anc_1}
-    return bbox, expected_text_anc, new_mention_text, match_string_pair, method
+    return bbox, expected_text_anc, new_mention_text, [], method 
 
 def get_page_text_anc_mentiontext(
     entity: documentai.Document.Entity,
