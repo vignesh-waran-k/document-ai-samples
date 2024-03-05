@@ -508,7 +508,7 @@ def get_page_text_anc_mentiontext(
             matched_method = "OCR-TU"
         return matches, match_string_pair
 
-    matches, match_string_pair = find_matches_and_method(orig_text, entity.mention_text, 
+    matches, match_string_pair = find_matches_and_method(orig_text, entity.mention_text,
                                                          mapping_text)
     if not matches:
         dates_german_text = get_formatted_dates(orig_text)
@@ -531,23 +531,17 @@ def get_page_text_anc_mentiontext(
     bbox, text_anc_1, new_mention_text, expected_text_anc = {}, {}, "", {}
 
     for match, str_pair in zip(matches, match_string_pair):
-        _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]), 
-                                                         end_index=int(match[1]))
+        _ts = documentai.Document.TextAnchor.TextSegment(start_index=int(match[0]), end_index=int(match[1]))
         bb, text_anc = get_token(orig_invoice_json, english_page_num, [_ts])
         if not bb:
             continue
-        cond1, cond2 = abs(bb["min_y"] - min_y) <= diff_y, abs(bb["min_x"] - min_x) <= diff_x
-        if cond1 and cond2:
-            diff_x = abs(bb["min_x"] - min_x)
-            diff_y = abs(bb["min_y"] - min_y)
+        if abs(bb["min_y"] - min_y) <= diff_y and abs(bb["min_x"] - min_x) <= diff_x:
             bbox = bb
             text_anc_1 = text_anc
-            for index, an3 in enumerate(text_anc_1):
-                si, ei = an3.start_index, an3.end_index
-                ent_text = orig_text[si:ei]
-                if not (index in [0, len(text_anc_1) - 1] and 
-                        ent_text.strip() in [")", "(", ":", " ", "/", "\\"]):
-                    new_mention_text += ent_text
+            new_mention_text = ''.join(orig_text[an3.start_index:an3.end_index]
+                                       for index, an3 in enumerate(text_anc_1)
+                                       if not (index in [0, len(text_anc_1) - 1] and 
+                                       orig_text[an3.start_index:an3.end_index].strip() in [")", "(", ":", " ", "/", "\\"]))
             expected_text_anc = {"textSegments": text_anc_1}
             break
 
